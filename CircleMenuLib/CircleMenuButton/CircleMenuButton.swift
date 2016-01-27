@@ -172,12 +172,13 @@ extension CircleMenuButton {
             completion: nil)
     }
     
-    public func tapAnimation(byAngle angle: Float, duration: Double, distance: Float) {
-        if let aContainer = container {
-            rotatedZ(angle: aContainer.angleZ + angle, animated: true, duration: duration)
-            changeDistance(self.bounds.size.height / 2.0, animated: true, duration: 0.2, delay: duration - 0.2)
-        }
-    }
+//    public func tapAnimation(byAngle angle: Float, duration: Double, distance: Float) {
+//        if let _ = container {
+////            rotatedZ(angle: aContainer.angleZ + angle, animated: true, duration: duration)
+//            rotationLayerAnimation(angle, duration: duration)
+////            changeDistance(self.bounds.size.height / 2.0, animated: true, duration: 0.2, delay: duration - 0.2)
+//        }
+//    }
     
     // MARK: layer animation
     

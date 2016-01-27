@@ -22,6 +22,7 @@ public class CircleMenu: UIButton {
     // MARK: properties
     
     @IBInspectable var buttonsCount: Int = 3
+    @IBInspectable var duration: Double = 2
     @IBInspectable var distance: Float = 100 // distance betwen center button and buttons
     
     lazy var buttons: [CircleMenuButton] = {
@@ -93,30 +94,14 @@ public class CircleMenu: UIButton {
     }
     
     func buttonHandler(sender: CircleMenuButton) {
-
-        let duration = 0.5
-        if let container = sender.superview { // rotation
-            createMovingObject(
-                sender.frame.size,
-                distance: distance,
-                angle: container.angleZ,
-                duration: duration,
-                additionAngle: 80)
+        let circle = CircleMenuLoader(radius: CGFloat(distance), strokeWidth: bounds.size.height, circleMenu: self, color: sender.backgroundColor!)
+        
+        if let container = sender.superview { // rotation animation
+            sender.rotationLayerAnimation(container.angleZ + 360, duration: duration)
+            container.superview?.bringSubviewToFront(container)
         }
         
-        sender.tapAnimation(byAngle: 90, duration: duration + 0.2, distance: distance) // rotation animation
-        
-        // hide buttons
-        let step = duration / Double(buttons.count + 1)
-        for index in 0..<buttons.count {
-            if index == sender.tag {
-                continue
-            }
-            
-            let animationIndex = index < sender.tag ? buttons.count + (index - sender.tag) : index - sender.tag
-            let delay = Double(step) * Double(animationIndex)
-            buttons[index].hideAnimation(self.bounds.size.width / CGFloat(2.0), duration: 0, delay:delay)
-        }
+        circle.fillAnimation(duration, startAngle: Float(360.0) / Float(buttons.count) * Float(sender.tag - 1))
     }
     
     // MARK: animations
