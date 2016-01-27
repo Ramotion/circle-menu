@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841EC5901C58E898008872D5 /* CircleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC58D1C58E898008872D5 /* CircleMenu.swift */; };
+		841EC5911C58E898008872D5 /* CircleMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC58F1C58E898008872D5 /* CircleMenuButton.swift */; };
 		84F248B71C58E65F008F12C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F248B61C58E65F008F12C1 /* AppDelegate.swift */; };
 		84F248B91C58E65F008F12C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F248B81C58E65F008F12C1 /* ViewController.swift */; };
 		84F248BC1C58E65F008F12C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F248BA1C58E65F008F12C1 /* Main.storyboard */; };
@@ -26,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		841EC58D1C58E898008872D5 /* CircleMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenu.swift; sourceTree = "<group>"; };
+		841EC58F1C58E898008872D5 /* CircleMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenuButton.swift; sourceTree = "<group>"; };
 		84F248B31C58E65F008F12C1 /* CircleMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CircleMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F248B61C58E65F008F12C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84F248B81C58E65F008F12C1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,9 +60,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		841EC58C1C58E87F008872D5 /* CircleMenuLib */ = {
+			isa = PBXGroup;
+			children = (
+				841EC58D1C58E898008872D5 /* CircleMenu.swift */,
+				841EC58E1C58E898008872D5 /* CircleMenuButton */,
+			);
+			path = CircleMenuLib;
+			sourceTree = "<group>";
+		};
+		841EC58E1C58E898008872D5 /* CircleMenuButton */ = {
+			isa = PBXGroup;
+			children = (
+				841EC58F1C58E898008872D5 /* CircleMenuButton.swift */,
+			);
+			path = CircleMenuButton;
+			sourceTree = "<group>";
+		};
 		84F248AA1C58E65F008F12C1 = {
 			isa = PBXGroup;
 			children = (
+				841EC58C1C58E87F008872D5 /* CircleMenuLib */,
 				84F248B51C58E65F008F12C1 /* CircleMenu */,
 				84F248CA1C58E65F008F12C1 /* CircleMenuTests */,
 				84F248B41C58E65F008F12C1 /* Products */,
@@ -197,6 +219,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841EC5911C58E898008872D5 /* CircleMenuButton.swift in Sources */,
+				841EC5901C58E898008872D5 /* CircleMenu.swift in Sources */,
 				84F248B91C58E65F008F12C1 /* ViewController.swift in Sources */,
 				84F248B71C58E65F008F12C1 /* AppDelegate.swift in Sources */,
 			);
@@ -386,6 +410,7 @@
 				84F248D21C58E65F008F12C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		84F248D31C58E65F008F12C1 /* Build configuration list for PBXNativeTarget "CircleMenuTests" */ = {
 			isa = XCConfigurationList;
@@ -394,6 +419,7 @@
 				84F248D51C58E65F008F12C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
