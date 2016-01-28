@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CircleMenuDelegate {
 
+    let colors = [UIColor.redColor(), UIColor.grayColor(), UIColor.greenColor(), UIColor.purpleColor()]
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,4 +22,9 @@ class ViewController: UIViewController {
     }
 
 
+    // MARK: <CircleMenuDelegate>
+    
+    func circleMenu(circleMenu: CircleMenu, willDisplay button: CircleMenuButton, atIndex: Int) {
+        button.backgroundColor = colors[atIndex]
+    }
 }

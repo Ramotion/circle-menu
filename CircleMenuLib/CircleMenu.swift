@@ -19,7 +19,8 @@ public func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> 
 // MARK: Protocol 
 
 @objc protocol CircleMenuDelegate {
-    func circleMenu(circleMenu: CircleMenu, button: CircleMenuButton, atIndex: Int)
+    // don't change button.tag
+    optional func circleMenu(circleMenu: CircleMenu, willDisplay button: CircleMenuButton, atIndex: Int)
 }
 
 // MARK: CircleMenu
@@ -31,7 +32,7 @@ public class CircleMenu: UIButton {
     @IBInspectable var duration: Double = 2
     @IBInspectable var distance: Float = 100 // distance betwen center button and buttons
     
-    @IBOutlet weak var delegate: CircleMenuDelegate?
+    @IBOutlet weak var delegate: AnyObject? //CircleMenuDelegate
     
     lazy var buttons: [CircleMenuButton] = {
         var buttons = [CircleMenuButton]()
@@ -124,6 +125,8 @@ public class CircleMenu: UIButton {
             let button = buttons[index]
             let angle: Float = Float(index) * step
             if isShow == true {
+                delegate?.circleMenu?(self, willDisplay: button, atIndex: index)
+                
                 button.rotatedZ(angle: angle, animated: false)
                 button.showAnimation(distance, duration: 0.3)
             } else {

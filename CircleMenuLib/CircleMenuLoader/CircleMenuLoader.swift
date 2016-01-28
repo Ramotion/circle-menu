@@ -18,7 +18,7 @@ public class CircleMenuLoader: UIView {
     // MARK: life cicle
     
     public init(radius: CGFloat, strokeWidth: CGFloat, circleMenu: CircleMenu, color: UIColor) {
-        super.init(frame: CGRectMake(0, 0, radius, radius))
+        super.init(frame: CGRect(x: 0, y: 0, width: radius, height: radius))
         
         if let aSuperView = circleMenu.superview {
             aSuperView.insertSubview(self, belowSubview: circleMenu)
