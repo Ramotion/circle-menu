@@ -35,29 +35,6 @@ public class CircleMenu: UIButton {
     @IBOutlet weak var delegate: AnyObject? //CircleMenuDelegate
     
     var buttons: [CircleMenuButton]?
-//    = {
-//        var buttons = [CircleMenuButton]()
-//        
-//        
-//        let step: Float = 360.0 / Float(self.buttonsCount)
-//        for index in 0..<self.buttonsCount {
-//            
-//            var angle: Float = Float(index) * step
-//            let button = Init(CircleMenuButton(
-//                size: self.bounds.size,
-//                circleMenu: self,
-//                distance:Float(self.bounds.size.height/2.0),
-//                angle: angle)) {
-//                    
-//                $0.tag = index
-//                $0.addTarget(self, action: "buttonHandler:", forControlEvents: UIControlEvents.TouchUpInside)
-//                $0.alpha = 0
-//            }
-//            buttons.append(button)
-//        }
-//        
-//        return buttons
-//    }()
     
     // MARK: life cicle
     override init(frame: CGRect) {
@@ -174,7 +151,7 @@ public class CircleMenu: UIButton {
                 button.rotatedZ(angle: angle, animated: false, delay: delay)
                 button.showAnimation(distance, duration: duration, delay: delay)
             } else {
-                button.hideAnimation(self.bounds.size.width / 2.0, duration: duration, delay: delay)
+                button.hideAnimation(duration, delay: delay)
             }
         }
         if isShow == false { // hide buttons and remove

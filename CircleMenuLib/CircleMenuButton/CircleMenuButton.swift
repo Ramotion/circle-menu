@@ -138,12 +138,7 @@ extension CircleMenuButton {
         })
     }
 
-    public func hideAnimation(distance: CGFloat, duration: Double, delay: Double = 0) {
-        let heightConstraint = self.container?.constraints.filter {$0.identifier == "height"}.first
-        
-        guard heightConstraint != nil else {
-            return
-        }
+    public func hideAnimation(duration: Double, delay: Double = 0) {
         
         UIView.animateWithDuration(
             duration,
@@ -152,7 +147,6 @@ extension CircleMenuButton {
             animations: { () -> Void in
                 self.transform = CGAffineTransformMakeScale(0.01, 0.01)
             }, completion: { (success) -> Void in
-                heightConstraint?.constant = CGFloat(distance)
                 self.alpha = 0
                 
                 self.superview?.removeFromSuperview() // remove container
@@ -178,14 +172,6 @@ extension CircleMenuButton {
             completion: nil)
     }
     
-//    public func tapAnimation(byAngle angle: Float, duration: Double, distance: Float) {
-//        if let _ = container {
-////            rotatedZ(angle: aContainer.angleZ + angle, animated: true, duration: duration)
-//            rotationLayerAnimation(angle, duration: duration)
-////            changeDistance(self.bounds.size.height / 2.0, animated: true, duration: 0.2, delay: duration - 0.2)
-//        }
-//    }
-    
     // MARK: layer animation
     
     public func rotationLayerAnimation(angle: Float, duration: Double) {
@@ -193,17 +179,8 @@ extension CircleMenuButton {
             let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
                 $0.duration = NSTimeInterval(duration)
                 $0.toValue = (angle.degres)
-                $0.fillMode = kCAFillModeForwards
-                $0.removedOnCompletion = false
-                $0.delegate = self
             }
             aContainer.layer.addAnimation(rotation, forKey: "rotation")
-        }
-    }
-    
-    public override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-        if let aContainer = container {
-            aContainer.removeFromSuperview()
         }
     }
 }
