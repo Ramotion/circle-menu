@@ -17,7 +17,7 @@ public class CircleMenuButton: UIButton {
     // MARK: life cicle
     
     init(size: CGSize, circleMenu: CircleMenu, distance: Float, angle: Float = 0) {
-        super.init(frame: CGRect(origin: CGPointZero, size: size))
+        super.init(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
         
         self.backgroundColor = UIColor(colorLiteralRed: 0.79, green: 0.24, blue: 0.27, alpha: 1)
         self.layer.cornerRadius = size.height / 2.0
@@ -39,7 +39,7 @@ public class CircleMenuButton: UIButton {
 
         guard circleMenu.superview != nil else { fatalError("wront circle menu")}
         
-        let container = Init(UIView(frame:CGRect(origin: CGPointZero, size: size))) {
+        let container = Init(UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))) {
             $0.backgroundColor = UIColor.clearColor()
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.layer.anchorPoint = CGPoint(x: 0.5, y: 1)

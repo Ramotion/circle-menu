@@ -27,6 +27,13 @@ public class CircleMenuLoader: UIView {
         circle = createCircle(radius, strokeWidth: strokeWidth, color: color)
         createConstraints(circleMenu, radius: radius)
         
+        let circleFrame = CGRect(
+            x: radius * 2 - strokeWidth,
+            y: radius - strokeWidth / 2,
+            width: strokeWidth,
+            height: strokeWidth)
+        createRoundView(circleFrame, color: color)
+        
         backgroundColor = UIColor.clearColor()
     }
 
@@ -90,6 +97,15 @@ public class CircleMenuLoader: UIView {
             attribute: .CenterY,
             multiplier: 1,
             constant:0))
+    }
+    
+    private func createRoundView(rect: CGRect, color: UIColor) {
+        let roundView = Init(UIView(frame: rect)) {
+            $0.backgroundColor = UIColor.blackColor()
+            $0.layer.cornerRadius = rect.size.width / 2.0
+            $0.backgroundColor = color
+        }
+        addSubview(roundView)
     }
     
     // MARK: animations
