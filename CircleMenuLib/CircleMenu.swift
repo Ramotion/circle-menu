@@ -16,6 +16,12 @@ public func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> 
     return value
 }
 
+// MARK: Protocol 
+
+@objc protocol CircleMenuDelegate {
+    func circleMenu(circleMenu: CircleMenu, button: CircleMenuButton, atIndex: Int)
+}
+
 // MARK: CircleMenu
 public class CircleMenu: UIButton {
     
@@ -24,6 +30,8 @@ public class CircleMenu: UIButton {
     @IBInspectable var buttonsCount: Int = 3
     @IBInspectable var duration: Double = 2
     @IBInspectable var distance: Float = 100 // distance betwen center button and buttons
+    
+    @IBOutlet weak var delegate: CircleMenuDelegate?
     
     lazy var buttons: [CircleMenuButton] = {
         var buttons = [CircleMenuButton]()
@@ -94,7 +102,11 @@ public class CircleMenu: UIButton {
     }
     
     func buttonHandler(sender: CircleMenuButton) {
-        let circle = CircleMenuLoader(radius: CGFloat(distance), strokeWidth: bounds.size.height, circleMenu: self, color: sender.backgroundColor!)
+        let circle = CircleMenuLoader(
+                            radius: CGFloat(distance),
+                            strokeWidth: bounds.size.height,
+                            circleMenu: self,
+                            color: sender.backgroundColor!)
         
         if let container = sender.superview { // rotation animation
             sender.rotationLayerAnimation(container.angleZ + 360, duration: duration)
