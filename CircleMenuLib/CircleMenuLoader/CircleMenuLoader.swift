@@ -116,7 +116,7 @@ public class CircleMenuLoader: UIView {
         }
         
         let rotateTransform = CATransform3DMakeRotation(CGFloat(startAngle.degres), 0, 0, 1)
-        self.layer.transform = rotateTransform
+        layer.transform = rotateTransform
         
         let animation = Init(CABasicAnimation(keyPath: "strokeEnd")) {
             $0.duration = duration
@@ -124,5 +124,26 @@ public class CircleMenuLoader: UIView {
             $0.toValue = (1)
         }
         circle?.addAnimation(animation, forKey: nil)
+    }
+    
+    public func hideAnimation(duration: Double, delay: Double) {
+        
+        let scale = Init(CABasicAnimation(keyPath: "transform.scale")) {
+            $0.toValue = 1.2
+            $0.duration = duration
+            $0.fillMode = kCAFillModeForwards
+            $0.removedOnCompletion = false
+            $0.beginTime = CACurrentMediaTime() + delay
+        }
+        layer.addAnimation(scale, forKey: nil)
+
+        UIView.animateWithDuration(
+            duration,
+            delay: delay,
+            options: UIViewAnimationOptions.CurveEaseIn,
+            animations: { () -> Void in
+                self.alpha = 0
+            }, completion: nil)
+
     }
 }

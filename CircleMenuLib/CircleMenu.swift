@@ -99,7 +99,7 @@ public class CircleMenu: UIButton {
     
     // MARK: actions
     func onTap() {
-        buttonsAnimationShow(isShow: !buttonsIsShown())
+        buttonsAnimationShow(isShow: !buttonsIsShown(), duration: 0.3)
     }
     
     func buttonHandler(sender: CircleMenuButton) {
@@ -115,11 +115,16 @@ public class CircleMenu: UIButton {
         }
         
         circle.fillAnimation(duration, startAngle: Float(360.0) / Float(buttons.count) * Float(sender.tag - 1))
+        circle.hideAnimation(0.3, delay: duration)
+        
+        scaleAnimation(layer, toValue: 0, duration: 0.3)
+        buttonsAnimationShow(isShow: false, duration: 0, delay: duration)
+        scaleAnimation(layer, toValue: 1, duration: 0.3, delay: duration)
     }
     
     // MARK: animations
     
-    private func buttonsAnimationShow(isShow isShow: Bool) {
+    private func buttonsAnimationShow(isShow isShow: Bool, duration: Double, delay: Double = 0) {
         let step: Float = 360.0 / Float(self.buttonsCount)
         for index in 0..<self.buttonsCount {
             let button = buttons[index]
@@ -127,12 +132,23 @@ public class CircleMenu: UIButton {
             if isShow == true {
                 delegate?.circleMenu?(self, willDisplay: button, atIndex: index)
                 
-                button.rotatedZ(angle: angle, animated: false)
-                button.showAnimation(distance, duration: 0.3)
+                button.rotatedZ(angle: angle, animated: false, delay: delay)
+                button.showAnimation(distance, duration: duration, delay: delay)
             } else {
-                button.hideAnimation(self.bounds.size.width / 2.0, duration: 0.3)
+                button.hideAnimation(self.bounds.size.width / 2.0, duration: duration, delay: delay)
             }
         }
+    }
+    
+    private func scaleAnimation(layer: CALayer, toValue: CGFloat, duration: Double, delay: Double = 0) {
+        let aniamtion = Init(CABasicAnimation(keyPath: "transform.scale")) {
+            $0.toValue = toValue
+            $0.duration = duration
+            $0.fillMode = kCAFillModeForwards
+            $0.removedOnCompletion = false
+            $0.beginTime = CACurrentMediaTime() + delay
+        }
+        layer.addAnimation(aniamtion, forKey: nil)
     }
 }
 

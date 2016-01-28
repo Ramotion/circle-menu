@@ -86,14 +86,14 @@ public class CircleMenuButton: UIButton {
     
     // MARK: public 
     
-    public func rotatedZ(angle angle: Float, animated: Bool, duration: Double = 0) {
+    public func rotatedZ(angle angle: Float, animated: Bool, duration: Double = 0, delay: Double = 0) {
         guard container != nil else {fatalError("contaner don't create")}
         
         let rotateTransform = CATransform3DMakeRotation(CGFloat(angle.degres), 0, 0, 1)
         if animated {
             UIView.animateWithDuration(
                 duration,
-                delay: 0,
+                delay: delay,
                 options: UIViewAnimationOptions.CurveEaseInOut,
                 animations: { () -> Void in
                     self.container!.layer.transform = rotateTransform
@@ -109,7 +109,7 @@ public class CircleMenuButton: UIButton {
 
 extension CircleMenuButton {
     
-    public func showAnimation(distance: Float, duration: Double) {
+    public func showAnimation(distance: Float, duration: Double, delay: Double = 0) {
         let heightConstraint = self.container?.constraints.filter {$0.identifier == "height"}.first
     
         guard heightConstraint != nil else {
@@ -123,7 +123,7 @@ extension CircleMenuButton {
         heightConstraint?.constant = CGFloat(distance)
         UIView.animateWithDuration(
             duration,
-            delay: 0,
+            delay: delay,
             usingSpringWithDamping: 0.6,
             initialSpringVelocity: 0,
             options: UIViewAnimationOptions.CurveLinear,
