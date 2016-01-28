@@ -30,6 +30,9 @@ public class CircleMenuButton: UIButton {
         aContainer.addSubview(self)
         container = aContainer
         
+        if let _ = self.imageView {
+            self.imageView!.layer.transform = CATransform3DMakeRotation(CGFloat(-angle.degres), 0, 0, 1)
+        }
         self.rotatedZ(angle: angle, animated: false)
     }
 
@@ -179,6 +182,7 @@ extension CircleMenuButton {
             let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
                 $0.duration = NSTimeInterval(duration)
                 $0.toValue = (angle.degres)
+                $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
             }
             aContainer.layer.addAnimation(rotation, forKey: "rotation")
         }

@@ -123,18 +123,19 @@ public class CircleMenuLoader: UIView {
         layer.transform = rotateTransform
         
         let animation = Init(CABasicAnimation(keyPath: "strokeEnd")) {
-            $0.duration = duration
+            $0.duration = CFTimeInterval(duration)
             $0.fromValue = (0)
             $0.toValue = (1)
+            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
         circle?.addAnimation(animation, forKey: nil)
     }
     
-    public func hideAnimation(duration: Double, delay: Double) {
+    public func hideAnimation(duration: CGFloat, delay: Double) {
         
         let scale = Init(CABasicAnimation(keyPath: "transform.scale")) {
             $0.toValue = 1.2
-            $0.duration = duration
+            $0.duration = CFTimeInterval(duration)
             $0.fillMode = kCAFillModeForwards
             $0.removedOnCompletion = false
             $0.beginTime = CACurrentMediaTime() + delay
@@ -142,7 +143,7 @@ public class CircleMenuLoader: UIView {
         layer.addAnimation(scale, forKey: nil)
 
         UIView.animateWithDuration(
-            duration,
+            CFTimeInterval(duration),
             delay: delay,
             options: UIViewAnimationOptions.CurveEaseIn,
             animations: { () -> Void in
