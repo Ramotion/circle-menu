@@ -34,29 +34,30 @@ public class CircleMenu: UIButton {
     
     @IBOutlet weak var delegate: AnyObject? //CircleMenuDelegate
     
-    lazy var buttons: [CircleMenuButton] = {
-        var buttons = [CircleMenuButton]()
-        
-        
-        let step: Float = 360.0 / Float(self.buttonsCount)
-        for index in 0..<self.buttonsCount {
-            
-            var angle: Float = Float(index) * step
-            let button = Init(CircleMenuButton(
-                size: self.bounds.size,
-                circleMenu: self,
-                distance:Float(self.bounds.size.height/2.0),
-                angle: angle)) {
-                    
-                $0.tag = index
-                $0.addTarget(self, action: "buttonHandler:", forControlEvents: UIControlEvents.TouchUpInside)
-                $0.alpha = 0
-            }
-            buttons.append(button)
-        }
-        
-        return buttons
-    }()
+    var buttons: [CircleMenuButton]?
+//    = {
+//        var buttons = [CircleMenuButton]()
+//        
+//        
+//        let step: Float = 360.0 / Float(self.buttonsCount)
+//        for index in 0..<self.buttonsCount {
+//            
+//            var angle: Float = Float(index) * step
+//            let button = Init(CircleMenuButton(
+//                size: self.bounds.size,
+//                circleMenu: self,
+//                distance:Float(self.bounds.size.height/2.0),
+//                angle: angle)) {
+//                    
+//                $0.tag = index
+//                $0.addTarget(self, action: "buttonHandler:", forControlEvents: UIControlEvents.TouchUpInside)
+//                $0.alpha = 0
+//            }
+//            buttons.append(button)
+//        }
+//        
+//        return buttons
+//    }()
     
     // MARK: life cicle
     override init(frame: CGRect) {
@@ -80,6 +81,30 @@ public class CircleMenu: UIButton {
             object.rotationLayerAnimation(angle + 360.0 + additionAngle, duration: duration)
     }
     
+    private func createButtons() -> [CircleMenuButton] {
+
+        var buttons = [CircleMenuButton]()
+
+        let step: Float = 360.0 / Float(self.buttonsCount)
+        for index in 0..<self.buttonsCount {
+
+            let angle: Float = Float(index) * step
+            let button = Init(CircleMenuButton(
+                size: self.bounds.size,
+                circleMenu: self,
+                distance:Float(self.bounds.size.height/2.0),
+                angle: angle)) {
+
+                $0.tag = index
+                $0.addTarget(self, action: "buttonHandler:", forControlEvents: UIControlEvents.TouchUpInside)
+                $0.alpha = 0
+            }
+            buttons.append(button)
+        }
+        
+        return buttons
+    }
+    
     // MARK: configure
     
     private func addActions() {
@@ -89,7 +114,11 @@ public class CircleMenu: UIButton {
     // MARK: helpers
     
     public func buttonsIsShown() -> Bool {
-        for button in buttons {
+        guard buttons != nil else {
+            return false
+        }
+        
+        for button in buttons! {
             if button.alpha == 0 {
                 return false
             }
@@ -99,6 +128,10 @@ public class CircleMenu: UIButton {
     
     // MARK: actions
     func onTap() {
+        if buttonsIsShown() == false {
+            buttons = createButtons()
+        }
+        
         buttonsAnimationShow(isShow: !buttonsIsShown(), duration: 0.3)
     }
     
@@ -114,20 +147,26 @@ public class CircleMenu: UIButton {
             container.superview?.bringSubviewToFront(container)
         }
         
-        circle.fillAnimation(duration, startAngle: Float(360.0) / Float(buttons.count) * Float(sender.tag - 1))
-        circle.hideAnimation(0.3, delay: duration)
-        
-        scaleAnimation(layer, toValue: 0, duration: 0.3)
-        buttonsAnimationShow(isShow: false, duration: 0, delay: duration)
-        scaleAnimation(layer, toValue: 1, duration: 0.3, delay: duration)
+        if let aButtons = buttons {
+            circle.fillAnimation(duration, startAngle: Float(360.0) / Float(aButtons.count) * Float(sender.tag - 1))
+            circle.hideAnimation(0.3, delay: duration)
+            
+            scaleAnimation(layer, toValue: 0, duration: 0.3)
+            buttonsAnimationShow(isShow: false, duration: 0, delay: duration)
+            scaleAnimation(layer, toValue: 1, duration: 0.3, delay: duration)
+        }
     }
     
     // MARK: animations
     
     private func buttonsAnimationShow(isShow isShow: Bool, duration: Double, delay: Double = 0) {
+        guard buttons != nil else {
+            return
+        }
+        
         let step: Float = 360.0 / Float(self.buttonsCount)
         for index in 0..<self.buttonsCount {
-            let button = buttons[index]
+            let button = buttons![index]
             let angle: Float = Float(index) * step
             if isShow == true {
                 delegate?.circleMenu?(self, willDisplay: button, atIndex: index)
@@ -137,6 +176,9 @@ public class CircleMenu: UIButton {
             } else {
                 button.hideAnimation(self.bounds.size.width / 2.0, duration: duration, delay: delay)
             }
+        }
+        if isShow == false { // hide buttons and remove
+            buttons = nil
         }
     }
     
