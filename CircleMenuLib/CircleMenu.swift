@@ -142,8 +142,8 @@ public class CircleMenu: UIButton {
         guard buttons != nil else {
             return
         }
-        
-        selected = isShow
+
+        self.selected = isShow
         
         let step: Float = 360.0 / Float(self.buttonsCount)
         for index in 0..<self.buttonsCount {
