@@ -36,6 +36,8 @@ public class CircleMenu: UIButton {
     
     var buttons: [CircleMenuButton]?
     
+    var customIconView: UIImageView!
+    
     // MARK: life cicle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,7 +45,10 @@ public class CircleMenu: UIButton {
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.addActions()
+
+        addActions()
+        addCustomImageView()        
+        setImage(UIImage(), forState: .Normal)
     }
     
     // MARK: create 
@@ -82,6 +87,57 @@ public class CircleMenu: UIButton {
         return buttons
     }
     
+    private func addCustomImageView() {
+        guard let selectedImage = imageForState(.Selected) else {
+            return
+        }
+        
+        guard let normalImage = imageForState(.Normal) else {
+            return
+        }
+        
+        customIconView = Init(UIImageView(image: normalImage)) {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.highlightedImage = selectedImage
+            $0.contentMode = .Center
+            $0.userInteractionEnabled = false
+        }
+        addSubview(customIconView)
+        
+        // added constraints
+        customIconView.addConstraint(NSLayoutConstraint(item: customIconView,
+            attribute: .Height,
+            relatedBy: .Equal,
+            toItem: nil,
+            attribute: .Height,
+            multiplier: 1,
+            constant: bounds.size.height))
+        
+        customIconView.addConstraint(NSLayoutConstraint(item: customIconView,
+            attribute: .Width,
+            relatedBy: .Equal,
+            toItem: nil,
+            attribute: .Width,
+            multiplier: 1,
+            constant: bounds.size.width))
+        
+        addConstraint(NSLayoutConstraint(item: self,
+            attribute: .CenterX,
+            relatedBy: .Equal,
+            toItem: customIconView,
+            attribute: .CenterX,
+            multiplier: 1,
+            constant:0))
+        
+        addConstraint(NSLayoutConstraint(item: self,
+            attribute: .CenterY,
+            relatedBy: .Equal,
+            toItem: customIconView,
+            attribute: .CenterY,
+            multiplier: 1,
+            constant:0))
+    }
+    
     // MARK: configure
     
     private func addActions() {
@@ -109,9 +165,10 @@ public class CircleMenu: UIButton {
         if buttonsIsShown() == false {
             buttons = createButtons()
         }
-        
-        buttonsAnimationShow(isShow: !buttonsIsShown(), duration: 0.3)
+        let isShow = !buttonsIsShown()
+        buttonsAnimationShow(isShow: isShow, duration: 0.3)
         tapBounceAnimation()
+        tapRotatedAnimation(0.3, isSelected: isShow)
     }
     
     func buttonHandler(sender: CircleMenuButton) {
@@ -133,6 +190,12 @@ public class CircleMenu: UIButton {
             scaleAnimation(layer, toValue: 0, duration: 0.3)
             buttonsAnimationShow(isShow: false, duration: 0, delay: duration)
             scaleAnimation(layer, toValue: 1, duration: 0.3, delay: duration)
+            
+            
+            let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC)))
+            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                self.customIconView.highlighted = false
+            })
         }
     }
     
@@ -142,8 +205,6 @@ public class CircleMenu: UIButton {
         guard buttons != nil else {
             return
         }
-
-        self.selected = isShow
         
         let step: Float = 360.0 / Float(self.buttonsCount)
         for index in 0..<self.buttonsCount {
@@ -163,7 +224,7 @@ public class CircleMenu: UIButton {
         }
     }
     
-    func tapBounceAnimation() {
+    private func tapBounceAnimation() {
         self.transform = CGAffineTransformMakeScale(0.9, 0.9)
         UIView.animateWithDuration(
             0.5,
@@ -175,6 +236,28 @@ public class CircleMenu: UIButton {
                 self.transform = CGAffineTransformMakeScale(1, 1)
             }, completion: { (success) -> Void in
         })
+    }
+    
+    private func tapRotatedAnimation(duration: Float, isSelected: Bool) {
+        
+        let angle: Float = 360.0
+        
+        let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
+            $0.duration = NSTimeInterval(duration)
+            $0.toValue = (angle.degres)
+            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        }
+        
+        let fade = Init(CATransition()) {
+            $0.duration = NSTimeInterval(duration)
+            $0.type = kCATransitionFade
+            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        }
+        
+        customIconView.highlighted = isSelected
+
+        customIconView.layer.addAnimation(rotation, forKey: nil)
+        customIconView.layer.addAnimation(fade, forKey: nil)
     }
     
     private func scaleAnimation(layer: CALayer, toValue: CGFloat, duration: Double, delay: Double = 0) {

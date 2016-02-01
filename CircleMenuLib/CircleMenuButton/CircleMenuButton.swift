@@ -179,12 +179,20 @@ extension CircleMenuButton {
     
     public func rotationLayerAnimation(angle: Float, duration: Double) {
         if let aContainer = container {
-            let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
-                $0.duration = NSTimeInterval(duration)
-                $0.toValue = (angle.degres)
-                $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            }
-            aContainer.layer.addAnimation(rotation, forKey: "rotation")
+            rotationLayerAnimation(aContainer, angle: angle, duration: duration)
         }
+    }
+}
+
+extension UIView {
+    
+    public func rotationLayerAnimation(view: UIView, angle: Float, duration: Double) {
+       
+        let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
+            $0.duration = NSTimeInterval(duration)
+            $0.toValue = (angle.degres)
+            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        }
+        view.layer.addAnimation(rotation, forKey: "rotation")
     }
 }
