@@ -27,12 +27,19 @@ public class CircleMenuButton: UIButton {
         self.layer.cornerRadius = size.height / 2.0
         
         let aContainer = createContainer(CGSize(width: size.width, height:CGFloat(distance)), circleMenu: circleMenu)
-        aContainer.addSubview(self)
-        container = aContainer
+
+        // hack view for rotate
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height))
+        view.backgroundColor = UIColor.clearColor()
+        view.addSubview(self)
+        //...
         
-        if let _ = self.imageView {
-            self.imageView!.layer.transform = CATransform3DMakeRotation(CGFloat(-angle.degres), 0, 0, 1)
-        }
+        aContainer.addSubview(view)
+        container = aContainer
+
+        
+        view.layer.transform = CATransform3DMakeRotation(-CGFloat(angle.degres), 0, 0, 1)
+        
         self.rotatedZ(angle: angle, animated: false)
     }
 
