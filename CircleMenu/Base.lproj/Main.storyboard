@@ -25,6 +25,7 @@
                                     <constraint firstAttribute="height" constant="60" id="Xnk-f6-9Ej"/>
                                 </constraints>
                                 <state key="normal" image="icon_menu"/>
+                                <state key="selected" image="icon_close"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="30"/>
@@ -56,6 +57,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_close" width="100" height="100"/>
         <image name="icon_menu" width="140" height="140"/>
     </resources>
 </document>

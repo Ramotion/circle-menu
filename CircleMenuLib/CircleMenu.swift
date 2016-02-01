@@ -104,12 +104,14 @@ public class CircleMenu: UIButton {
     }
     
     // MARK: actions
+    
     func onTap() {
         if buttonsIsShown() == false {
             buttons = createButtons()
         }
         
         buttonsAnimationShow(isShow: !buttonsIsShown(), duration: 0.3)
+        tapBounceAnimation()
     }
     
     func buttonHandler(sender: CircleMenuButton) {
@@ -141,6 +143,8 @@ public class CircleMenu: UIButton {
             return
         }
         
+        selected = isShow
+        
         let step: Float = 360.0 / Float(self.buttonsCount)
         for index in 0..<self.buttonsCount {
             let button = buttons![index]
@@ -157,6 +161,20 @@ public class CircleMenu: UIButton {
         if isShow == false { // hide buttons and remove
             buttons = nil
         }
+    }
+    
+    func tapBounceAnimation() {
+        self.transform = CGAffineTransformMakeScale(0.9, 0.9)
+        UIView.animateWithDuration(
+            0.5,
+            delay: 0,
+            usingSpringWithDamping: 0.3,
+            initialSpringVelocity: 5,
+            options: UIViewAnimationOptions.CurveLinear,
+            animations: { () -> Void in
+                self.transform = CGAffineTransformMakeScale(1, 1)
+            }, completion: { (success) -> Void in
+        })
     }
     
     private func scaleAnimation(layer: CALayer, toValue: CGFloat, duration: Double, delay: Double = 0) {
