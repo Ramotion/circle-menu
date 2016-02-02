@@ -36,7 +36,7 @@ class ViewController: UIViewController, CircleMenuDelegate {
 //            frame: CGRect(x: 200, y: 200, width: 50, height: 50),
 //            normalIcon:"icon_menu",
 //            selectedIcon:"icon_close",
-//            buttonsCount: 5,
+//            buttonsCount: 4,
 //            duration: 4,
 //            distance: 120)
 //        button.backgroundColor = UIColor.lightGrayColor()
