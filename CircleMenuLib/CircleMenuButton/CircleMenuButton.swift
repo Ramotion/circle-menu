@@ -33,7 +33,6 @@ public class CircleMenuButton: UIButton {
         aContainer.addSubview(view)
         container = aContainer
 
-        
         view.layer.transform = CATransform3DMakeRotation(-CGFloat(angle.degres), 0, 0, 1)
         
         self.rotatedZ(angle: angle, animated: false)
