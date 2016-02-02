@@ -12,13 +12,9 @@ public class CircleMenuButton: UIButton {
     
     // MARK: properties
     
-    weak var container: UIView?
+    public weak var container: UIView?
     
     // MARK: life cicle
-    
-    deinit {
-        print("remvoe button item: \(tag)")
-    }
     
     init(size: CGSize, circleMenu: CircleMenu, distance: Float, angle: Float = 0) {
         super.init(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
@@ -159,7 +155,9 @@ extension CircleMenuButton {
             }, completion: { (success) -> Void in
                 self.alpha = 0
                 
-                self.superview?.removeFromSuperview() // remove container
+                if let _ = self.container {
+                    self.container!.removeFromSuperview() // remove container
+                }
         })
     }
     

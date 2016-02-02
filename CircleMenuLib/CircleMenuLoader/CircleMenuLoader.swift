@@ -17,10 +17,6 @@ public class CircleMenuLoader: UIView {
 
     // MARK: life cicle
     
-    deinit {
-        print("circle removed")
-    }
-    
     public init(radius: CGFloat, strokeWidth: CGFloat, circleMenu: CircleMenu, color: UIColor) {
         super.init(frame: CGRect(x: 0, y: 0, width: radius, height: radius))
         
@@ -152,6 +148,5 @@ public class CircleMenuLoader: UIView {
             completion: { (success) -> Void in
                 self.removeFromSuperview()
         })
-
     }
 }

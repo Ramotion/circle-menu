@@ -166,7 +166,8 @@ public class CircleMenu: UIButton {
             buttons = createButtons()
         }
         let isShow = !buttonsIsShown()
-        buttonsAnimationShow(isShow: isShow, duration: 0.3)
+        let duration  = isShow ? 0.3 : 0.2
+        buttonsAnimationShow(isShow: isShow, duration: duration)
         tapBounceAnimation()
         tapRotatedAnimation(0.3, isSelected: isShow)
     }
@@ -178,19 +179,18 @@ public class CircleMenu: UIButton {
                             circleMenu: self,
                             color: sender.backgroundColor!)
         
-        if let container = sender.superview { // rotation animation
+        if let container = sender.container { // rotation animation
             sender.rotationLayerAnimation(container.angleZ + 360, duration: duration)
             container.superview?.bringSubviewToFront(container)
         }
         
         if let aButtons = buttons {
-            circle.fillAnimation(duration, startAngle: Float(360.0) / Float(aButtons.count) * Float(sender.tag - 1))
+            circle.fillAnimation(duration, startAngle: -90 + Float(360 / aButtons.count) * Float(sender.tag))
             circle.hideAnimation(0.3, delay: duration)
             
             scaleAnimation(layer, toValue: 0, duration: 0.3)
             buttonsAnimationShow(isShow: false, duration: 0, delay: duration)
             scaleAnimation(layer, toValue: 1, duration: 0.3, delay: duration)
-            
             
             let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC)))
             dispatch_after(dispatchTime, dispatch_get_main_queue(), {
