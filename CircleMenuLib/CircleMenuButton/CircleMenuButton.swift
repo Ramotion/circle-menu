@@ -148,7 +148,7 @@ extension CircleMenuButton {
         UIView.animateWithDuration(
             duration,
             delay: delay,
-            usingSpringWithDamping: 0.6,
+            usingSpringWithDamping: 0.7,
             initialSpringVelocity: 0,
             options: UIViewAnimationOptions.CurveLinear,
             animations: { () -> Void in
