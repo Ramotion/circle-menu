@@ -59,7 +59,8 @@ public class CircleMenu: UIButton {
     
     var buttons: [CircleMenuButton]?
     
-    var customIconView: UIImageView!
+    private var customNormalIconView: UIImageView!
+    private var customSelectedIconView: UIImageView!
     
     // MARK: life cicle
     init(frame: CGRect,
@@ -83,16 +84,26 @@ public class CircleMenu: UIButton {
         self.distance = distance
         
         addActions()
-        addCustomImageView()
+
+        customNormalIconView = addCustomImageView(state: .Normal)
+        customSelectedIconView = addCustomImageView(state: .Selected)
+        customSelectedIconView.alpha = 0
+
         setImage(UIImage(), forState: .Normal)
+        setImage(UIImage(), forState: .Selected)
     }
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
         addActions()
-        addCustomImageView()        
+        
+        customNormalIconView = addCustomImageView(state: .Normal)
+        
+        customSelectedIconView = addCustomImageView(state: .Selected)
+        customSelectedIconView.alpha = 0
         setImage(UIImage(), forState: .Normal)
+        setImage(UIImage(), forState: .Selected)
     }
     
     // MARK: create
@@ -121,25 +132,21 @@ public class CircleMenu: UIButton {
         return buttons
     }
     
-    private func addCustomImageView() {
-        guard let selectedImage = imageForState(.Selected) else {
-            return
+    private func addCustomImageView(state state: UIControlState) -> UIImageView? {
+
+        guard let image = imageForState(state) else {
+            return nil
         }
         
-        guard let normalImage = imageForState(.Normal) else {
-            return
-        }
-        
-        customIconView = Init(UIImageView(image: normalImage)) {
+        let iconView = Init(UIImageView(image: image)) {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.highlightedImage = selectedImage
             $0.contentMode = .Center
             $0.userInteractionEnabled = false
         }
-        addSubview(customIconView)
+        addSubview(iconView)
         
         // added constraints
-        customIconView.addConstraint(NSLayoutConstraint(item: customIconView,
+        iconView.addConstraint(NSLayoutConstraint(item: iconView,
             attribute: .Height,
             relatedBy: .Equal,
             toItem: nil,
@@ -147,7 +154,7 @@ public class CircleMenu: UIButton {
             multiplier: 1,
             constant: bounds.size.height))
         
-        customIconView.addConstraint(NSLayoutConstraint(item: customIconView,
+        iconView.addConstraint(NSLayoutConstraint(item: iconView,
             attribute: .Width,
             relatedBy: .Equal,
             toItem: nil,
@@ -158,7 +165,7 @@ public class CircleMenu: UIButton {
         addConstraint(NSLayoutConstraint(item: self,
             attribute: .CenterX,
             relatedBy: .Equal,
-            toItem: customIconView,
+            toItem: iconView,
             attribute: .CenterX,
             multiplier: 1,
             constant:0))
@@ -166,10 +173,12 @@ public class CircleMenu: UIButton {
         addConstraint(NSLayoutConstraint(item: self,
             attribute: .CenterY,
             relatedBy: .Equal,
-            toItem: customIconView,
+            toItem: iconView,
             attribute: .CenterY,
             multiplier: 1,
             constant:0))
+        
+        return iconView
     }
     
     // MARK: configure
@@ -200,8 +209,9 @@ public class CircleMenu: UIButton {
             buttons = createButtons()
         }
         let isShow = !buttonsIsShown()
-        let duration  = isShow ? 0.3 : 0.2
+        let duration  = isShow ? 0.5 : 0.2
         buttonsAnimationIsShow(isShow: isShow, duration: duration)
+      
         tapBounceAnimation()
         tapRotatedAnimation(0.3, isSelected: isShow)
     }
@@ -228,13 +238,13 @@ public class CircleMenu: UIButton {
             buttonsAnimationIsShow(isShow: false, duration: 0, delay: duration)
             scaleAnimation(layer, toValue: 1, duration: 0.3, delay: duration)
            
-            if let _ = customIconView {
+            if customNormalIconView != nil && customSelectedIconView != nil {
                 let dispatchTime: dispatch_time_t = dispatch_time(
                     DISPATCH_TIME_NOW,
                     Int64(duration * Double(NSEC_PER_SEC)))
                 
                 dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                    self.customIconView.highlighted = false
+                    self.tapRotatedAnimation(0, isSelected: false)
                     self.delegate?.circleMenu?(self, buttonDidSelected: sender, atIndex: sender.tag)
                 })
             }
@@ -282,26 +292,54 @@ public class CircleMenu: UIButton {
     
     private func tapRotatedAnimation(duration: Float, isSelected: Bool) {
         
-        let angle: Float = 360.0
-        
-        let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
-            $0.duration = NSTimeInterval(duration)
-            $0.toValue = (angle.degres)
-            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        }
-        
-        let fade = Init(CATransition()) {
-            $0.duration = NSTimeInterval(duration)
-            $0.type = kCATransitionFade
-            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        }
-        
-        if let _ = customIconView {
-            customIconView.highlighted = isSelected
+        let addAnimations: (view: UIImageView, isShow: Bool) -> () = { (view, isShow) in
+            var toAngle: Float   = 180.0
+            var fromAngle: Float = 0
+            var fromScale        = 1.0
+            var toScale          = 0.2
+            var fromOpacity      = 1
+            var toOpacity        = 0
+            if isShow == true {
+                toAngle     = 0
+                fromAngle   = -180
+                fromScale   = 0.2
+                toScale     = 1.0
+                fromOpacity = 0
+                toOpacity   = 1
+            }
             
-            customIconView.layer.addAnimation(rotation, forKey: nil)
-            customIconView.layer.addAnimation(fade, forKey: nil)
+            let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
+                $0.duration       = NSTimeInterval(duration)
+                $0.toValue        = (toAngle.degres)
+                $0.fromValue      = (fromAngle.degres)
+                $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            }
+            let fade = Init(CABasicAnimation(keyPath: "opacity")) {
+                $0.duration            = NSTimeInterval(duration)
+                $0.fromValue           = fromOpacity
+                $0.toValue             = toOpacity
+                $0.timingFunction      = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                $0.fillMode            = kCAFillModeForwards
+                $0.removedOnCompletion = false
+            }
+            let scale = Init(CABasicAnimation(keyPath: "transform.scale")) {
+                $0.duration       = NSTimeInterval(duration)
+                $0.toValue        = toScale
+                $0.fromValue        = fromScale
+                $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            }
+            
+            view.layer.addAnimation(rotation, forKey: nil)
+            view.layer.addAnimation(fade, forKey: nil)
+            view.layer.addAnimation(scale, forKey: nil)
         }
+        
+        if customNormalIconView != nil && customSelectedIconView != nil {
+            addAnimations(view: customNormalIconView, isShow: !isSelected)
+            addAnimations(view: customSelectedIconView, isShow: isSelected)
+        }
+        selected = isSelected
+        self.alpha = isSelected ? 0.5 : 1
     }
     
     private func scaleAnimation(layer: CALayer, toValue: CGFloat, duration: Double, delay: Double = 0) {
