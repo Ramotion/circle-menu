@@ -55,8 +55,25 @@ public class CircleMenu: UIButton {
     var customIconView: UIImageView!
     
     // MARK: life cicle
-    override init(frame: CGRect) {
+    init(frame: CGRect,
+        normalIcon: String?,
+        selectedIcon: String?,
+        buttonsCount: Int = 3,
+        duration: Double = 2,
+        distance: Float = 100) {
         super.init(frame: frame)
+        
+        if let _ = normalIcon {
+            setImage(UIImage(named: normalIcon!), forState: .Normal)
+        }
+        
+        if let _ = selectedIcon {
+            setImage(UIImage(named: selectedIcon!), forState: .Selected)
+        }
+    
+        self.buttonsCount = buttonsCount
+        self.duration = duration
+        self.distance = distance
         
         addActions()
         addCustomImageView()
@@ -201,11 +218,16 @@ public class CircleMenu: UIButton {
             scaleAnimation(layer, toValue: 0, duration: 0.3)
             buttonsAnimationIsShow(isShow: false, duration: 0, delay: duration)
             scaleAnimation(layer, toValue: 1, duration: 0.3, delay: duration)
-            
-            let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC)))
-            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                self.customIconView.highlighted = false
-            })
+           
+            if let _ = customIconView {
+                let dispatchTime: dispatch_time_t = dispatch_time(
+                    DISPATCH_TIME_NOW,
+                    Int64(duration * Double(NSEC_PER_SEC)))
+                
+                dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                    self.customIconView.highlighted = false
+                })
+            }
         }
     }
     
@@ -264,10 +286,12 @@ public class CircleMenu: UIButton {
             $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
         
-        customIconView.highlighted = isSelected
-
-        customIconView.layer.addAnimation(rotation, forKey: nil)
-        customIconView.layer.addAnimation(fade, forKey: nil)
+        if let _ = customIconView {
+            customIconView.highlighted = isSelected
+            
+            customIconView.layer.addAnimation(rotation, forKey: nil)
+            customIconView.layer.addAnimation(fade, forKey: nil)
+        }
     }
     
     private func scaleAnimation(layer: CALayer, toValue: CGFloat, duration: Double, delay: Double = 0) {

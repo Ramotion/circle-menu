@@ -29,7 +29,21 @@ class ViewController: UIViewController, CircleMenuDelegate {
                                                   ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // add button
+        
+//        let button = CircleMenu(
+//            frame: CGRect(x: 200, y: 200, width: 50, height: 50),
+//            normalIcon:"icon_menu",
+//            selectedIcon:"icon_close",
+//            buttonsCount: 5,
+//            duration: 4,
+//            distance: 120)
+//        button.backgroundColor = UIColor.lightGrayColor()
+//        button.delegate = self
+//        button.layer.cornerRadius = button.frame.size.width / 2.0
+//        view.addSubview(button)
+        
     }
 
     override func didReceiveMemoryWarning() {
