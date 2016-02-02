@@ -234,9 +234,10 @@ public class CircleMenu: UIButton {
             circle.fillAnimation(duration, startAngle: -90 + Float(360 / aButtons.count) * Float(sender.tag))
             circle.hideAnimation(0.3, delay: duration)
             
-            scaleAnimation(layer, toValue: 0, duration: 0.3)
+            hideCenterButton(duration: 0.3)
+          
             buttonsAnimationIsShow(isShow: false, duration: 0, delay: duration)
-            scaleAnimation(layer, toValue: 1, duration: 0.3, delay: duration)
+            showCenterButton(duration: 0.3, delay: duration)
            
             if customNormalIconView != nil && customSelectedIconView != nil {
                 let dispatchTime: dispatch_time_t = dispatch_time(
@@ -244,7 +245,7 @@ public class CircleMenu: UIButton {
                     Int64(duration * Double(NSEC_PER_SEC)))
                 
                 dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                    self.tapRotatedAnimation(0, isSelected: false)
+//                    self.tapRotatedAnimation(0.01, isSelected: false)
                     self.delegate?.circleMenu?(self, buttonDidSelected: sender, atIndex: sender.tag)
                 })
             }
@@ -342,15 +343,64 @@ public class CircleMenu: UIButton {
         self.alpha = isSelected ? 0.5 : 1
     }
     
-    private func scaleAnimation(layer: CALayer, toValue: CGFloat, duration: Double, delay: Double = 0) {
-        let aniamtion = Init(CABasicAnimation(keyPath: "transform.scale")) {
-            $0.toValue = toValue
-            $0.duration = duration
-            $0.fillMode = kCAFillModeForwards
+    private func hideCenterButton(duration duration: Double, delay: Double = 0) {
+
+        UIView.animateWithDuration(
+            NSTimeInterval(duration),
+            delay: NSTimeInterval(delay),
+            options: UIViewAnimationOptions.CurveEaseOut,
+            animations: { () -> Void in
+                self.transform = CGAffineTransformMakeScale(0.001, 0.001)
+            }, completion: { (success) -> Void in
+        })
+
+    }
+    
+    private func showCenterButton(duration duration: Float, delay: Double) {
+        UIView.animateWithDuration(
+            NSTimeInterval(duration),
+            delay: NSTimeInterval(delay),
+            usingSpringWithDamping: 0.8,
+            initialSpringVelocity: 18,
+            options: UIViewAnimationOptions.CurveEaseOut,
+            animations: { () -> Void in
+                self.transform = CGAffineTransformMakeScale(1, 1)
+                self.alpha = 1
+            }, completion: { (success) -> Void in
+        })
+        
+        let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
+            $0.duration       = NSTimeInterval(duration)
+            $0.toValue        = (0)
+            $0.fromValue      = (Float(-180).degres)
+            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
+            $0.beginTime = CACurrentMediaTime() + delay
+        }
+        let fade = Init(CABasicAnimation(keyPath: "opacity")) {
+            $0.duration            = NSTimeInterval(0.01)
+            $0.toValue             = 0
+            $0.timingFunction      = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            $0.fillMode            = kCAFillModeForwards
             $0.removedOnCompletion = false
             $0.beginTime = CACurrentMediaTime() + delay
         }
-        layer.addAnimation(aniamtion, forKey: nil)
+        let show = Init(CABasicAnimation(keyPath: "opacity")) {
+            $0.duration            = NSTimeInterval(0.01)
+            $0.toValue             = 1
+            $0.timingFunction      = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            $0.fillMode            = kCAFillModeForwards
+            $0.removedOnCompletion = false
+            $0.beginTime = CACurrentMediaTime() + delay
+        }
+        
+        if customNormalIconView != nil {
+            customNormalIconView.layer.addAnimation(rotation, forKey: nil)
+            customNormalIconView.layer.addAnimation(show, forKey: nil)
+        }
+        
+        if customSelectedIconView != nil {
+            customSelectedIconView.layer.addAnimation(fade, forKey: nil)
+        }
     }
 }
 
