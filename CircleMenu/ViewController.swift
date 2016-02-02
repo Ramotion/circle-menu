@@ -58,4 +58,12 @@ class ViewController: UIViewController, CircleMenuDelegate {
         button.backgroundColor = items[atIndex].color
         button.setImage(UIImage(imageLiteral: items[atIndex].icon), forState: .Normal)
     }
+    
+    func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: CircleMenuButton, atIndex: Int) {
+        print("button will selected: \(atIndex)")
+    }
+    
+    func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: CircleMenuButton, atIndex: Int) {
+        print("button did selected: \(atIndex)")
+    }
 }

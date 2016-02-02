@@ -35,8 +35,15 @@ public func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> 
 // MARK: Protocol 
 
 @objc protocol CircleMenuDelegate {
+    
     // don't change button.tag
     optional func circleMenu(circleMenu: CircleMenu, willDisplay button: CircleMenuButton, atIndex: Int)
+
+    // call before animation
+    optional func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: CircleMenuButton, atIndex: Int)
+
+    // call after animation
+    optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: CircleMenuButton, atIndex: Int)
 }
 
 // MARK: CircleMenu
@@ -200,6 +207,8 @@ public class CircleMenu: UIButton {
     }
     
     func buttonHandler(sender: CircleMenuButton) {
+        delegate?.circleMenu?(self, buttonWillSelected: sender, atIndex: sender.tag)
+        
         let circle = CircleMenuLoader(
                             radius: CGFloat(distance),
                             strokeWidth: bounds.size.height,
@@ -226,6 +235,7 @@ public class CircleMenu: UIButton {
                 
                 dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                     self.customIconView.highlighted = false
+                    self.delegate?.circleMenu?(self, buttonDidSelected: sender, atIndex: sender.tag)
                 })
             }
         }
