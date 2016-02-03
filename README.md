@@ -1,6 +1,6 @@
 [![CocoaPods](https://img.shields.io/cocoapods/p/CircleMenu.svg)](https://cocoapods.org/pods/CircleMenu)
-<!--[![CocoaPods](https://img.shields.io/cocoapods/v/CercleMenu.svg)](http://cocoapods.org/pods/CercleMenu)-->
 [![Twitter](https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat)](http://twitter.com/Ramotion)
+<!--[![CocoaPods](https://img.shields.io/cocoapods/v/CercleMenu.svg)](http://cocoapods.org/pods/CercleMenu)-->
 
 # circle-menu
 
