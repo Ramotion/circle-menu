@@ -53,7 +53,7 @@ public class CircleMenu: UIButton {
     
     @IBInspectable var buttonsCount: Int = 3
     @IBInspectable var duration: Double = 2 // circle animation duration 
-    @IBInspectable var distance: Float = 100 // distance betwen center button and buttons
+    @IBInspectable var distance: Float = 100 // distance between center button and buttons
     
     @IBOutlet weak var delegate: AnyObject? //CircleMenuDelegate
     
