@@ -1,6 +1,6 @@
 [![CocoaPods](https://img.shields.io/cocoapods/p/CircleMenu.svg)](https://cocoapods.org/pods/CircleMenu)
 [![Twitter](https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat)](http://twitter.com/Ramotion)
-<!--[![CocoaPods](https://img.shields.io/cocoapods/v/CercleMenu.svg)](http://cocoapods.org/pods/CercleMenu)-->
+<!--[![CocoaPods](https://img.shields.io/cocoapods/v/CercleMenu.svg)](http://cocoapods.org/pods/CircleMenu)-->
 
 # circle-menu
 
@@ -68,3 +68,11 @@ pod 'CircleMenu', '~> 0.0.1'
 
 Adaptive tab bar is released under the MIT license.
 See [LICENSE](./LICENSE) for details.
+
+## About
+The project maintained by [app development agency](https://ramotion.com?utm_source=gthb&utm_medium=special&utm_campaign=circle-menu) [Ramotion Inc.](https://ramotion.com?utm_source=gthb&utm_medium=special&utm_campaign=circle-menu)
+See our other [open-source projects](https://github.com/ramotion) or [hire](https://ramotion.com?utm_source=gthb&utm_medium=special&utm_campaign=circle-menu) us to design, develop, and grow your product.
+
+[![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=https://github.com/ramotion/circle-menu)
+[![Twitter Follow](https://img.shields.io/twitter/follow/ramotion.svg?style=social)](https://twitter.com/ramotion)
+
