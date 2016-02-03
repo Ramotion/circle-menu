@@ -21,6 +21,7 @@ pod 'CircleMenu', '~> 0.0.1'
 1) Create a new UIButton inheriting from `CircleMenu`
 
 2) Add images for Normal and Selected state
+
 3) Use delegate method to configure buttons 
 ``` swift
     func circleMenu(circleMenu: CircleMenu, willDisplay button: CircleMenuButton, atIndex: Int)
