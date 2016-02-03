@@ -83,25 +83,24 @@ public class CircleMenu: UIButton {
         self.duration = duration
         self.distance = distance
         
-        addActions()
-
-        customNormalIconView = addCustomImageView(state: .Normal)
-        customSelectedIconView = addCustomImageView(state: .Selected)
-        customSelectedIconView.alpha = 0
-
-        setImage(UIImage(), forState: .Normal)
-        setImage(UIImage(), forState: .Selected)
+        commonInit()
     }
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
+        
+            commonInit()
+        }
+    
+    private func commonInit() {
         addActions()
         
         customNormalIconView = addCustomImageView(state: .Normal)
         
         customSelectedIconView = addCustomImageView(state: .Selected)
-        customSelectedIconView.alpha = 0
+        if customSelectedIconView != nil {
+            customSelectedIconView.alpha = 0
+        }
         setImage(UIImage(), forState: .Normal)
         setImage(UIImage(), forState: .Selected)
     }
