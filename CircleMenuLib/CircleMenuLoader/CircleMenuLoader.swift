@@ -131,7 +131,7 @@ public class CircleMenuLoader: UIView {
             return
         }
         
-        let rotateTransform = CATransform3DMakeRotation(CGFloat(startAngle.degres), 0, 0, 1)
+        let rotateTransform = CATransform3DMakeRotation(CGFloat(startAngle.degrees), 0, 0, 1)
         layer.transform = rotateTransform
         
         let animation = Init(CABasicAnimation(keyPath: "strokeEnd")) {

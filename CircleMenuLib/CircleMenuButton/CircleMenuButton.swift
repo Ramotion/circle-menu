@@ -48,7 +48,7 @@ public class CircleMenuButton: UIButton {
         aContainer.addSubview(view)
         container = aContainer
 
-        view.layer.transform = CATransform3DMakeRotation(-CGFloat(angle.degres), 0, 0, 1)
+        view.layer.transform = CATransform3DMakeRotation(-CGFloat(angle.degrees), 0, 0, 1)
         
         self.rotatedZ(angle: angle, animated: false)
     }
@@ -113,7 +113,7 @@ public class CircleMenuButton: UIButton {
     public func rotatedZ(angle angle: Float, animated: Bool, duration: Double = 0, delay: Double = 0) {
         guard container != nil else {fatalError("contaner don't create")}
         
-        let rotateTransform = CATransform3DMakeRotation(CGFloat(angle.degres), 0, 0, 1)
+        let rotateTransform = CATransform3DMakeRotation(CGFloat(angle.degrees), 0, 0, 1)
         if animated {
             UIView.animateWithDuration(
                 duration,
@@ -209,7 +209,7 @@ extension UIView {
        
         let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
             $0.duration = NSTimeInterval(duration)
-            $0.toValue = (angle.degres)
+            $0.toValue = (angle.degrees)
             $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
         view.layer.addAnimation(rotation, forKey: "rotation")

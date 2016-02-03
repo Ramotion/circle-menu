@@ -311,8 +311,8 @@ public class CircleMenu: UIButton {
             
             let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
                 $0.duration       = NSTimeInterval(duration)
-                $0.toValue        = (toAngle.degres)
-                $0.fromValue      = (fromAngle.degres)
+                $0.toValue        = (toAngle.degrees)
+                $0.fromValue      = (fromAngle.degrees)
                 $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
             }
             let fade = Init(CABasicAnimation(keyPath: "opacity")) {
@@ -361,8 +361,8 @@ public class CircleMenu: UIButton {
             NSTimeInterval(duration),
             delay: NSTimeInterval(delay),
             usingSpringWithDamping: 0.8,
-            initialSpringVelocity: 18,
-            options: UIViewAnimationOptions.CurveEaseOut,
+            initialSpringVelocity: 18.0,
+            options: UIViewAnimationOptions.CurveLinear,
             animations: { () -> Void in
                 self.transform = CGAffineTransformMakeScale(1, 1)
                 self.alpha = 1
@@ -372,8 +372,8 @@ public class CircleMenu: UIButton {
         let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
             $0.duration       = NSTimeInterval(duration)
             $0.toValue        = (0)
-            $0.fromValue      = (Float(-180).degres)
-            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
+            $0.fromValue      = (Float(-180).degrees)
+            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
             $0.beginTime = CACurrentMediaTime() + delay
         }
         let fade = Init(CABasicAnimation(keyPath: "opacity")) {
@@ -385,7 +385,7 @@ public class CircleMenu: UIButton {
             $0.beginTime = CACurrentMediaTime() + delay
         }
         let show = Init(CABasicAnimation(keyPath: "opacity")) {
-            $0.duration            = NSTimeInterval(0.01)
+            $0.duration            = NSTimeInterval(duration)
             $0.toValue             = 1
             $0.timingFunction      = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
             $0.fillMode            = kCAFillModeForwards
@@ -411,7 +411,7 @@ extension Float {
         return self * (Float(180) / Float(M_PI))
     }
     
-    var degres: Float {
+    var degrees: Float {
         return self  * Float(M_PI) / 180.0
     }
 }
