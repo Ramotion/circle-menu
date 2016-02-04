@@ -61,14 +61,16 @@ public class CircleMenuButton: UIButton {
     
     private func createContainer(size: CGSize, circleMenu: CircleMenu) -> UIView {
 
-        guard circleMenu.superview != nil else { fatalError("wront circle menu")}
+        guard let circleMenuSuperView = circleMenu.superview else {
+            fatalError("wront circle menu")
+        }
         
         let container = Init(UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))) {
             $0.backgroundColor = UIColor.clearColor()
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
         }
-        circleMenu.superview!.insertSubview(container, belowSubview: circleMenu)
+        circleMenuSuperView.insertSubview(container, belowSubview: circleMenu)
         
         // added constraints
         let height = NSLayoutConstraint(item: container,
@@ -89,7 +91,7 @@ public class CircleMenuButton: UIButton {
             multiplier: 1,
             constant: size.width))
         
-        circleMenu.superview!.addConstraint(NSLayoutConstraint(item: circleMenu,
+        circleMenuSuperView.addConstraint(NSLayoutConstraint(item: circleMenu,
             attribute: .CenterX,
             relatedBy: .Equal,
             toItem: container,
@@ -97,7 +99,7 @@ public class CircleMenuButton: UIButton {
             multiplier: 1,
             constant:0))
         
-        circleMenu.superview!.addConstraint(NSLayoutConstraint(item: circleMenu,
+        circleMenuSuperView.addConstraint(NSLayoutConstraint(item: circleMenu,
             attribute: .CenterY,
             relatedBy: .Equal,
             toItem: container,
@@ -111,7 +113,9 @@ public class CircleMenuButton: UIButton {
     // MARK: public 
     
     public func rotatedZ(angle angle: Float, animated: Bool, duration: Double = 0, delay: Double = 0) {
-        guard container != nil else {fatalError("contaner don't create")}
+        guard let container = self.container else {
+            fatalError("contaner don't create")
+        }
         
         let rotateTransform = CATransform3DMakeRotation(CGFloat(angle.degrees), 0, 0, 1)
         if animated {
@@ -120,11 +124,11 @@ public class CircleMenuButton: UIButton {
                 delay: delay,
                 options: UIViewAnimationOptions.CurveEaseInOut,
                 animations: { () -> Void in
-                    self.container!.layer.transform = rotateTransform
+                    container.layer.transform = rotateTransform
                 },
                 completion: nil)
         } else {
-            container!.layer.transform = rotateTransform
+            container.layer.transform = rotateTransform
         }
     }
 }
@@ -134,6 +138,11 @@ public class CircleMenuButton: UIButton {
 extension CircleMenuButton {
     
     public func showAnimation(distance: Float, duration: Double, delay: Double = 0) {
+        
+        guard let container = self.container else {
+            fatalError()
+        }
+        
         let heightConstraint = self.container?.constraints.filter {$0.identifier == "height"}.first
     
         guard heightConstraint != nil else {
@@ -152,13 +161,17 @@ extension CircleMenuButton {
             initialSpringVelocity: 0,
             options: UIViewAnimationOptions.CurveLinear,
             animations: { () -> Void in
-                self.container!.layoutIfNeeded()
+                container.layoutIfNeeded()
                 self.transform = CGAffineTransformMakeScale(1, 1)
             }, completion: { (success) -> Void in
         })
     }
 
     public func hideAnimation(duration: Double, delay: Double = 0) {
+
+        guard let container = self.container else {
+            fatalError()
+        }
         
         UIView.animateWithDuration(
             duration,
@@ -170,12 +183,17 @@ extension CircleMenuButton {
                 self.alpha = 0
                 
                 if let _ = self.container {
-                    self.container!.removeFromSuperview() // remove container
+                    container.removeFromSuperview() // remove container
                 }
         })
     }
     
     public func changeDistance(distance: CGFloat, animated: Bool, duration: Double = 0, delay: Double = 0) {
+        
+        guard let container = self.container else {
+            fatalError()
+        }
+        
         let heightConstraint = self.container?.constraints.filter {$0.identifier == "height"}.first
         
         guard heightConstraint != nil else {
@@ -189,7 +207,7 @@ extension CircleMenuButton {
             delay: delay,
             options: UIViewAnimationOptions.CurveEaseIn,
             animations: { () -> Void in
-                self.container!.layoutIfNeeded()
+                container.layoutIfNeeded()
             },
             completion: nil)
     }

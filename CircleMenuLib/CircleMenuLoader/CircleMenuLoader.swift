@@ -33,7 +33,7 @@ public class CircleMenuLoader: UIView {
 
     // MARK: life cicle
     
-    public init(radius: CGFloat, strokeWidth: CGFloat, circleMenu: CircleMenu, color: UIColor) {
+    public init(radius: CGFloat, strokeWidth: CGFloat, circleMenu: CircleMenu, color: UIColor?) {
         super.init(frame: CGRect(x: 0, y: 0, width: radius, height: radius))
         
         if let aSuperView = circleMenu.superview {
@@ -59,7 +59,7 @@ public class CircleMenuLoader: UIView {
     
     // MARK: create
     
-    private func createCircle(radius: CGFloat, strokeWidth: CGFloat, color: UIColor) -> CAShapeLayer {
+    private func createCircle(radius: CGFloat, strokeWidth: CGFloat, color: UIColor?) -> CAShapeLayer {
         
         let circlePath = UIBezierPath(
             arcCenter: CGPoint(x: radius, y: radius),
@@ -71,7 +71,7 @@ public class CircleMenuLoader: UIView {
         let circle = Init(CAShapeLayer()) {
             $0.path = circlePath.CGPath
             $0.fillColor = UIColor.clearColor().CGColor
-            $0.strokeColor = color.CGColor
+            $0.strokeColor = color?.CGColor
             $0.lineWidth = strokeWidth
         }
         
@@ -80,6 +80,11 @@ public class CircleMenuLoader: UIView {
     }
     
     private func createConstraints(circleMenu: CircleMenu, radius: CGFloat) {
+        
+        guard let circleMenuSuperView = circleMenu.superview else {
+            fatalError()
+        }
+        
         translatesAutoresizingMaskIntoConstraints = false
         // added constraints
         addConstraint(NSLayoutConstraint(item: self,
@@ -98,7 +103,7 @@ public class CircleMenuLoader: UIView {
             multiplier: 1,
             constant: radius * 2.0))
         
-        circleMenu.superview!.addConstraint(NSLayoutConstraint(item: circleMenu,
+        circleMenuSuperView.addConstraint(NSLayoutConstraint(item: circleMenu,
             attribute: .CenterX,
             relatedBy: .Equal,
             toItem: self,
@@ -106,7 +111,7 @@ public class CircleMenuLoader: UIView {
             multiplier: 1,
             constant:0))
         
-        circleMenu.superview!.addConstraint(NSLayoutConstraint(item: circleMenu,
+        circleMenuSuperView.addConstraint(NSLayoutConstraint(item: circleMenu,
             attribute: .CenterY,
             relatedBy: .Equal,
             toItem: self,
@@ -115,7 +120,7 @@ public class CircleMenuLoader: UIView {
             constant:0))
     }
     
-    private func createRoundView(rect: CGRect, color: UIColor) {
+    private func createRoundView(rect: CGRect, color: UIColor?) {
         let roundView = Init(UIView(frame: rect)) {
             $0.backgroundColor = UIColor.blackColor()
             $0.layer.cornerRadius = rect.size.width / 2.0

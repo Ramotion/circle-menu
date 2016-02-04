@@ -71,12 +71,12 @@ public class CircleMenu: UIButton {
         distance: Float = 100) {
         super.init(frame: frame)
         
-        if let _ = normalIcon {
-            setImage(UIImage(named: normalIcon!), forState: .Normal)
+        if let icon = normalIcon {
+            setImage(UIImage(named: icon), forState: .Normal)
         }
         
-        if let _ = selectedIcon {
-            setImage(UIImage(named: selectedIcon!), forState: .Selected)
+        if let icon = selectedIcon {
+            setImage(UIImage(named: icon), forState: .Selected)
         }
     
         self.buttonsCount = buttonsCount
@@ -189,11 +189,11 @@ public class CircleMenu: UIButton {
     // MARK: helpers
     
     public func buttonsIsShown() -> Bool {
-        guard buttons != nil else {
+        guard let buttons = self.buttons else {
             return false
         }
         
-        for button in buttons! {
+        for button in buttons {
             if button.alpha == 0 {
                 return false
             }
@@ -222,7 +222,7 @@ public class CircleMenu: UIButton {
                             radius: CGFloat(distance),
                             strokeWidth: bounds.size.height,
                             circleMenu: self,
-                            color: sender.backgroundColor!)
+                            color: sender.backgroundColor)
         
         if let container = sender.container { // rotation animation
             sender.rotationLayerAnimation(container.angleZ + 360, duration: duration)
@@ -244,7 +244,6 @@ public class CircleMenu: UIButton {
                     Int64(duration * Double(NSEC_PER_SEC)))
                 
                 dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-//                    self.tapRotatedAnimation(0.01, isSelected: false)
                     self.delegate?.circleMenu?(self, buttonDidSelected: sender, atIndex: sender.tag)
                 })
             }
@@ -254,13 +253,13 @@ public class CircleMenu: UIButton {
     // MARK: animations
     
     private func buttonsAnimationIsShow(isShow isShow: Bool, duration: Double, delay: Double = 0) {
-        guard buttons != nil else {
+        guard let buttons = self.buttons else {
             return
         }
         
         let step: Float = 360.0 / Float(self.buttonsCount)
         for index in 0..<self.buttonsCount {
-            let button = buttons![index]
+            let button = buttons[index]
             let angle: Float = Float(index) * step
             if isShow == true {
                 delegate?.circleMenu?(self, willDisplay: button, atIndex: index)
@@ -272,7 +271,7 @@ public class CircleMenu: UIButton {
             }
         }
         if isShow == false { // hide buttons and remove
-            buttons = nil
+            self.buttons = nil
         }
     }
     
