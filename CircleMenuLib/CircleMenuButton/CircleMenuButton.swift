@@ -137,7 +137,7 @@ public class CircleMenuButton: UIButton {
 
 extension CircleMenuButton {
     
-    public func showAnimation(distance: Float, duration: Double, delay: Double = 0) {
+    public func showAnimation(distance distance: Float, duration: Double, delay: Double = 0) {
         
         guard let container = self.container else {
             fatalError()
@@ -162,22 +162,29 @@ extension CircleMenuButton {
             options: UIViewAnimationOptions.CurveLinear,
             animations: { () -> Void in
                 container.layoutIfNeeded()
-                self.transform = CGAffineTransformMakeScale(1, 1)
+                self.transform = CGAffineTransformMakeScale(1.0, 1.0)
             }, completion: { (success) -> Void in
         })
     }
 
-    public func hideAnimation(duration: Double, delay: Double = 0) {
+    public func hideAnimation(distance distance: Float, duration: Double, delay: Double = 0) {
 
         guard let container = self.container else {
             fatalError()
         }
         
+        let heightConstraint = self.container?.constraints.filter {$0.identifier == "height"}.first
+        
+        guard heightConstraint != nil else {
+            return
+        }
+        heightConstraint?.constant = CGFloat(distance)
         UIView.animateWithDuration(
             duration,
             delay: delay,
             options: UIViewAnimationOptions.CurveEaseIn,
             animations: { () -> Void in
+                container.layoutIfNeeded()
                 self.transform = CGAffineTransformMakeScale(0.01, 0.01)
             }, completion: { (success) -> Void in
                 self.alpha = 0

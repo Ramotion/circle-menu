@@ -265,9 +265,9 @@ public class CircleMenu: UIButton {
                 delegate?.circleMenu?(self, willDisplay: button, atIndex: index)
                 
                 button.rotatedZ(angle: angle, animated: false, delay: delay)
-                button.showAnimation(distance, duration: duration, delay: delay)
+                button.showAnimation(distance: distance, duration: duration, delay: delay)
             } else {
-                button.hideAnimation(duration, delay: delay)
+                button.hideAnimation(distance: Float(self.bounds.size.height / 2.0), duration: duration, delay: delay)
             }
         }
         if isShow == false { // hide buttons and remove
