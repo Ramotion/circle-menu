@@ -236,7 +236,7 @@ public class CircleMenu: UIButton {
             hideCenterButton(duration: 0.3)
           
             buttonsAnimationIsShow(isShow: false, duration: 0, delay: duration)
-            showCenterButton(duration: 0.3, delay: duration)
+            showCenterButton(duration: 0.525, delay: duration)
            
             if customNormalIconView != nil && customSelectedIconView != nil {
                 let dispatchTime: dispatch_time_t = dispatch_time(
@@ -358,8 +358,8 @@ public class CircleMenu: UIButton {
         UIView.animateWithDuration(
             NSTimeInterval(duration),
             delay: NSTimeInterval(delay),
-            usingSpringWithDamping: 0.8,
-            initialSpringVelocity: 18.0,
+            usingSpringWithDamping: 0.78,
+            initialSpringVelocity: 0,
             options: UIViewAnimationOptions.CurveLinear,
             animations: { () -> Void in
                 self.transform = CGAffineTransformMakeScale(1, 1)
@@ -367,11 +367,12 @@ public class CircleMenu: UIButton {
             }, completion: { (success) -> Void in
         })
         
-        let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
-            $0.duration       = NSTimeInterval(duration)
-            $0.toValue        = (0)
-            $0.fromValue      = (Float(-180).degrees)
-            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        let rotation = Init(CASpringAnimation(keyPath: "transform.rotation")) {
+            $0.duration        = NSTimeInterval(1.5)
+            $0.toValue         = (0)
+            $0.fromValue       = (Float(-180).degrees)
+            $0.damping         = 10
+            $0.initialVelocity = 0
             $0.beginTime = CACurrentMediaTime() + delay
         }
         let fade = Init(CABasicAnimation(keyPath: "opacity")) {
