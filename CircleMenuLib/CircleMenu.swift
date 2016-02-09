@@ -338,7 +338,7 @@ public class CircleMenu: UIButton {
             addAnimations(view: customSelectedIconView, isShow: isSelected)
         }
         selected = isSelected
-        self.alpha = isSelected ? 0.5 : 1
+        self.alpha = isSelected ? 0.3 : 1
     }
     
     private func hideCenterButton(duration duration: Double, delay: Double = 0) {

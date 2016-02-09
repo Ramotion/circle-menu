@@ -22,10 +22,11 @@ class ViewController: UIViewController, CircleMenuDelegate {
 
 //    let colors = [UIColor.redColor(), UIColor.grayColor(), UIColor.greenColor(), UIColor.purpleColor()]
     let items: [(icon: String, color: UIColor)] = [
-                                                    ("icon_back", UIColor.color(234, green: 183, blue: 84, alpha: 1)),
-                                                    ("icon_play", UIColor.color(229, green: 94, blue: 75, alpha: 1)),
-                                                    ("icon_replay", UIColor.color(99, green: 186, blue: 51, alpha: 1)),
-                                                    ("icon_close", UIColor.color(32, green: 164, blue: 203, alpha: 1)),
+                                                    ("icon_home", UIColor(red:0.19, green:0.57, blue:1, alpha:1)),
+                                                    ("icon_search", UIColor(red:0.22, green:0.74, blue:0, alpha:1)),
+                                                    ("notifications-btn", UIColor(red:0.96, green:0.23, blue:0.21, alpha:1)),
+                                                    ("settings-btn", UIColor(red:0.51, green:0.15, blue:1, alpha:1)),
+                                                    ("nearby-btn", UIColor(red:1, green:0.39, blue:0, alpha:1)),
                                                   ]
     override func viewDidLoad() {
         super.viewDidLoad()

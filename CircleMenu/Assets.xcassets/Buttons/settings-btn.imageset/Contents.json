@@ -1,15 +1,12 @@
 {
   "images" : [
     {
-      "idiom" : "universal"
-    },
-    {
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "icon_replay.pdf",
+      "filename" : "settings-btn.pdf",
       "scale" : "2x"
     },
     {

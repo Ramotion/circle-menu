@@ -1,15 +1,12 @@
 {
   "images" : [
     {
-      "idiom" : "universal"
-    },
-    {
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "close-btn2.pdf",
+      "filename" : "nearby-btn.pdf",
       "scale" : "2x"
     },
     {
