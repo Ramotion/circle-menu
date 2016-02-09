@@ -151,11 +151,12 @@ public class CircleMenuLoader: UIView {
     public func hideAnimation(duration: CGFloat, delay: Double) {
         
         let scale = Init(CABasicAnimation(keyPath: "transform.scale")) {
-            $0.toValue = 1.2
-            $0.duration = CFTimeInterval(duration)
-            $0.fillMode = kCAFillModeForwards
+            $0.toValue             = 1.2
+            $0.duration            = CFTimeInterval(duration)
+            $0.fillMode            = kCAFillModeForwards
             $0.removedOnCompletion = false
-            $0.beginTime = CACurrentMediaTime() + delay
+            $0.timingFunction      = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+            $0.beginTime           = CACurrentMediaTime() + delay
         }
         layer.addAnimation(scale, forKey: nil)
 
