@@ -10,6 +10,10 @@
 		841EC5901C58E898008872D5 /* CircleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC58D1C58E898008872D5 /* CircleMenu.swift */; };
 		841EC5911C58E898008872D5 /* CircleMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC58F1C58E898008872D5 /* CircleMenuButton.swift */; };
 		841EC5941C58F3E2008872D5 /* CircleMenuLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC5931C58F3E2008872D5 /* CircleMenuLoader.swift */; };
+		8497460C1C6A1C5D001E7184 /* CircleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC58D1C58E898008872D5 /* CircleMenu.swift */; };
+		8497460D1C6A1C6D001E7184 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F248BD1C58E65F008F12C1 /* Assets.xcassets */; };
+		8497460E1C6A1C9D001E7184 /* CircleMenuLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC5931C58F3E2008872D5 /* CircleMenuLoader.swift */; };
+		8497460F1C6A1CA0001E7184 /* CircleMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC58F1C58E898008872D5 /* CircleMenuButton.swift */; };
 		84F248B71C58E65F008F12C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F248B61C58E65F008F12C1 /* AppDelegate.swift */; };
 		84F248B91C58E65F008F12C1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F248B81C58E65F008F12C1 /* ViewController.swift */; };
 		84F248BC1C58E65F008F12C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F248BA1C58E65F008F12C1 /* Main.storyboard */; };
@@ -221,6 +225,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8497460D1C6A1C6D001E7184 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +265,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8497460F1C6A1CA0001E7184 /* CircleMenuButton.swift in Sources */,
+				8497460C1C6A1C5D001E7184 /* CircleMenu.swift in Sources */,
 				84F248CC1C58E65F008F12C1 /* CircleMenuTests.swift in Sources */,
+				8497460E1C6A1C9D001E7184 /* CircleMenuLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
