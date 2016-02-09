@@ -151,7 +151,7 @@ extension CircleMenuButton {
         self.transform = CGAffineTransformMakeScale(0, 0)
         self.container?.layoutIfNeeded()
         
-        self.alpha = 1
+        self.alpha = 0
         
         heightConstraint?.constant = CGFloat(distance)
         UIView.animateWithDuration(
@@ -163,6 +163,7 @@ extension CircleMenuButton {
             animations: { () -> Void in
                 container.layoutIfNeeded()
                 self.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                self.alpha = 1
             }, completion: { (success) -> Void in
         })
     }

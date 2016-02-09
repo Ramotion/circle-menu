@@ -51,11 +51,13 @@ public class CircleMenu: UIButton {
     
     // MARK: properties
     
-    @IBInspectable var buttonsCount: Int = 3
-    @IBInspectable var duration: Double = 2 // circle animation duration 
-    @IBInspectable var distance: Float = 100 // distance between center button and buttons
+    @IBInspectable public var buttonsCount: Int = 3
+    @IBInspectable public var duration: Double  = 2 // circle animation duration
+    @IBInspectable public var distance: Float   = 100 // distance between center button and buttons
+    @IBInspectable public var showDelay: Double = 0 // delay between show buttons
     
-    @IBOutlet weak var delegate: AnyObject? //CircleMenuDelegate
+    
+    @IBOutlet weak public var delegate: AnyObject? //CircleMenuDelegate
     
     var buttons: [CircleMenuButton]?
     
@@ -80,8 +82,8 @@ public class CircleMenu: UIButton {
         }
     
         self.buttonsCount = buttonsCount
-        self.duration = duration
-        self.distance = distance
+        self.duration     = duration
+        self.distance     = distance
         
         commonInit()
     }
@@ -235,7 +237,7 @@ public class CircleMenu: UIButton {
             
             hideCenterButton(duration: 0.3)
           
-            buttonsAnimationIsShow(isShow: false, duration: 0, delay: duration)
+            buttonsAnimationIsShow(isShow: false, duration: 0, hideDelay: duration)
             showCenterButton(duration: 0.525, delay: duration)
            
             if customNormalIconView != nil && customSelectedIconView != nil {
@@ -252,7 +254,7 @@ public class CircleMenu: UIButton {
     
     // MARK: animations
     
-    private func buttonsAnimationIsShow(isShow isShow: Bool, duration: Double, delay: Double = 0) {
+    private func buttonsAnimationIsShow(isShow isShow: Bool, duration: Double, hideDelay: Double = 0) {
         guard let buttons = self.buttons else {
             return
         }
@@ -264,10 +266,12 @@ public class CircleMenu: UIButton {
             if isShow == true {
                 delegate?.circleMenu?(self, willDisplay: button, atIndex: index)
                 
-                button.rotatedZ(angle: angle, animated: false, delay: delay)
-                button.showAnimation(distance: distance, duration: duration, delay: delay)
+                button.rotatedZ(angle: angle, animated: false, delay: Double(index) * showDelay)
+                button.showAnimation(distance: distance, duration: duration, delay: Double(index) * showDelay)
             } else {
-                button.hideAnimation(distance: Float(self.bounds.size.height / 2.0), duration: duration, delay: delay)
+                button.hideAnimation(
+                    distance: Float(self.bounds.size.height / 2.0),
+                    duration: duration, delay: hideDelay)
             }
         }
         if isShow == false { // hide buttons and remove
@@ -324,7 +328,7 @@ public class CircleMenu: UIButton {
             let scale = Init(CABasicAnimation(keyPath: "transform.scale")) {
                 $0.duration       = NSTimeInterval(duration)
                 $0.toValue        = toScale
-                $0.fromValue        = fromScale
+                $0.fromValue      = fromScale
                 $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
             }
             
