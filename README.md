@@ -15,7 +15,7 @@ Just add CircleMenuLib folder to your project.
 
 or use [CocoaPods](https://cocoapods.org) with Podfile:
 ``` ruby
-pod 'CircleMenu', '~> 0.0.3'
+pod 'CircleMenu', '~> 0.0.4'
 ```
 
 ## Usage
