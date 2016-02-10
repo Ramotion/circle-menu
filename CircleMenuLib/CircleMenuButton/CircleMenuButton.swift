@@ -66,9 +66,9 @@ public class CircleMenuButton: UIButton {
         }
         
         let container = Init(UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))) {
-            $0.backgroundColor = UIColor.clearColor()
+            $0.backgroundColor                           = UIColor.clearColor()
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
+            $0.layer.anchorPoint                         = CGPoint(x: 0.5, y: 1)
         }
         circleMenuSuperView.insertSubview(container, belowSubview: circleMenu)
         
@@ -234,8 +234,8 @@ extension UIView {
     public func rotationLayerAnimation(view: UIView, angle: Float, duration: Double) {
        
         let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
-            $0.duration = NSTimeInterval(duration)
-            $0.toValue = (angle.degrees)
+            $0.duration       = NSTimeInterval(duration)
+            $0.toValue        = (angle.degrees)
             $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
         view.layer.addAnimation(rotation, forKey: "rotation")

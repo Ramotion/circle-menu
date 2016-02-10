@@ -69,10 +69,10 @@ public class CircleMenuLoader: UIView {
             clockwise: true)
         
         let circle = Init(CAShapeLayer()) {
-            $0.path = circlePath.CGPath
-            $0.fillColor = UIColor.clearColor().CGColor
+            $0.path        = circlePath.CGPath
+            $0.fillColor   = UIColor.clearColor().CGColor
             $0.strokeColor = color?.CGColor
-            $0.lineWidth = strokeWidth
+            $0.lineWidth   = strokeWidth
         }
         
         self.layer.addSublayer(circle)
@@ -140,9 +140,9 @@ public class CircleMenuLoader: UIView {
         layer.transform = rotateTransform
         
         let animation = Init(CABasicAnimation(keyPath: "strokeEnd")) {
-            $0.duration = CFTimeInterval(duration)
-            $0.fromValue = (0)
-            $0.toValue = (1)
+            $0.duration       = CFTimeInterval(duration)
+            $0.fromValue      = (0)
+            $0.toValue        = (1)
             $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
         circle?.addAnimation(animation, forKey: nil)

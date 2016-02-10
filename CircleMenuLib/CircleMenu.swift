@@ -34,7 +34,7 @@ public func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> 
 
 // MARK: Protocol 
 
-@objc protocol CircleMenuDelegate {
+@objc public protocol CircleMenuDelegate {
     
     // don't change button.tag
     optional func circleMenu(circleMenu: CircleMenu, willDisplay button: CircleMenuButton, atIndex: Int)
@@ -65,7 +65,7 @@ public class CircleMenu: UIButton {
     private var customSelectedIconView: UIImageView!
     
     // MARK: life cicle
-    init(frame: CGRect,
+    public init(frame: CGRect,
         normalIcon: String?,
         selectedIcon: String?,
         buttonsCount: Int = 3,
@@ -141,8 +141,8 @@ public class CircleMenu: UIButton {
         
         let iconView = Init(UIImageView(image: image)) {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.contentMode = .Center
-            $0.userInteractionEnabled = false
+            $0.contentMode                               = .Center
+            $0.userInteractionEnabled                    = false
         }
         addSubview(iconView)
         
@@ -261,7 +261,7 @@ public class CircleMenu: UIButton {
         
         let step: Float = 360.0 / Float(self.buttonsCount)
         for index in 0..<self.buttonsCount {
-            let button = buttons[index]
+            let button       = buttons[index]
             let angle: Float = Float(index) * step
             if isShow == true {
                 delegate?.circleMenu?(self, willDisplay: button, atIndex: index)
