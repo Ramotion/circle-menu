@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CircleMenu  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="CircleMenu  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">CircleMenu Docs</a> (3% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">CircleMenu Reference</a>
+        <img id="carat" src="img/carat.png" />
+        CircleMenu  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/CircleMenu.html">CircleMenu</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/CircleMenuButton.html">CircleMenuButton</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/CircleMenuLoader.html">CircleMenuLoader</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/UIView.html">UIView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:F10CircleMenu4IniturFTq_5blockFT6objectq__T__q_">Init(_:block:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/CircleMenuDelegate.html">CircleMenuDelegate</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <p><a href="http://twitter.com/Ramotion"><img src="https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat" alt="Twitter"></a>
+<a href="https://cocoapods.org/pods/CircleMenu"><img src="https://img.shields.io/cocoapods/p/CircleMenu.svg" alt="CocoaPods"></a>
+<a href="http://cocoapods.org/pods/CircleMenu"><img src="https://img.shields.io/cocoapods/v/CircleMenu.svg" alt="CocoaPods"></a></p>
+<a href='#circle_menu' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='circle_menu'>circle-menu</h1>
+<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
+
+<ul>
+<li>iOS 8.0+</li>
+<li>Xcode 7.2</li>
+</ul>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+
+<p>Just add CircleMenuLib folder to your project.</p>
+
+<p>or use <a href="https://cocoapods.org">CocoaPods</a> with Podfile:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'CircleMenu'</span><span class="p">,</span> <span class="s1">'~&gt; 0.0.5'</span>
+</code></pre>
+<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
+<a href='#with_storyboard' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h5 id='with_storyboard'>with storyboard</h5>
+
+<p>1) Create a new UIButton inheriting from <code>CircleMenu</code></p>
+
+<p>2) Add images for Normal and Selected state</p>
+
+<p>3) Use delegate method to configure buttons</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">circleMenu</span><span class="p">(</span><span class="nv">circleMenu</span><span class="p">:</span> <span class="kt">CircleMenu</span><span class="p">,</span> <span class="n">willDisplay</span> <span class="nv">button</span><span class="p">:</span> <span class="kt">CircleMenuButton</span><span class="p">,</span> <span class="nv">atIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+</code></pre>
+
+<p>4) Use properties to confiure CircleMenu</p>
+<pre class="highlight swift"><code><span class="kd">@IBInspectable</span> <span class="k">var</span> <span class="nv">buttonsCount</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="kd">@IBInspectable</span> <span class="k">var</span> <span class="nv">duration</span><span class="p">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1">// circle animation duration</span>
+<span class="kd">@IBInspectable</span> <span class="k">var</span> <span class="nv">distance</span><span class="p">:</span> <span class="kt">Float</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1">// distance between center button and buttons</span>
+</code></pre>
+<a href='#programmatically' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h5 id='programmatically'>programmatically</h5>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">button</span> <span class="o">=</span> <span class="kt">CircleMenu</span><span class="p">(</span>
+  <span class="nv">frame</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">50</span><span class="p">),</span>
+  <span class="nv">normalIcon</span><span class="p">:</span><span class="s">"icon_menu"</span><span class="p">,</span>
+  <span class="nv">selectedIcon</span><span class="p">:</span><span class="s">"icon_close"</span><span class="p">,</span>
+  <span class="nv">buttonsCount</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="nv">duration</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="nv">distance</span><span class="p">:</span> <span class="mi">120</span><span class="p">)</span>
+<span class="n">button</span><span class="o">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="k">self</span>
+<span class="n">button</span><span class="o">.</span><span class="n">layer</span><span class="o">.</span><span class="n">cornerRadius</span> <span class="o">=</span> <span class="n">button</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">width</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="n">view</span><span class="o">.</span><span class="nf">addSubview</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
+</code></pre>
+<a href='#delegate_methods' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h5 id='delegate_methods'>delegate methods</h5>
+<pre class="highlight swift"><code><span class="c1">// configure buttons</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">circleMenu</span><span class="p">(</span><span class="nv">circleMenu</span><span class="p">:</span> <span class="kt">CircleMenu</span><span class="p">,</span> <span class="n">willDisplay</span> <span class="nv">button</span><span class="p">:</span> <span class="kt">CircleMenuButton</span><span class="p">,</span> <span class="nv">atIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+
+<span class="c1">// call before animation</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">circleMenu</span><span class="p">(</span><span class="nv">circleMenu</span><span class="p">:</span> <span class="kt">CircleMenu</span><span class="p">,</span> <span class="n">buttonWillSelected</span> <span class="nv">button</span><span class="p">:</span> <span class="kt">CircleMenuButton</span><span class="p">,</span> <span class="nv">atIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+
+<span class="c1">// call after animation</span>
+<span class="kd">optional</span> <span class="kd">func</span> <span class="nf">circleMenu</span><span class="p">(</span><span class="nv">circleMenu</span><span class="p">:</span> <span class="kt">CircleMenu</span><span class="p">,</span> <span class="n">buttonDidSelected</span> <span class="nv">button</span><span class="p">:</span> <span class="kt">CircleMenuButton</span><span class="p">,</span> <span class="nv">atIndex</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+</code></pre>
+<a href='#licence' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='licence'>Licence</h2>
+
+<p>Adaptive tab bar is released under the MIT license.
+See <a href="./LICENSE">LICENSE</a> for details.</p>
+<a href='#about' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='about'>About</h2>
+
+<p>The project maintained by <a href="https://ramotion.com?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=circle-menu">app development agency</a> <a href="https://ramotion.com?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=circle-menu">Ramotion Inc.</a>
+See our other <a href="https://github.com/ramotion">open-source projects</a> or <a href="https://ramotion.com?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=circle-menu">hire</a> us to design, develop, and grow your product.</p>
+
+<p><a href="https://twitter.com/intent/tweet?text=https://github.com/ramotion/circle-menu"><img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" alt="Twitter URL"></a>
+<a href="https://twitter.com/ramotion"><img src="https://img.shields.io/twitter/follow/ramotion.svg?style=social" alt="Twitter Follow"></a></p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2016 <a class="link" href="https://github.com/Ramotion/circle-menu" target="_blank" rel="external">Juri Vasylenko</a>. All rights reserved. (Last updated: 2016-02-11)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.5.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
