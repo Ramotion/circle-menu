@@ -32,7 +32,7 @@ class ViewController: UIViewController, CircleMenuDelegate {
         super.viewDidLoad()
 
         // add button
-        
+
 //        let button = CircleMenu(
 //            frame: CGRect(x: 200, y: 200, width: 50, height: 50),
 //            normalIcon:"icon_menu",
@@ -44,7 +44,7 @@ class ViewController: UIViewController, CircleMenuDelegate {
 //        button.delegate = self
 //        button.layer.cornerRadius = button.frame.size.width / 2.0
 //        view.addSubview(button)
-        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,21 +54,21 @@ class ViewController: UIViewController, CircleMenuDelegate {
 
 
     // MARK: <CircleMenuDelegate>
-    
+
     func circleMenu(circleMenu: CircleMenu, willDisplay button: CircleMenuButton, atIndex: Int) {
         button.backgroundColor = items[atIndex].color
         button.setImage(UIImage(imageLiteral: items[atIndex].icon), forState: .Normal)
-        
+
         // set highlited image
         let highlightedImage  = UIImage(imageLiteral: items[atIndex].icon).imageWithRenderingMode(.AlwaysTemplate)
         button.setImage(highlightedImage, forState: .Highlighted)
         button.tintColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.3)
     }
-    
+
     func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: CircleMenuButton, atIndex: Int) {
         print("button will selected: \(atIndex)")
     }
-    
+
     func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: CircleMenuButton, atIndex: Int) {
         print("button did selected: \(atIndex)")
     }

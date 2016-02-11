@@ -32,10 +32,10 @@ public func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> 
     return value
 }
 
-// MARK: Protocol 
+// MARK: Protocol
 
 @objc public protocol CircleMenuDelegate {
-    
+
     // don't change button.tag
     optional func circleMenu(circleMenu: CircleMenu, willDisplay button: CircleMenuButton, atIndex: Int)
 
@@ -48,23 +48,23 @@ public func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> 
 
 // MARK: CircleMenu
 public class CircleMenu: UIButton {
-    
+
     // MARK: properties
-    
+
     @IBInspectable public var buttonsCount: Int = 3
     @IBInspectable public var duration: Double  = 2 // circle animation duration
     @IBInspectable public var distance: Float   = 100 // distance between center button and buttons
     @IBInspectable public var showDelay: Double = 0 // delay between show buttons
-    
-    
-    @IBOutlet weak public var delegate: AnyObject? //CircleMenuDelegate
-    
+
+
+    @IBOutlet weak public var delegate: CircleMenuDelegate?
+
     var buttons: [CircleMenuButton]?
-    
+
     private var customNormalIconView: UIImageView!
     private var customSelectedIconView: UIImageView!
-    
-    // MARK: life cicle
+
+    // MARK: life cycle
     public init(frame: CGRect,
         normalIcon: String?,
         selectedIcon: String?,
@@ -72,33 +72,33 @@ public class CircleMenu: UIButton {
         duration: Double = 2,
         distance: Float = 100) {
         super.init(frame: frame)
-        
+
         if let icon = normalIcon {
             setImage(UIImage(named: icon), forState: .Normal)
         }
-        
+
         if let icon = selectedIcon {
             setImage(UIImage(named: icon), forState: .Selected)
         }
-    
+
         self.buttonsCount = buttonsCount
         self.duration     = duration
         self.distance     = distance
-        
+
         commonInit()
     }
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+
             commonInit()
         }
-    
+
     private func commonInit() {
         addActions()
-        
+
         customNormalIconView = addCustomImageView(state: .Normal)
-        
+
         customSelectedIconView = addCustomImageView(state: .Selected)
         if customSelectedIconView != nil {
             customSelectedIconView.alpha = 0
@@ -106,9 +106,9 @@ public class CircleMenu: UIButton {
         setImage(UIImage(), forState: .Normal)
         setImage(UIImage(), forState: .Selected)
     }
-    
+
     // MARK: create
-    
+
     private func createButtons() -> [CircleMenuButton] {
 
         var buttons = [CircleMenuButton]()
@@ -129,23 +129,23 @@ public class CircleMenu: UIButton {
             }
             buttons.append(button)
         }
-        
+
         return buttons
     }
-    
+
     private func addCustomImageView(state state: UIControlState) -> UIImageView? {
 
         guard let image = imageForState(state) else {
             return nil
         }
-        
+
         let iconView = Init(UIImageView(image: image)) {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.contentMode                               = .Center
             $0.userInteractionEnabled                    = false
         }
         addSubview(iconView)
-        
+
         // added constraints
         iconView.addConstraint(NSLayoutConstraint(item: iconView,
             attribute: .Height,
@@ -154,7 +154,7 @@ public class CircleMenu: UIButton {
             attribute: .Height,
             multiplier: 1,
             constant: bounds.size.height))
-        
+
         iconView.addConstraint(NSLayoutConstraint(item: iconView,
             attribute: .Width,
             relatedBy: .Equal,
@@ -162,7 +162,7 @@ public class CircleMenu: UIButton {
             attribute: .Width,
             multiplier: 1,
             constant: bounds.size.width))
-        
+
         addConstraint(NSLayoutConstraint(item: self,
             attribute: .CenterX,
             relatedBy: .Equal,
@@ -170,7 +170,7 @@ public class CircleMenu: UIButton {
             attribute: .CenterX,
             multiplier: 1,
             constant:0))
-        
+
         addConstraint(NSLayoutConstraint(item: self,
             attribute: .CenterY,
             relatedBy: .Equal,
@@ -178,23 +178,23 @@ public class CircleMenu: UIButton {
             attribute: .CenterY,
             multiplier: 1,
             constant:0))
-        
+
         return iconView
     }
-    
+
     // MARK: configure
-    
+
     private func addActions() {
         self.addTarget(self, action: "onTap", forControlEvents: UIControlEvents.TouchUpInside)
     }
-    
+
     // MARK: helpers
-    
+
     public func buttonsIsShown() -> Bool {
         guard let buttons = self.buttons else {
             return false
         }
-        
+
         for button in buttons {
             if button.alpha == 0 {
                 return false
@@ -202,9 +202,9 @@ public class CircleMenu: UIButton {
         }
         return true
     }
-    
+
     // MARK: actions
-    
+
     func onTap() {
         if buttonsIsShown() == false {
             buttons = createButtons()
@@ -212,60 +212,60 @@ public class CircleMenu: UIButton {
         let isShow = !buttonsIsShown()
         let duration  = isShow ? 0.5 : 0.2
         buttonsAnimationIsShow(isShow: isShow, duration: duration)
-      
+
         tapBounceAnimation()
         tapRotatedAnimation(0.3, isSelected: isShow)
     }
-    
+
     func buttonHandler(sender: CircleMenuButton) {
         delegate?.circleMenu?(self, buttonWillSelected: sender, atIndex: sender.tag)
-        
+
         let circle = CircleMenuLoader(
                             radius: CGFloat(distance),
                             strokeWidth: bounds.size.height,
                             circleMenu: self,
                             color: sender.backgroundColor)
-        
+
         if let container = sender.container { // rotation animation
             sender.rotationLayerAnimation(container.angleZ + 360, duration: duration)
             container.superview?.bringSubviewToFront(container)
         }
-        
+
         if let aButtons = buttons {
             circle.fillAnimation(duration, startAngle: -90 + Float(360 / aButtons.count) * Float(sender.tag))
             circle.hideAnimation(0.5, delay: duration)
-            
+
             hideCenterButton(duration: 0.3)
-          
+
             buttonsAnimationIsShow(isShow: false, duration: 0, hideDelay: duration)
             showCenterButton(duration: 0.525, delay: duration)
-           
+
             if customNormalIconView != nil && customSelectedIconView != nil {
                 let dispatchTime: dispatch_time_t = dispatch_time(
                     DISPATCH_TIME_NOW,
                     Int64(duration * Double(NSEC_PER_SEC)))
-                
+
                 dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                     self.delegate?.circleMenu?(self, buttonDidSelected: sender, atIndex: sender.tag)
                 })
             }
         }
     }
-    
+
     // MARK: animations
-    
+
     private func buttonsAnimationIsShow(isShow isShow: Bool, duration: Double, hideDelay: Double = 0) {
         guard let buttons = self.buttons else {
             return
         }
-        
+
         let step: Float = 360.0 / Float(self.buttonsCount)
         for index in 0..<self.buttonsCount {
             let button       = buttons[index]
             let angle: Float = Float(index) * step
             if isShow == true {
                 delegate?.circleMenu?(self, willDisplay: button, atIndex: index)
-                
+
                 button.rotatedZ(angle: angle, animated: false, delay: Double(index) * showDelay)
                 button.showAnimation(distance: distance, duration: duration, delay: Double(index) * showDelay)
             } else {
@@ -278,7 +278,7 @@ public class CircleMenu: UIButton {
             self.buttons = nil
         }
     }
-    
+
     private func tapBounceAnimation() {
         self.transform = CGAffineTransformMakeScale(0.9, 0.9)
         UIView.animateWithDuration(
@@ -292,9 +292,9 @@ public class CircleMenu: UIButton {
             }, completion: { (success) -> Void in
         })
     }
-    
+
     private func tapRotatedAnimation(duration: Float, isSelected: Bool) {
-        
+
         let addAnimations: (view: UIImageView, isShow: Bool) -> () = { (view, isShow) in
             var toAngle: Float   = 180.0
             var fromAngle: Float = 0
@@ -310,7 +310,7 @@ public class CircleMenu: UIButton {
                 fromOpacity = 0
                 toOpacity   = 1
             }
-            
+
             let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
                 $0.duration       = NSTimeInterval(duration)
                 $0.toValue        = (toAngle.degrees)
@@ -331,12 +331,12 @@ public class CircleMenu: UIButton {
                 $0.fromValue      = fromScale
                 $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
             }
-            
+
             view.layer.addAnimation(rotation, forKey: nil)
             view.layer.addAnimation(fade, forKey: nil)
             view.layer.addAnimation(scale, forKey: nil)
         }
-        
+
         if customNormalIconView != nil && customSelectedIconView != nil {
             addAnimations(view: customNormalIconView, isShow: !isSelected)
             addAnimations(view: customSelectedIconView, isShow: isSelected)
@@ -344,7 +344,7 @@ public class CircleMenu: UIButton {
         selected = isSelected
         self.alpha = isSelected ? 0.3 : 1
     }
-    
+
     private func hideCenterButton(duration duration: Double, delay: Double = 0) {
 
         UIView.animateWithDuration(
@@ -357,7 +357,7 @@ public class CircleMenu: UIButton {
         })
 
     }
-    
+
     private func showCenterButton(duration duration: Float, delay: Double) {
         UIView.animateWithDuration(
             NSTimeInterval(duration),
@@ -370,7 +370,7 @@ public class CircleMenu: UIButton {
                 self.alpha = 1
             }, completion: { (success) -> Void in
         })
-        
+
         let rotation = Init(CASpringAnimation(keyPath: "transform.rotation")) {
             $0.duration        = NSTimeInterval(1.5)
             $0.toValue         = (0)
@@ -395,12 +395,12 @@ public class CircleMenu: UIButton {
             $0.removedOnCompletion = false
             $0.beginTime = CACurrentMediaTime() + delay
         }
-        
+
         if customNormalIconView != nil {
             customNormalIconView.layer.addAnimation(rotation, forKey: nil)
             customNormalIconView.layer.addAnimation(show, forKey: nil)
         }
-        
+
         if customSelectedIconView != nil {
             customSelectedIconView.layer.addAnimation(fade, forKey: nil)
         }
@@ -413,14 +413,14 @@ extension Float {
     var radians: Float {
         return self * (Float(180) / Float(M_PI))
     }
-    
+
     var degrees: Float {
         return self  * Float(M_PI) / 180.0
     }
 }
 
 extension UIView {
-    
+
     var angleZ: Float {
         let radians: Float = atan2(Float(self.transform.b), Float(self.transform.a))
         return radians.radians
