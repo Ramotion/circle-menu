@@ -2,7 +2,7 @@
 [![CocoaPods](https://img.shields.io/cocoapods/p/CircleMenu.svg)](https://cocoapods.org/pods/CircleMenu)
 [![CocoaPods](https://img.shields.io/cocoapods/v/CircleMenu.svg)](http://cocoapods.org/pods/CircleMenu)
 
-# circle-menu
+# CircleMenu
 
 ## Requirements
 
