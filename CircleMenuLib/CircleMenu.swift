@@ -376,7 +376,7 @@ public class CircleMenu: UIButton {
             $0.toValue         = (0)
             $0.fromValue       = (Float(-180).degrees)
             $0.damping         = 10
-            $0.initialVelocity = 0
+//            $0.initialVelocity = 0
             $0.beginTime = CACurrentMediaTime() + delay
         }
         let fade = Init(CABasicAnimation(keyPath: "opacity")) {
