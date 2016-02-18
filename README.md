@@ -6,7 +6,7 @@
 [![codebeat badge](https://codebeat.co/badges/6f67da5d-c416-4bac-9fb7-c2dc938feedc)](https://codebeat.co/projects/github-com-ramotion-circle-menu)
 [![Travis](https://img.shields.io/travis/Ramotion/circle-menu.svg)](https://travis-ci.org/Ramotion/circle-menu)
 
-
+[shot on dribbble:](https://github.com/Ramotion/circle-menu)
 ![preview](./preview.gif)
 
 ## Requirements
