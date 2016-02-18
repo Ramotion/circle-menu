@@ -1,8 +1,11 @@
+![header](./header.png)
+# CircleMenu
 [![Twitter](https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat)](http://twitter.com/Ramotion)
 [![CocoaPods](https://img.shields.io/cocoapods/p/CircleMenu.svg)](https://cocoapods.org/pods/CircleMenu)
 [![CocoaPods](https://img.shields.io/cocoapods/v/CircleMenu.svg)](http://cocoapods.org/pods/CircleMenu)
 
-# CircleMenu
+
+![preview](./preview.gif)
 
 ## Requirements
 
@@ -71,7 +74,7 @@ optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: Circl
 
 ## Licence
 
-Adaptive tab bar is released under the MIT license.
+Circle menu bar is released under the MIT license.
 See [LICENSE](./LICENSE) for details.
 
 ## About
