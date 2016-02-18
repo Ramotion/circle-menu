@@ -74,7 +74,7 @@ optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: Circl
 
 ## Licence
 
-Circle menu bar is released under the MIT license.
+Circle menu is released under the MIT license.
 See [LICENSE](./LICENSE) for details.
 
 ## About
