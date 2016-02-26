@@ -9,6 +9,9 @@
 [shot on dribbble:](https://dribbble.com/shots/2534780-Circle-Menu-Swift-Open-Source)
 ![preview](./preview.gif)
 
+
+The [iPhone mockup](https://store.ramotion.com/product/iphone-6-mockups?utm_source=gthb&utm_medium=special&utm_campaign=circle-menu) available [here](https://store.ramotion.com/product/iphone-6-mockups?utm_source=gthb&utm_medium=special&utm_campaign=circle-menu).
+
 ## Requirements
 
 - iOS 8.0+
