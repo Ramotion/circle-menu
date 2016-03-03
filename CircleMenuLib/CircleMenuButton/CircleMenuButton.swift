@@ -143,17 +143,16 @@ extension CircleMenuButton {
             fatalError()
         }
         
-        let heightConstraint = self.container?.constraints.filter {$0.identifier == "height"}.first
-        
-        guard heightConstraint != nil else {
+        guard let heightConstraint = self.container?.constraints.filter({$0.identifier == "height"}).first else {
             return
         }
+        
         self.transform = CGAffineTransformMakeScale(0, 0)
         self.container?.layoutIfNeeded()
         
         self.alpha = 0
         
-        heightConstraint?.constant = CGFloat(distance)
+        heightConstraint.constant = CGFloat(distance)
         UIView.animateWithDuration(
             duration,
             delay: delay,

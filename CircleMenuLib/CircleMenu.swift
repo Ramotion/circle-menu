@@ -62,6 +62,14 @@ public class CircleMenu: UIButton {
         return endAngle - startAngle
     }
     
+    var step: Float {
+        if totalAngle >= 360 {
+            return totalAngle / Float(self.buttonsCount)
+        } else {
+            return totalAngle / Float(self.buttonsCount - 1)
+        }
+    }
+    
     
     @IBOutlet weak public var delegate: CircleMenuDelegate?
     
@@ -89,9 +97,7 @@ public class CircleMenu: UIButton {
             self.startAngle = startAngle
             self.endAngle = endAngle
             
-            if self.endAngle < self.startAngle {
-                swap(&self.startAngle, &self.endAngle)
-            }
+            
             
             commonInit()
     }
@@ -104,6 +110,15 @@ public class CircleMenu: UIButton {
     
     private func commonInit() {
         addActions()
+        
+        if self.endAngle < self.startAngle {
+            swap(&self.startAngle, &self.endAngle)
+        }
+        
+        if endAngle - startAngle > 360 {
+            endAngle = 360
+            startAngle = 0
+        }
         
         customNormalIconView = addCustomImageView(state: .Normal)
         
@@ -120,7 +135,6 @@ public class CircleMenu: UIButton {
     private func createButtons() -> [CircleMenuButton] {
         var buttons = [CircleMenuButton]()
         
-        let step: Float = self.totalAngle / Float(self.buttonsCount)
         for index in 0..<self.buttonsCount {
             
             let angle: Float = self.startAngle + Float(index) * step
@@ -243,7 +257,6 @@ public class CircleMenu: UIButton {
             return
         }
         
-        let step: Float = self.totalAngle / Float(self.buttonsCount)
         for index in 0..<self.buttonsCount {
             let button       = buttons[index]
             let angle: Float = self.startAngle + Float(index) * step
