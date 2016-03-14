@@ -44,7 +44,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Rln-EX-2ni"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="mcN-5O-ZPf"/>
                                 </connections>
                             </button>
                         </subviews>

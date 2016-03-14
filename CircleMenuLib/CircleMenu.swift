@@ -57,7 +57,7 @@ public class CircleMenu: UIButton {
   @IBInspectable public var showDelay: Double = 0 // delay between show buttons
   
   
-  @IBOutlet weak public var delegate: CircleMenuDelegate?
+  @IBOutlet weak public var delegate: AnyObject? //CircleMenuDelegate?
   
   var buttons: [CircleMenuButton]?
   
