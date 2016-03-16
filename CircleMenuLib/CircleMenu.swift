@@ -103,6 +103,20 @@ public class CircleMenu: UIButton {
     setImage(UIImage(), forState: .Selected)
   }
   
+  // MARK: public
+  
+  public func hideButtons(duration: Double, hideDelay: Double = 0) {
+    if buttons == nil {
+      return
+    }
+    
+    buttonsAnimationIsShow(isShow: false, duration: duration, hideDelay: hideDelay)
+
+    tapBounceAnimation()
+    tapRotatedAnimation(0.3, isSelected: false)
+  }
+
+  
   // MARK: create
   
   private func createButtons() -> [CircleMenuButton] {
