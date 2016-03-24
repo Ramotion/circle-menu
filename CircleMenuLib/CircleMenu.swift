@@ -129,7 +129,7 @@ public class CircleMenu: UIButton {
       let distance = Float(self.bounds.size.height/2.0)
       let button = Init(CircleMenuButton(size: self.bounds.size, circleMenu: self, distance:distance, angle: angle)) {
           $0.tag = index
-          $0.addTarget(self, action: "buttonHandler:", forControlEvents: UIControlEvents.TouchUpInside)
+          $0.addTarget(self, action: #selector(CircleMenu.buttonHandler(_:)), forControlEvents: UIControlEvents.TouchUpInside)
           $0.alpha = 0
       }
       buttons.append(button)
@@ -168,7 +168,7 @@ public class CircleMenu: UIButton {
   // MARK: configure
   
   private func addActions() {
-    self.addTarget(self, action: "onTap", forControlEvents: UIControlEvents.TouchUpInside)
+    self.addTarget(self, action: #selector(CircleMenu.onTap), forControlEvents: UIControlEvents.TouchUpInside)
   }
   
   // MARK: helpers
