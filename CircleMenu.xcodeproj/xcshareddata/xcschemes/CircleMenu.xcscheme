@@ -20,6 +20,20 @@
                ReferencedContainer = "container:CircleMenu.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "84F248C61C58E65F008F12C1"
+               BuildableName = "CircleMenuTests.xctest"
+               BlueprintName = "CircleMenuTests"
+               ReferencedContainer = "container:CircleMenu.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,16 +42,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84F248C61C58E65F008F12C1"
-               BuildableName = "CircleMenuTests.xctest"
-               BlueprintName = "CircleMenuTests"
-               ReferencedContainer = "container:CircleMenu.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
