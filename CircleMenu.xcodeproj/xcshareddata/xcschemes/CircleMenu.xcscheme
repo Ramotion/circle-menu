@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0720"
+   LastUpgradeVersion = "0730"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84F248B21C58E65F008F12C1"
-               BuildableName = "CircleMenu.app"
+               BlueprintIdentifier = "8403F5781CFF2C2E007D0BD1"
+               BuildableName = "CircleMenu.framework"
                BlueprintName = "CircleMenu"
-               ReferencedContainer = "container:CircleMenu.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "NO"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84F248C61C58E65F008F12C1"
-               BuildableName = "CircleMenuTests.xctest"
-               BlueprintName = "CircleMenuTests"
                ReferencedContainer = "container:CircleMenu.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -43,15 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "84F248B21C58E65F008F12C1"
-            BuildableName = "CircleMenu.app"
-            BlueprintName = "CircleMenu"
-            ReferencedContainer = "container:CircleMenu.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -65,16 +42,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "84F248B21C58E65F008F12C1"
-            BuildableName = "CircleMenu.app"
+            BlueprintIdentifier = "8403F5781CFF2C2E007D0BD1"
+            BuildableName = "CircleMenu.framework"
             BlueprintName = "CircleMenu"
             ReferencedContainer = "container:CircleMenu.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -84,16 +60,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "84F248B21C58E65F008F12C1"
-            BuildableName = "CircleMenu.app"
+            BlueprintIdentifier = "8403F5781CFF2C2E007D0BD1"
+            BuildableName = "CircleMenu.framework"
             BlueprintName = "CircleMenu"
             ReferencedContainer = "container:CircleMenu.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

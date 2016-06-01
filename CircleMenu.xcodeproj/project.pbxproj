@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8403F57C1CFF2C2E007D0BD1 /* CircleMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 8403F57B1CFF2C2E007D0BD1 /* CircleMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8403F5801CFF2C2E007D0BD1 /* CircleMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8403F5791CFF2C2E007D0BD1 /* CircleMenu.framework */; };
+		8403F5811CFF2C2E007D0BD1 /* CircleMenu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8403F5791CFF2C2E007D0BD1 /* CircleMenu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8403F5861CFF2C46007D0BD1 /* CircleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC58D1C58E898008872D5 /* CircleMenu.swift */; };
+		8403F5871CFF2C4B007D0BD1 /* CircleMenuLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC5931C58F3E2008872D5 /* CircleMenuLoader.swift */; };
+		8403F5881CFF2C4F007D0BD1 /* CircleMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC58F1C58E898008872D5 /* CircleMenuButton.swift */; };
 		841EC5901C58E898008872D5 /* CircleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC58D1C58E898008872D5 /* CircleMenu.swift */; };
 		841EC5911C58E898008872D5 /* CircleMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC58F1C58E898008872D5 /* CircleMenuButton.swift */; };
 		841EC5941C58F3E2008872D5 /* CircleMenuLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC5931C58F3E2008872D5 /* CircleMenuLoader.swift */; };
@@ -23,6 +29,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8403F57E1CFF2C2E007D0BD1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84F248AB1C58E65F008F12C1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8403F5781CFF2C2E007D0BD1;
+			remoteInfo = CircleMenu;
+		};
 		84F248C81C58E65F008F12C1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84F248AB1C58E65F008F12C1 /* Project object */;
@@ -32,11 +45,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8403F5851CFF2C2E007D0BD1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8403F5811CFF2C2E007D0BD1 /* CircleMenu.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		8403F5791CFF2C2E007D0BD1 /* CircleMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CircleMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8403F57B1CFF2C2E007D0BD1 /* CircleMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleMenu.h; sourceTree = "<group>"; };
+		8403F57D1CFF2C2E007D0BD1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		841EC58D1C58E898008872D5 /* CircleMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenu.swift; sourceTree = "<group>"; };
 		841EC58F1C58E898008872D5 /* CircleMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenuButton.swift; sourceTree = "<group>"; };
 		841EC5931C58F3E2008872D5 /* CircleMenuLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleMenuLoader.swift; sourceTree = "<group>"; };
-		84F248B31C58E65F008F12C1 /* CircleMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CircleMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84F248B31C58E65F008F12C1 /* CircleMenuDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CircleMenuDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F248B61C58E65F008F12C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84F248B81C58E65F008F12C1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		84F248BB1C58E65F008F12C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -49,10 +79,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8403F5751CFF2C2E007D0BD1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84F248B01C58E65F008F12C1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8403F5801CFF2C2E007D0BD1 /* CircleMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +104,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8403F57A1CFF2C2E007D0BD1 /* CircleMenu */ = {
+			isa = PBXGroup;
+			children = (
+				8403F57B1CFF2C2E007D0BD1 /* CircleMenu.h */,
+				8403F57D1CFF2C2E007D0BD1 /* Info.plist */,
+			);
+			path = CircleMenu;
+			sourceTree = "<group>";
+		};
 		841EC58C1C58E87F008872D5 /* CircleMenuLib */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +145,7 @@
 				841EC58C1C58E87F008872D5 /* CircleMenuLib */,
 				84F248B51C58E65F008F12C1 /* CircleMenu */,
 				84F248CA1C58E65F008F12C1 /* CircleMenuTests */,
+				8403F57A1CFF2C2E007D0BD1 /* CircleMenu */,
 				84F248B41C58E65F008F12C1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -105,8 +153,9 @@
 		84F248B41C58E65F008F12C1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84F248B31C58E65F008F12C1 /* CircleMenu.app */,
+				84F248B31C58E65F008F12C1 /* CircleMenuDemo.app */,
 				84F248C71C58E65F008F12C1 /* CircleMenuTests.xctest */,
+				8403F5791CFF2C2E007D0BD1 /* CircleMenu.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,15 +184,26 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		8403F5761CFF2C2E007D0BD1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8403F57C1CFF2C2E007D0BD1 /* CircleMenu.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		84F248B21C58E65F008F12C1 /* CircleMenu */ = {
+		8403F5781CFF2C2E007D0BD1 /* CircleMenu */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84F248D01C58E65F008F12C1 /* Build configuration list for PBXNativeTarget "CircleMenu" */;
+			buildConfigurationList = 8403F5821CFF2C2E007D0BD1 /* Build configuration list for PBXNativeTarget "CircleMenu" */;
 			buildPhases = (
-				84F248AF1C58E65F008F12C1 /* Sources */,
-				84F248B01C58E65F008F12C1 /* Frameworks */,
-				84F248B11C58E65F008F12C1 /* Resources */,
-				846980FB1C59F398002D77BE /* swift lint */,
+				8403F5741CFF2C2E007D0BD1 /* Sources */,
+				8403F5751CFF2C2E007D0BD1 /* Frameworks */,
+				8403F5761CFF2C2E007D0BD1 /* Headers */,
+				8403F5771CFF2C2E007D0BD1 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -151,7 +211,27 @@
 			);
 			name = CircleMenu;
 			productName = CircleMenu;
-			productReference = 84F248B31C58E65F008F12C1 /* CircleMenu.app */;
+			productReference = 8403F5791CFF2C2E007D0BD1 /* CircleMenu.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		84F248B21C58E65F008F12C1 /* CircleMenuDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84F248D01C58E65F008F12C1 /* Build configuration list for PBXNativeTarget "CircleMenuDemo" */;
+			buildPhases = (
+				84F248AF1C58E65F008F12C1 /* Sources */,
+				84F248B01C58E65F008F12C1 /* Frameworks */,
+				84F248B11C58E65F008F12C1 /* Resources */,
+				846980FB1C59F398002D77BE /* swift lint */,
+				8403F5851CFF2C2E007D0BD1 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8403F57F1CFF2C2E007D0BD1 /* PBXTargetDependency */,
+			);
+			name = CircleMenuDemo;
+			productName = CircleMenu;
+			productReference = 84F248B31C58E65F008F12C1 /* CircleMenuDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		84F248C61C58E65F008F12C1 /* CircleMenuTests */ = {
@@ -182,6 +262,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Alex K.";
 				TargetAttributes = {
+					8403F5781CFF2C2E007D0BD1 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 					84F248B21C58E65F008F12C1 = {
 						CreatedOnToolsVersion = 7.2;
 					};
@@ -204,13 +287,21 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				84F248B21C58E65F008F12C1 /* CircleMenu */,
+				84F248B21C58E65F008F12C1 /* CircleMenuDemo */,
 				84F248C61C58E65F008F12C1 /* CircleMenuTests */,
+				8403F5781CFF2C2E007D0BD1 /* CircleMenu */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8403F5771CFF2C2E007D0BD1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84F248B11C58E65F008F12C1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -249,6 +340,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8403F5741CFF2C2E007D0BD1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8403F5861CFF2C46007D0BD1 /* CircleMenu.swift in Sources */,
+				8403F5881CFF2C4F007D0BD1 /* CircleMenuButton.swift in Sources */,
+				8403F5871CFF2C4B007D0BD1 /* CircleMenuLoader.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		84F248AF1C58E65F008F12C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -275,9 +376,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8403F57F1CFF2C2E007D0BD1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8403F5781CFF2C2E007D0BD1 /* CircleMenu */;
+			targetProxy = 8403F57E1CFF2C2E007D0BD1 /* PBXContainerItemProxy */;
+		};
 		84F248C91C58E65F008F12C1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 84F248B21C58E65F008F12C1 /* CircleMenu */;
+			target = 84F248B21C58E65F008F12C1 /* CircleMenuDemo */;
 			targetProxy = 84F248C81C58E65F008F12C1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -302,6 +408,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8403F5831CFF2C2E007D0BD1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CircleMenu/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ramotion.CircleMenu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8403F5841CFF2C2E007D0BD1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CircleMenu/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ramotion.CircleMenu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		84F248CE1C58E65F008F12C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -387,6 +537,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = CircleMenu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -400,6 +551,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = CircleMenu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -436,6 +588,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8403F5821CFF2C2E007D0BD1 /* Build configuration list for PBXNativeTarget "CircleMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8403F5831CFF2C2E007D0BD1 /* Debug */,
+				8403F5841CFF2C2E007D0BD1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		84F248AE1C58E65F008F12C1 /* Build configuration list for PBXProject "CircleMenu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -445,7 +605,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84F248D01C58E65F008F12C1 /* Build configuration list for PBXNativeTarget "CircleMenu" */ = {
+		84F248D01C58E65F008F12C1 /* Build configuration list for PBXNativeTarget "CircleMenuDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				84F248D11C58E65F008F12C1 /* Debug */,
