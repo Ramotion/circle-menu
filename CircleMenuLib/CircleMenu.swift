@@ -162,6 +162,21 @@ public class CircleMenu: UIButton {
     tapRotatedAnimation(0.3, isSelected: false)
   }
 
+  /**
+   Check is sub buttons showed
+   */
+  public func buttonsIsShown() -> Bool {
+    guard let buttons = self.buttons else {
+      return false
+    }
+    
+    for button in buttons {
+      if button.alpha == 0 {
+        return false
+      }
+    }
+    return true
+  }
   
   // MARK: create
   
@@ -215,25 +230,6 @@ public class CircleMenu: UIButton {
   
   private func addActions() {
     self.addTarget(self, action: #selector(CircleMenu.onTap), forControlEvents: UIControlEvents.TouchUpInside)
-  }
-  
-  // MARK: helpers
-  
-  
-  /**
-   Check is sub buttons showed
-   */
-  public func buttonsIsShown() -> Bool {
-    guard let buttons = self.buttons else {
-      return false
-    }
-    
-    for button in buttons {
-      if button.alpha == 0 {
-        return false
-      }
-    }
-    return true
   }
   
   // MARK: actions
