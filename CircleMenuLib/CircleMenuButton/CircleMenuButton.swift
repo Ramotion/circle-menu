@@ -135,7 +135,7 @@ internal class CircleMenuButton: UIButton {
 
 // MARK: Animations
 
-extension CircleMenuButton {
+internal extension CircleMenuButton {
 
     internal func showAnimation(distance distance: Float, duration: Double, delay: Double = 0) {
 
@@ -229,7 +229,7 @@ extension CircleMenuButton {
     }
 }
 
-extension UIView {
+internal extension UIView {
 
     internal func rotationLayerAnimation(view: UIView, angle: Float, duration: Double) {
 

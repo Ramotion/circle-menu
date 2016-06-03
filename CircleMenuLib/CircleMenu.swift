@@ -86,7 +86,7 @@ public class CircleMenu: UIButton {
   /// The object that acts as the delegate of the circle menu.
   @IBOutlet weak public var delegate: AnyObject? //CircleMenuDelegate?
   
-  var buttons: [CircleMenuButton]?
+  var buttons: [UIButton]?
   
   private var customNormalIconView: UIImageView!
   private var customSelectedIconView: UIImageView!
@@ -165,8 +165,8 @@ public class CircleMenu: UIButton {
   
   // MARK: create
   
-  private func createButtons() -> [CircleMenuButton] {
-    var buttons = [CircleMenuButton]()
+  private func createButtons() -> [UIButton] {
+    var buttons = [UIButton]()
     
     let step: Float = 360.0 / Float(self.buttonsCount)
     for index in 0..<self.buttonsCount {
@@ -291,7 +291,7 @@ public class CircleMenu: UIButton {
     
     let step: Float = 360.0 / Float(self.buttonsCount)
     for index in 0..<self.buttonsCount {
-      let button       = buttons[index]
+      guard case let button as CircleMenuButton = buttons[index] else { continue }
       let angle: Float = Float(index) * step
       if isShow == true {
         delegate?.circleMenu?(self, willDisplay: button, atIndex: index)
@@ -426,7 +426,7 @@ public class CircleMenu: UIButton {
 
 // MARK: extension
 
-extension Float {
+internal extension Float {
   var radians: Float {
     return self * (Float(180) / Float(M_PI))
   }
@@ -436,7 +436,7 @@ extension Float {
   }
 }
 
-extension UIView {
+internal extension UIView {
   
   var angleZ: Float {
     let radians: Float = atan2(Float(self.transform.b), Float(self.transform.a))
