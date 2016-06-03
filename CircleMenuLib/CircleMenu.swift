@@ -250,7 +250,11 @@ public class CircleMenu: UIButton {
     tapRotatedAnimation(0.3, isSelected: isShow)
   }
   
-  func buttonHandler(sender: CircleMenuButton) {
+  func buttonHandler(sender: UIButton) {
+    guard case let sender as CircleMenuButton = sender else {
+      return
+    }
+    
     delegate?.circleMenu?(self, buttonWillSelected: sender, atIndex: sender.tag)
     
     let circle = CircleMenuLoader(radius: CGFloat(distance), strokeWidth: bounds.size.height, circleMenu: self,
