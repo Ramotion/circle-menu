@@ -34,29 +34,56 @@ public func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> 
 
 // MARK: Protocol
 
+/**
+ *  CircleMenuDelegate
+ */
 @objc public protocol CircleMenuDelegate {
   
-  // don't change button.tag
+  /**
+   Tells the delegate the circle menu is about to draw a button for a particular index.
+   
+   - parameter circleMenu: The circle menu object informing the delegate of this impending event.
+   - parameter button:     A circle menu button object that circle menu is going to use when drawing the row. Don't change button.tag
+   - parameter atIndex:    An button index.
+   */
   optional func circleMenu(circleMenu: CircleMenu, willDisplay button: CircleMenuButton, atIndex: Int)
   
-  // call before animation
+  /**
+   Tells the delegate that a specified index is about to be selected.
+   
+   - parameter circleMenu: A circle menu object informing the delegate about the impending selection.
+   - parameter button:     A selected circle menu button. Don't change button.tag
+   - parameter atIndex:    Selected button index
+   */
   optional func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: CircleMenuButton, atIndex: Int)
   
-  // call after animation
+  /**
+   Tells the delegate that the specified index is now selected.
+   
+   - parameter circleMenu: A circle menu object informing the delegate about the new index selection.
+   - parameter button:     A selected circle menu button. Don't change button.tag
+   - parameter atIndex:    Selected button index
+   */
   optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: CircleMenuButton, atIndex: Int)
 }
 
 // MARK: CircleMenu
+
+/// A Button object with pop ups buttons
 public class CircleMenu: UIButton {
   
   // MARK: properties
   
+  /// Buttons count
   @IBInspectable public var buttonsCount: Int = 3
-  @IBInspectable public var duration: Double  = 2 // circle animation duration
-  @IBInspectable public var distance: Float   = 100 // distance between center button and buttons
-  @IBInspectable public var showDelay: Double = 0 // delay between show buttons
+  /// Circle animation duration
+  @IBInspectable public var duration: Double  = 2
+  /// Distance between center button and buttons
+  @IBInspectable public var distance: Float   = 100
+  /// Delay between show buttons
+  @IBInspectable public var showDelay: Double = 0 
   
-  
+  /// The object that acts as the delegate of the circle menu.
   @IBOutlet weak public var delegate: AnyObject? //CircleMenuDelegate?
   
   var buttons: [CircleMenuButton]?
@@ -105,6 +132,12 @@ public class CircleMenu: UIButton {
   
   // MARK: public
   
+  /**
+   Hide button
+   
+   - parameter duration:  The duration, in seconds, of the animation.
+   - parameter hideDelay: The time to delay, in seconds.
+   */
   public func hideButtons(duration: Double, hideDelay: Double = 0) {
     if buttons == nil {
       return
