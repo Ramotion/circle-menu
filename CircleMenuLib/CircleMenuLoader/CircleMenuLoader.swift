@@ -25,7 +25,7 @@
 import Foundation
 import UIKit
 
-public class CircleMenuLoader: UIView {
+internal class CircleMenuLoader: UIView {
 
     // MARK: properties
 
@@ -33,7 +33,7 @@ public class CircleMenuLoader: UIView {
 
     // MARK: life cycle
 
-    public init(radius: CGFloat, strokeWidth: CGFloat, circleMenu: CircleMenu, color: UIColor?) {
+    internal init(radius: CGFloat, strokeWidth: CGFloat, circleMenu: CircleMenu, color: UIColor?) {
         super.init(frame: CGRect(x: 0, y: 0, width: radius, height: radius))
 
         if let aSuperView = circleMenu.superview {
@@ -53,7 +53,7 @@ public class CircleMenuLoader: UIView {
         backgroundColor = UIColor.clearColor()
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    required internal init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -120,7 +120,7 @@ public class CircleMenuLoader: UIView {
             constant:0))
     }
 
-    private func createRoundView(rect: CGRect, color: UIColor?) {
+    internal func createRoundView(rect: CGRect, color: UIColor?) {
         let roundView = Init(UIView(frame: rect)) {
             $0.backgroundColor = UIColor.blackColor()
             $0.layer.cornerRadius = rect.size.width / 2.0
@@ -131,7 +131,7 @@ public class CircleMenuLoader: UIView {
 
     // MARK: animations
 
-    public func fillAnimation(duration: Double, startAngle: Float) {
+    internal func fillAnimation(duration: Double, startAngle: Float) {
         guard circle != nil else {
             return
         }
@@ -148,7 +148,7 @@ public class CircleMenuLoader: UIView {
         circle?.addAnimation(animation, forKey: nil)
     }
 
-    public func hideAnimation(duration: CGFloat, delay: Double) {
+    internal func hideAnimation(duration: CGFloat, delay: Double) {
 
         let scale = Init(CABasicAnimation(keyPath: "transform.scale")) {
             $0.toValue             = 1.2

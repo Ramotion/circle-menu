@@ -23,11 +23,11 @@
 
 import UIKit
 
-public class CircleMenuButton: UIButton {
+internal class CircleMenuButton: UIButton {
 
     // MARK: properties
 
-    public weak var container: UIView?
+    internal weak var container: UIView?
 
     // MARK: life cycle
 
@@ -53,7 +53,7 @@ public class CircleMenuButton: UIButton {
         self.rotatedZ(angle: angle, animated: false)
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    required internal init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -110,9 +110,9 @@ public class CircleMenuButton: UIButton {
         return container
     }
 
-    // MARK: public
+    // MARK: methods
 
-    public func rotatedZ(angle angle: Float, animated: Bool, duration: Double = 0, delay: Double = 0) {
+    internal func rotatedZ(angle angle: Float, animated: Bool, duration: Double = 0, delay: Double = 0) {
         guard let container = self.container else {
             fatalError("contaner don't create")
         }
@@ -137,7 +137,7 @@ public class CircleMenuButton: UIButton {
 
 extension CircleMenuButton {
 
-    public func showAnimation(distance distance: Float, duration: Double, delay: Double = 0) {
+    internal func showAnimation(distance distance: Float, duration: Double, delay: Double = 0) {
 
         guard let container = self.container else {
             fatalError()
@@ -168,7 +168,7 @@ extension CircleMenuButton {
         })
     }
 
-    public func hideAnimation(distance distance: Float, duration: Double, delay: Double = 0) {
+    internal func hideAnimation(distance distance: Float, duration: Double, delay: Double = 0) {
 
         guard let container = self.container else {
             fatalError()
@@ -196,7 +196,7 @@ extension CircleMenuButton {
         })
     }
 
-    public func changeDistance(distance: CGFloat, animated: Bool, duration: Double = 0, delay: Double = 0) {
+    internal func changeDistance(distance: CGFloat, animated: Bool, duration: Double = 0, delay: Double = 0) {
 
         guard let container = self.container else {
             fatalError()
@@ -222,7 +222,7 @@ extension CircleMenuButton {
 
     // MARK: layer animation
 
-    public func rotationLayerAnimation(angle: Float, duration: Double) {
+    internal func rotationLayerAnimation(angle: Float, duration: Double) {
         if let aContainer = container {
             rotationLayerAnimation(aContainer, angle: angle, duration: duration)
         }
@@ -231,7 +231,7 @@ extension CircleMenuButton {
 
 extension UIView {
 
-    public func rotationLayerAnimation(view: UIView, angle: Float, duration: Double) {
+    internal func rotationLayerAnimation(view: UIView, angle: Float, duration: Double) {
 
         let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
             $0.duration       = NSTimeInterval(duration)

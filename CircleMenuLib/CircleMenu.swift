@@ -27,7 +27,7 @@ import UIKit
 // MARK: helpers
 
 @warn_unused_result
-public func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> Type {
+func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> Type {
   block(object: value)
   return value
 }
@@ -46,7 +46,7 @@ public func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> 
    - parameter button:     A circle menu button object that circle menu is going to use when drawing the row. Don't change button.tag
    - parameter atIndex:    An button index.
    */
-  optional func circleMenu(circleMenu: CircleMenu, willDisplay button: CircleMenuButton, atIndex: Int)
+  optional func circleMenu(circleMenu: CircleMenu, willDisplay button: UIButton, atIndex: Int)
   
   /**
    Tells the delegate that a specified index is about to be selected.
@@ -55,7 +55,7 @@ public func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> 
    - parameter button:     A selected circle menu button. Don't change button.tag
    - parameter atIndex:    Selected button index
    */
-  optional func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: CircleMenuButton, atIndex: Int)
+  optional func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: UIButton, atIndex: Int)
   
   /**
    Tells the delegate that the specified index is now selected.
@@ -64,7 +64,7 @@ public func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> 
    - parameter button:     A selected circle menu button. Don't change button.tag
    - parameter atIndex:    Selected button index
    */
-  optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: CircleMenuButton, atIndex: Int)
+  optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: UIButton, atIndex: Int)
 }
 
 // MARK: CircleMenu
@@ -92,6 +92,19 @@ public class CircleMenu: UIButton {
   private var customSelectedIconView: UIImageView!
   
   // MARK: life cycle
+  
+  /**
+   Initializes and returns a circle menu object.
+   
+   - parameter frame:        A rectangle specifying the initial location and size of the circle menu in its superview’s coordinates.
+   - parameter normalIcon:   The image to use for the specified normal state.
+   - parameter selectedIcon: The image to use for the specified selected state.
+   - parameter buttonsCount: The number of buttons.
+   - parameter duration:     The duration, in seconds, of the animation.
+   - parameter distance:     Distance between center button and sub buttons.
+   
+   - returns: A newly created circle menu.
+   */
   public init(frame: CGRect, normalIcon: String?, selectedIcon: String?, buttonsCount: Int = 3, duration: Double = 2,
     distance: Float = 100) {
       super.init(frame: frame)
@@ -206,6 +219,10 @@ public class CircleMenu: UIButton {
   
   // MARK: helpers
   
+  
+  /**
+   Check is sub buttons showed
+   */
   public func buttonsIsShown() -> Bool {
     guard let buttons = self.buttons else {
       return false
