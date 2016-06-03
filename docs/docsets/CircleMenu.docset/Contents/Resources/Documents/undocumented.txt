@@ -1,37 +1,4 @@
-CircleMenuButton.swift
-	public class CircleMenuButton: UIButton
-	public weak var container: UIView?
-	required public init?(coder aDecoder: NSCoder)
-	public func rotatedZ(angle angle: Float, animated: Bool, duration: Double = 0, delay: Double = 0)
-	public class CircleMenuButton : UIButton
-	public func showAnimation(distance distance: Float, duration: Double, delay: Double = 0)
-	public func hideAnimation(distance distance: Float, duration: Double, delay: Double = 0)
-	public func changeDistance(distance: CGFloat, animated: Bool, duration: Double = 0, delay: Double = 0)
-	public func rotationLayerAnimation(angle: Float, duration: Double)
-	public func rotationLayerAnimation(view: UIView, angle: Float, duration: Double)
-CircleMenuLoader.swift
-	public class CircleMenuLoader: UIView
-	public init(radius: CGFloat, strokeWidth: CGFloat, circleMenu: CircleMenu, color: UIColor?)
-	required public init?(coder aDecoder: NSCoder)
-	public func fillAnimation(duration: Double, startAngle: Float)
-	public func hideAnimation(duration: CGFloat, delay: Double)
 CircleMenu.swift
-	public func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> Type
-	@objc public protocol CircleMenuDelegate
-	optional func circleMenu(circleMenu: CircleMenu, willDisplay button: CircleMenuButton, atIndex: Int)
-	optional func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: CircleMenuButton, atIndex: Int)
-	optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: CircleMenuButton, atIndex: Int)
-	public class CircleMenu: UIButton
-	@IBInspectable public var buttonsCount: Int = 3
-	@IBInspectable public var duration: Double  = 2 // circle animation duration
-	@IBInspectable public var distance: Float   = 100 // distance between center button and buttons
-	@IBInspectable public var showDelay: Double = 0 // delay between show buttons
-	@IBOutlet weak public var delegate: AnyObject? //CircleMenuDelegate
-	public init(frame: CGRect,
-        normalIcon: String?,
-        selectedIcon: String?,
-        buttonsCount: Int = 3,
-        duration: Double = 2,
-        distance: Float = 100)
 	required public init?(coder aDecoder: NSCoder)
-	public func buttonsIsShown() -> Bool
+CircleMenuButton.swift
+	internal class CircleMenuButton : UIButton

@@ -143,7 +143,7 @@ public class CircleMenu: UIButton {
     setImage(UIImage(), forState: .Selected)
   }
   
-  // MARK: public
+  // MARK: methods
   
   /**
    Hide button
