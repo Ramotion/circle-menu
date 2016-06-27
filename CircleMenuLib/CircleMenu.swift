@@ -65,6 +65,13 @@ func Init<Type>(value: Type, @noescape block: (object: Type) -> Void) -> Type {
    - parameter atIndex:    Selected button index
    */
   optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: UIButton, atIndex: Int)
+
+    /**
+     Tells the delegate that the menu was collapsed - the cancel action.
+     
+     - parameter circleMenu: A circle menu object informing the delegate about the new index selection.
+     */
+    optional func menuCollapsed(circleMenu: CircleMenu)
 }
 
 // MARK: CircleMenu
@@ -302,6 +309,7 @@ public class CircleMenu: UIButton {
         button.hideAnimation(
           distance: Float(self.bounds.size.height / 2.0),
           duration: duration, delay: hideDelay)
+        self.delegate?.menuCollapsed?(self)
       }
     }
     if isShow == false { // hide buttons and remove
