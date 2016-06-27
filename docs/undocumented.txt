@@ -1,4 +1,4 @@
-CircleMenu.swift
-	required public init?(coder aDecoder: NSCoder)
 CircleMenuButton.swift
 	internal class CircleMenuButton : UIButton
+CircleMenu.swift
+	required public init?(coder aDecoder: NSCoder)
