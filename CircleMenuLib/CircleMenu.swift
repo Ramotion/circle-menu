@@ -89,7 +89,11 @@ public class CircleMenu: UIButton {
   @IBInspectable public var distance: Float   = 100
   /// Delay between show buttons
   @IBInspectable public var showDelay: Double = 0 
-  
+  /// Start angle
+  @IBInspectable public var startAngle: Float = 0
+  /// End angle
+  @IBInspectable public var endAngle: Float = 360
+    
   /// The object that acts as the delegate of the circle menu.
   @IBOutlet weak public var delegate: AnyObject? //CircleMenuDelegate?
   
@@ -97,6 +101,18 @@ public class CircleMenu: UIButton {
   
   private var customNormalIconView: UIImageView!
   private var customSelectedIconView: UIImageView!
+  
+  var totalAngle: Float {
+    return endAngle - startAngle
+  }
+  
+  var step: Float {
+    if totalAngle >= 360 {
+      return totalAngle / Float(self.buttonsCount)
+    } else {
+      return totalAngle / Float(self.buttonsCount - 1)
+    }
+  }
   
   // MARK: life cycle
   
@@ -113,7 +129,7 @@ public class CircleMenu: UIButton {
    - returns: A newly created circle menu.
    */
   public init(frame: CGRect, normalIcon: String?, selectedIcon: String?, buttonsCount: Int = 3, duration: Double = 2,
-    distance: Float = 100) {
+    distance: Float = 100, startAngle: Float = 0, endAngle: Float = 360) {
       super.init(frame: frame)
       
       if let icon = normalIcon {
@@ -127,7 +143,9 @@ public class CircleMenu: UIButton {
       self.buttonsCount = buttonsCount
       self.duration     = duration
       self.distance     = distance
-      
+      self.startAngle   = startAngle
+      self.endAngle     = endAngle
+    
       commonInit()
   }
   
@@ -139,6 +157,15 @@ public class CircleMenu: UIButton {
   
   private func commonInit() {
     addActions()
+    
+    if self.endAngle < self.startAngle {
+      swap(&self.startAngle, &self.endAngle)
+    }
+    
+    if endAngle - startAngle > 360 {
+      endAngle = 360
+      startAngle = 0
+    }
     
     customNormalIconView = addCustomImageView(state: .Normal)
     
@@ -190,7 +217,6 @@ public class CircleMenu: UIButton {
   private func createButtons() -> [UIButton] {
     var buttons = [UIButton]()
     
-    let step: Float = 360.0 / Float(self.buttonsCount)
     for index in 0..<self.buttonsCount {
       
       let angle: Float = Float(index) * step
@@ -269,7 +295,7 @@ public class CircleMenu: UIButton {
     }
     
     if let aButtons = buttons {
-      circle.fillAnimation(duration, startAngle: -90 + Float(360 / aButtons.count) * Float(sender.tag))
+      circle.fillAnimation(duration, startAngle: -90 + startAngle + totalAngle / Float(aButtons.count) * Float(sender.tag))
       circle.hideAnimation(0.5, delay: duration)
       
       hideCenterButton(duration: 0.3)
@@ -296,7 +322,6 @@ public class CircleMenu: UIButton {
       return
     }
     
-    let step: Float = 360.0 / Float(self.buttonsCount)
     for index in 0..<self.buttonsCount {
       guard case let button as CircleMenuButton = buttons[index] else { continue }
       let angle: Float = Float(index) * step
