@@ -290,7 +290,7 @@ public class CircleMenu: UIButton {
       color: sender.backgroundColor)
     
     if let container = sender.container { // rotation animation
-      sender.rotationLayerAnimation(container.angleZ + 360, duration: duration)
+      sender.rotationLayerAnimation(container.angleZ + totalAngle, duration: duration)
       container.superview?.bringSubviewToFront(container)
     }
     
