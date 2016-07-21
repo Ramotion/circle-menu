@@ -1,4 +1,4 @@
-![header](./header.png)
+[![header](./header.png)](https://ramotion.com?utm_source=gthb&utm_medium=special&utm_campaign=circle-menu-logo)
 # CircleMenu
 [![Twitter](https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat)](http://twitter.com/Ramotion)
 [![CocoaPods](https://img.shields.io/cocoapods/p/CircleMenu.svg)](https://cocoapods.org/pods/CircleMenu)
@@ -8,8 +8,9 @@
 [![codebeat badge](https://codebeat.co/badges/6f67da5d-c416-4bac-9fb7-c2dc938feedc)](https://codebeat.co/projects/github-com-ramotion-circle-menu)
 [![Travis](https://img.shields.io/travis/Ramotion/circle-menu.svg)](https://travis-ci.org/Ramotion/circle-menu)
 
+## About
+Ramotion specializes in building dedicated engineering teams and developing custom software.<br> [Contact our team](https://ramotion.com?utm_source=gthb&utm_medium=special&utm_campaign=circle-menu-contact-us) and we’ll help you work with the best engineers from Eastern Europe.
 
-[shot on dribbble:](https://dribbble.com/shots/2534780-Circle-Menu-Swift-Open-Source)
 ![preview](./preview.gif)
 
 
@@ -92,9 +93,7 @@ optional func menuCollapsed(circleMenu: CircleMenu)
 Circle menu is released under the MIT license.
 See [LICENSE](./LICENSE) for details.
 
-## About
-The project maintained by [app development agency](https://ramotion.com?utm_source=gthb&utm_medium=special&utm_campaign=circle-menu) [Ramotion Inc.](https://ramotion.com?utm_source=gthb&utm_medium=special&utm_campaign=circle-menu)
-See our other [open-source projects](https://github.com/ramotion) or [hire](https://ramotion.com?utm_source=gthb&utm_medium=special&utm_campaign=circle-menu) us to design, develop, and grow your product.
+## Folow us
 
 [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=https://github.com/ramotion/circle-menu)
 [![Twitter Follow](https://img.shields.io/twitter/follow/ramotion.svg?style=social)](https://twitter.com/ramotion)
