@@ -96,8 +96,8 @@ open class CircleMenu: UIButton {
   var buttons: [UIButton]?
   weak var platform: UIView?
   
-  fileprivate var customNormalIconView: UIImageView!
-  fileprivate var customSelectedIconView: UIImageView!
+  fileprivate var customNormalIconView: UIImageView?
+  fileprivate var customSelectedIconView: UIImageView?
   
   /**
    Initializes and returns a circle menu object.
@@ -147,7 +147,7 @@ open class CircleMenu: UIButton {
     
     customSelectedIconView = addCustomImageView(state: .selected)
     if customSelectedIconView != nil {
-      customSelectedIconView.alpha = 0
+      customSelectedIconView?.alpha = 0
     }
     setImage(UIImage(), for: UIControlState())
     setImage(UIImage(), for: .selected)
@@ -407,10 +407,13 @@ open class CircleMenu: UIButton {
       view.layer.add(scale, forKey: nil)
     }
     
-    if customNormalIconView != nil && customSelectedIconView != nil {
+    if let customNormalIconView = self.customNormalIconView {
       addAnimations(customNormalIconView, !isSelected)
+    }
+    if let customSelectedIconView = self.customSelectedIconView {
       addAnimations(customSelectedIconView, isSelected)
     }
+
     self.isSelected = isSelected
     self.alpha = isSelected ? 0.3 : 1
   }
@@ -458,10 +461,10 @@ open class CircleMenu: UIButton {
       $0.beginTime           = CACurrentMediaTime() + delay
     }
     
-    customNormalIconView.layer.add(rotation, forKey: nil)
-    customNormalIconView.layer.add(show, forKey: nil)
+    customNormalIconView?.layer.add(rotation, forKey: nil)
+    customNormalIconView?.layer.add(show, forKey: nil)
     
-    customSelectedIconView.layer.add(fade, forKey: nil)
+    customSelectedIconView?.layer.add(fade, forKey: nil)
   }
 }
 
