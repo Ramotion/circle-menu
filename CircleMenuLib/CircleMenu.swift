@@ -94,6 +94,7 @@ open class CircleMenu: UIButton {
   @IBOutlet weak open var delegate: AnyObject? //CircleMenuDelegate?
   
   var buttons: [UIButton]?
+  weak var platform: UIView?
   
   fileprivate var customNormalIconView: UIImageView!
   fileprivate var customSelectedIconView: UIImageView!
@@ -150,6 +151,7 @@ open class CircleMenu: UIButton {
     }
     setImage(UIImage(), for: UIControlState())
     setImage(UIImage(), for: .selected)
+    
   }
   
   // MARK: methods
@@ -188,8 +190,7 @@ open class CircleMenu: UIButton {
   }
   
   // MARK: create
-  
-  fileprivate func createButtons() -> [UIButton] {
+  fileprivate func createButtons(platform: UIView) -> [UIButton] {
     var buttons = [UIButton]()
     
     let step: Float = 360.0 / Float(self.buttonsCount)
@@ -197,7 +198,7 @@ open class CircleMenu: UIButton {
       
       let angle: Float = Float(index) * step
       let distance = Float(self.bounds.size.height/2.0)
-      let button = Init(CircleMenuButton(size: self.bounds.size, circleMenu: self, distance:distance, angle: angle)) {
+      let button = Init(CircleMenuButton(size: self.bounds.size, platform: platform, distance:distance, angle: angle)) {
         $0.tag = index
         $0.addTarget(self, action: #selector(CircleMenu.buttonHandler(_:)), for: UIControlEvents.touchUpInside)
         $0.alpha = 0
@@ -235,8 +236,39 @@ open class CircleMenu: UIButton {
     return iconView
   }
   
-  // MARK: configure
+  fileprivate func createPlatform() -> UIView {
+    let platform = UIView(frame: .zero)
+    platform.backgroundColor = .clear
+    platform.translatesAutoresizingMaskIntoConstraints = false
+    superview?.insertSubview(platform, belowSubview: self)
+    
+    // constraints
+    let sizeConstraints = [NSLayoutAttribute.width, .height].map {
+      NSLayoutConstraint(item: platform,
+                         attribute: $0,
+                         relatedBy: .equal,
+                         toItem: nil,
+                         attribute: $0,
+                         multiplier: 1,
+                         constant: CGFloat(distance * Float(2.0)))
+    }
+    platform.addConstraints(sizeConstraints)
+    
+    let centerConstraints = [NSLayoutAttribute.centerX, .centerY].map {
+      NSLayoutConstraint(item: self,
+                         attribute: $0,
+                         relatedBy: .equal,
+                         toItem: platform,
+                         attribute: $0,
+                         multiplier: 1,
+                         constant:0)
+    }
+    superview?.addConstraints(centerConstraints)
+    
+    return platform
+  }
   
+  // MARK: configure
   fileprivate func addActions() {
     self.addTarget(self, action: #selector(CircleMenu.onTap), for: UIControlEvents.touchUpInside)
   }
@@ -245,7 +277,9 @@ open class CircleMenu: UIButton {
   
   func onTap() {
     if buttonsIsShown() == false {
-      buttons = createButtons()
+      let platform = createPlatform()
+      buttons = createButtons(platform: platform)
+      self.platform = platform
     }
     let isShow = !buttonsIsShown()
     let duration  = isShow ? 0.5 : 0.2
@@ -270,7 +304,9 @@ open class CircleMenu: UIButton {
     
     if let buttons = buttons {
       circle.fillAnimation(duration, startAngle: -90 + Float(360 / buttons.count) * Float(sender.tag))
-      circle.hideAnimation(0.5, delay: duration)
+      circle.hideAnimation(0.5, delay: duration) { [weak self] _ in
+        if self?.platform?.superview != nil { self?.platform?.removeFromSuperview()}
+      }
       
       hideCenterButton(duration: 0.3)
       

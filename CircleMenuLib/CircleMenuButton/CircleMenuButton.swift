@@ -26,18 +26,18 @@ import UIKit
 internal class CircleMenuButton: UIButton {
   
   // MARK: properties
-  
-  internal weak var container: UIView?
+  weak var container: UIView?
+
   
   // MARK: life cycle
   
-  init(size: CGSize, circleMenu: CircleMenu, distance: Float, angle: Float = 0) {
+  init(size: CGSize, platform: UIView, distance: Float, angle: Float = 0) {
     super.init(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
     
     self.backgroundColor = UIColor(colorLiteralRed: 0.79, green: 0.24, blue: 0.27, alpha: 1)
     self.layer.cornerRadius = size.height / 2.0
     
-    let aContainer = createContainer(CGSize(width: size.width, height:CGFloat(distance)), circleMenu: circleMenu)
+    let aContainer = createContainer(CGSize(width: size.width, height:CGFloat(distance)), platform: platform)
     
     // hack view for rotate
     let view = UIView(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height))
@@ -58,19 +58,14 @@ internal class CircleMenuButton: UIButton {
   }
   
   // MARK: configure
-  
-  fileprivate func createContainer(_ size: CGSize, circleMenu: CircleMenu) -> UIView {
-    
-    guard let circleMenuSuperView = circleMenu.superview else {
-      fatalError("wront circle menu")
-    }
-    
+  fileprivate func createContainer(_ size: CGSize, platform: UIView) -> UIView {
     let container = Init(UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))) {
       $0.backgroundColor                           = UIColor.clear
       $0.translatesAutoresizingMaskIntoConstraints = false
       $0.layer.anchorPoint                         = CGPoint(x: 0.5, y: 1)
     }
-    circleMenuSuperView.insertSubview(container, belowSubview: circleMenu)
+//    circleMenu.superview?.insertSubview(container, belowSubview: circleMenu)
+    platform.addSubview(container)
     
     // added constraints
     let height = NSLayoutConstraint(item: container,
@@ -91,21 +86,21 @@ internal class CircleMenuButton: UIButton {
                                                multiplier: 1,
                                                constant: size.width))
     
-    circleMenuSuperView.addConstraint(NSLayoutConstraint(item: circleMenu,
-                                                         attribute: .centerX,
-                                                         relatedBy: .equal,
-                                                         toItem: container,
-                                                         attribute: .centerX,
-                                                         multiplier: 1,
-                                                         constant:0))
+    platform.addConstraint(NSLayoutConstraint(item: platform,
+                                              attribute: .centerX,
+                                              relatedBy: .equal,
+                                              toItem: container,
+                                              attribute: .centerX,
+                                              multiplier: 1,
+                                              constant:0))
     
-    circleMenuSuperView.addConstraint(NSLayoutConstraint(item: circleMenu,
-                                                         attribute: .centerY,
-                                                         relatedBy: .equal,
-                                                         toItem: container,
-                                                         attribute: .centerY,
-                                                         multiplier: 1,
-                                                         constant:0))
+    platform.addConstraint(NSLayoutConstraint(item: platform,
+                                              attribute: .centerY,
+                                              relatedBy: .equal,
+                                              toItem: container,
+                                              attribute: .centerY,
+                                              multiplier: 1,
+                                              constant:0))
     
     return container
   }

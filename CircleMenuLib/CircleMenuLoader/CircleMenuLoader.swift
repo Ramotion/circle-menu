@@ -143,7 +143,7 @@ internal class CircleMenuLoader: UIView {
     circle?.add(animation, forKey: nil)
   }
   
-  internal func hideAnimation(_ duration: CGFloat, delay: Double) {
+  internal func hideAnimation(_ duration: CGFloat, delay: Double, completion: @escaping () -> Void) {
     
     let scale = Init(CABasicAnimation(keyPath: "transform.scale")) {
       $0.toValue             = 1.2
@@ -164,6 +164,7 @@ internal class CircleMenuLoader: UIView {
       },
       completion: { (success) -> Void in
         self.removeFromSuperview()
+        completion()
     })
   }
 }
