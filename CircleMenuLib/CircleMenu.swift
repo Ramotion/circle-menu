@@ -237,9 +237,10 @@ open class CircleMenu: UIButton {
   }
   
   fileprivate func createPlatform() -> UIView {
-    let platform = UIView(frame: .zero)
-    platform.backgroundColor = .clear
-    platform.translatesAutoresizingMaskIntoConstraints = false
+    let platform = Init(UIView(frame: .zero)) {
+      $0.backgroundColor = .clear
+      $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     superview?.insertSubview(platform, belowSubview: self)
     
     // constraints
@@ -290,27 +291,29 @@ open class CircleMenu: UIButton {
   }
   
   func buttonHandler(_ sender: CircleMenuButton) {
+    guard let platform = self.platform else { return }
+
     delegate?.circleMenu?(self, buttonWillSelected: sender, atIndex: sender.tag)
     
     let circle = CircleMenuLoader(radius: CGFloat(distance),
                                   strokeWidth: bounds.size.height,
-                                  circleMenu: self,
+                                  platform: platform,
                                   color: sender.backgroundColor)
     
     if let container = sender.container { // rotation animation
-      sender.rotationLayerAnimation(container.angleZ + 360, duration: duration)
+      sender.rotationAnimation(container.angleZ + 360, duration: duration)
       container.superview?.bringSubview(toFront: container)
     }
     
     if let buttons = buttons {
-      circle.fillAnimation(duration, startAngle: -90 + Float(360 / buttons.count) * Float(sender.tag))
+      circle.fillAnimation(duration, startAngle: -90 + Float(360 / buttons.count) * Float(sender.tag)) { [weak self] _ in
+        self?.buttons?.forEach { $0.alpha = 0 }
+      }
       circle.hideAnimation(0.5, delay: duration) { [weak self] _ in
-        if self?.platform?.superview != nil { self?.platform?.removeFromSuperview()}
+        if self?.platform?.superview != nil { self?.platform?.removeFromSuperview() }
       }
       
       hideCenterButton(duration: 0.3)
-      
-      buttonsAnimationIsShow(isShow: false, duration: 0, hideDelay: duration)
       showCenterButton(duration: 0.525, delay: duration)
 
       if customNormalIconView != nil && customSelectedIconView != nil {

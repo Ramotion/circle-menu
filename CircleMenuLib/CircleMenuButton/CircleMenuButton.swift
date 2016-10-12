@@ -64,7 +64,6 @@ internal class CircleMenuButton: UIButton {
       $0.translatesAutoresizingMaskIntoConstraints = false
       $0.layer.anchorPoint                         = CGPoint(x: 0.5, y: 1)
     }
-//    circleMenu.superview?.insertSubview(container, belowSubview: circleMenu)
     platform.addSubview(container)
     
     // added constraints
@@ -199,22 +198,12 @@ internal extension CircleMenuButton {
   
   // MARK: layer animation
   
-  internal func rotationLayerAnimation(_ angle: Float, duration: Double) {
-    if let aContainer = container {
-      rotationLayerAnimation(aContainer, angle: angle, duration: duration)
-    }
-  }
-}
-
-internal extension UIView {
-  
-  internal func rotationLayerAnimation(_ view: UIView, angle: Float, duration: Double) {
-    
+  internal func rotationAnimation(_ angle: Float, duration: Double) {
     let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
       $0.duration       = TimeInterval(duration)
       $0.toValue        = (angle.degrees)
       $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
     }
-    view.layer.add(rotation, forKey: "rotation")
+    container?.layer.add(rotation, forKey: "rotation")
   }
 }
