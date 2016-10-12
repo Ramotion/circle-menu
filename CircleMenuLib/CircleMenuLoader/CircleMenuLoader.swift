@@ -50,7 +50,7 @@ internal class CircleMenuLoader: UIView {
             height: strokeWidth)
         createRoundView(circleFrame, color: color)
 
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
     }
 
     required internal init?(coder aDecoder: NSCoder) {
@@ -59,7 +59,7 @@ internal class CircleMenuLoader: UIView {
 
     // MARK: create
 
-    private func createCircle(radius: CGFloat, strokeWidth: CGFloat, color: UIColor?) -> CAShapeLayer {
+    fileprivate func createCircle(_ radius: CGFloat, strokeWidth: CGFloat, color: UIColor?) -> CAShapeLayer {
 
         let circlePath = UIBezierPath(
             arcCenter: CGPoint(x: radius, y: radius),
@@ -69,9 +69,9 @@ internal class CircleMenuLoader: UIView {
             clockwise: true)
 
         let circle = Init(CAShapeLayer()) {
-            $0.path        = circlePath.CGPath
-            $0.fillColor   = UIColor.clearColor().CGColor
-            $0.strokeColor = color?.CGColor
+            $0.path        = circlePath.cgPath
+            $0.fillColor   = UIColor.clear.cgColor
+            $0.strokeColor = color?.cgColor
             $0.lineWidth   = strokeWidth
         }
 
@@ -79,7 +79,7 @@ internal class CircleMenuLoader: UIView {
         return circle
     }
 
-    private func createConstraints(circleMenu: CircleMenu, radius: CGFloat) {
+    fileprivate func createConstraints(_ circleMenu: CircleMenu, radius: CGFloat) {
 
         guard let circleMenuSuperView = circleMenu.superview else {
             fatalError()
@@ -88,41 +88,41 @@ internal class CircleMenuLoader: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         // added constraints
         addConstraint(NSLayoutConstraint(item: self,
-            attribute: .Height,
-            relatedBy: .Equal,
+            attribute: .height,
+            relatedBy: .equal,
             toItem: nil,
-            attribute: .Height,
+            attribute: .height,
             multiplier: 1,
             constant: radius * 2.0))
 
         addConstraint(NSLayoutConstraint(item: self,
-            attribute: .Width,
-            relatedBy: .Equal,
+            attribute: .width,
+            relatedBy: .equal,
             toItem: nil,
-            attribute: .Width,
+            attribute: .width,
             multiplier: 1,
             constant: radius * 2.0))
 
         circleMenuSuperView.addConstraint(NSLayoutConstraint(item: circleMenu,
-            attribute: .CenterX,
-            relatedBy: .Equal,
+            attribute: .centerX,
+            relatedBy: .equal,
             toItem: self,
-            attribute: .CenterX,
+            attribute: .centerX,
             multiplier: 1,
             constant:0))
 
         circleMenuSuperView.addConstraint(NSLayoutConstraint(item: circleMenu,
-            attribute: .CenterY,
-            relatedBy: .Equal,
+            attribute: .centerY,
+            relatedBy: .equal,
             toItem: self,
-            attribute: .CenterY,
+            attribute: .centerY,
             multiplier: 1,
             constant:0))
     }
 
-    internal func createRoundView(rect: CGRect, color: UIColor?) {
+    internal func createRoundView(_ rect: CGRect, color: UIColor?) {
         let roundView = Init(UIView(frame: rect)) {
-            $0.backgroundColor = UIColor.blackColor()
+            $0.backgroundColor = UIColor.black
             $0.layer.cornerRadius = rect.size.width / 2.0
             $0.backgroundColor = color
         }
@@ -131,7 +131,7 @@ internal class CircleMenuLoader: UIView {
 
     // MARK: animations
 
-    internal func fillAnimation(duration: Double, startAngle: Float) {
+    internal func fillAnimation(_ duration: Double, startAngle: Float) {
         guard circle != nil else {
             return
         }
@@ -145,25 +145,25 @@ internal class CircleMenuLoader: UIView {
             $0.toValue        = (1)
             $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
-        circle?.addAnimation(animation, forKey: nil)
+        circle?.add(animation, forKey: nil)
     }
 
-    internal func hideAnimation(duration: CGFloat, delay: Double) {
+    internal func hideAnimation(_ duration: CGFloat, delay: Double) {
 
         let scale = Init(CABasicAnimation(keyPath: "transform.scale")) {
             $0.toValue             = 1.2
             $0.duration            = CFTimeInterval(duration)
             $0.fillMode            = kCAFillModeForwards
-            $0.removedOnCompletion = false
+            $0.isRemovedOnCompletion = false
             $0.timingFunction      = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
             $0.beginTime           = CACurrentMediaTime() + delay
         }
-        layer.addAnimation(scale, forKey: nil)
+        layer.add(scale, forKey: nil)
 
-        UIView.animateWithDuration(
-            CFTimeInterval(duration),
+        UIView.animate(
+            withDuration: CFTimeInterval(duration),
             delay: delay,
-            options: UIViewAnimationOptions.CurveEaseIn,
+            options: UIViewAnimationOptions.curveEaseIn,
             animations: { () -> Void in
                 self.alpha = 0
             },
