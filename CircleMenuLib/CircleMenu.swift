@@ -98,8 +98,6 @@ open class CircleMenu: UIButton {
   fileprivate var customNormalIconView: UIImageView!
   fileprivate var customSelectedIconView: UIImageView!
   
-  // MARK: life cycle
-  
   /**
    Initializes and returns a circle menu object.
    
@@ -112,8 +110,12 @@ open class CircleMenu: UIButton {
    
    - returns: A newly created circle menu.
    */
-  public init(frame: CGRect, normalIcon: String?, selectedIcon: String?, buttonsCount: Int = 3, duration: Double = 2,
-    distance: Float = 100) {
+  public init(frame: CGRect,
+              normalIcon: String?,
+              selectedIcon: String?,
+              buttonsCount: Int = 3,
+              duration: Double = 2,
+              distance: Float = 100) {
       super.init(frame: frame)
       
       if let icon = normalIcon {
