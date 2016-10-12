@@ -163,7 +163,6 @@ internal extension CircleMenuButton {
   }
   
   internal func hideAnimation(distance: Float, duration: Double, delay: Double = 0) {
-    
     guard let heightConstraint = (self.container?.constraints.filter {$0.identifier == "height"})?.first else {
       fatalError()
     }
@@ -187,24 +186,18 @@ internal extension CircleMenuButton {
   
   internal func changeDistance(_ distance: CGFloat, animated: Bool, duration: Double = 0, delay: Double = 0) {
     
-    guard let container = self.container else {
+    guard let heightConstraint = (self.container?.constraints.filter {$0.identifier == "height"})?.first else {
       fatalError()
     }
     
-    let heightConstraint = self.container?.constraints.filter {$0.identifier == "height"}.first
-    
-    guard heightConstraint != nil else {
-      return
-    }
-    
-    heightConstraint?.constant = distance
+    heightConstraint.constant = distance
     
     UIView.animate(
       withDuration: duration,
       delay: delay,
       options: UIViewAnimationOptions.curveEaseIn,
       animations: { () -> Void in
-        container.layoutIfNeeded()
+        self.container?.superview?.layoutIfNeeded()
       },
       completion: nil)
   }
