@@ -28,7 +28,8 @@ Just add CircleMenuLib folder to your project.
 or use [CocoaPods](https://cocoapods.org) with Podfile:
 
 ```ruby
-pod 'CircleMenu', '~> 1.0.0'
+pod 'CircleMenu', '~> 2.0.0' swift 3
+pod 'CircleMenu', '~> 1.0.7' swift 2
 ```
 or [Carthage](https://github.com/Carthage/Carthage) users can simply add to their `Cartfile`:
 ```
