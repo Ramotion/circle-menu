@@ -9,7 +9,8 @@
 [![Travis](https://img.shields.io/travis/Ramotion/circle-menu.svg)](https://travis-ci.org/Ramotion/circle-menu)
 
 ## About
-This project is maintained by Ramotion, an agency specialized in building dedicated engineering teams and developing custom software.<br><br> [Contact our team](https://business.ramotion.com?utm_source=gthb&utm_medium=special&utm_campaign=circle-menu-contact-us) and we’ll help you work with the best engineers from Eastern Europe.
+This project is maintained by Ramotion, Inc.<br>
+We specialize in the designing and coding of custom UI for Mobile Apps and Websites.<br><br>[**Looking for developers for your project?** [CONTACT OUR TEAM](http://business.ramotion.com/#Get_in_Touch?utm_source=gthb&utm_medium=special&utm_campaign=circle-menu-contact-us)]
 
 [![preview](./preview.gif)](https://dribbble.com/shots/2534780-Circle-Menu-Swift-Open-Source)
 
