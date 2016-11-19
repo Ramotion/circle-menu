@@ -350,6 +350,10 @@ open class CircleMenu: UIButton {
     }
     if isShow == false { // hide buttons and remove
       self.buttons = nil
+
+      DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
+        if self.platform?.superview != nil { self.platform?.removeFromSuperview() }
+      }
     }
   }
   
