@@ -32,7 +32,6 @@ class ViewController: UIViewController, CircleMenuDelegate {
     super.viewDidLoad()
     
     // add button
-    
     //        let button = CircleMenu(
     //            frame: CGRect(x: 200, y: 200, width: 50, height: 50),
     //            normalIcon:"icon_menu",
