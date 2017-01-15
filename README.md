@@ -90,8 +90,11 @@ optional func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: Circ
 // call after animation
 optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: CircleMenuButton, atIndex: Int)
 
-// call upon cancel of the menu
+// call upon cancel of the menu - fires immediately on button press
 optional func menuCollapsed(circleMenu: CircleMenu)
+
+// call upon opening of the menu - fires immediately on button press
+optional func menuOpened(circleMenu: CircleMenu)
 ```
 
 ## Licence
