@@ -65,11 +65,18 @@ func Init<Type>(_ value: Type, block: (_ object: Type) -> Void) -> Type {
   @objc optional func circleMenu(_ circleMenu: CircleMenu, buttonDidSelected button: UIButton, atIndex: Int)
 
   /**
-   Tells the delegate that the menu was collapsed - the cancel action.
+   Tells the delegate that the menu was collapsed - the cancel action. Fires immediately on button press
 
    - parameter circleMenu: A circle menu object informing the delegate about the new index selection.
    */
   @objc optional func menuCollapsed(_ circleMenu: CircleMenu)
+
+  /**
+   Tells the delegate that the menu was opened. Fires immediately on button press
+
+   - parameter circleMenu: A circle menu object informing the delegate about the new index selection.
+   */
+  @objc optional func menuOpened(_ circleMenu: CircleMenu)
 }
 
 // MARK: CircleMenu
@@ -279,6 +286,9 @@ open class CircleMenu: UIButton {
       let platform = createPlatform()
       buttons = createButtons(platform: platform)
       self.platform = platform
+      DispatchQueue.main.asyncAfter(deadline: .now()) {
+        self.delegate?.menuOpened!(self)
+      }
     }
     let isShow = !buttonsIsShown()
     let duration  = isShow ? 0.5 : 0.2
@@ -347,9 +357,11 @@ open class CircleMenu: UIButton {
     }
     if isShow == false { // hide buttons and remove
       self.buttons = nil
-      self.delegate?.menuCollapsed?(self)
-      DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
-        if self.platform?.superview != nil { self.platform?.removeFromSuperview() }
+      DispatchQueue.main.asyncAfter(deadline: .now()) {
+          self.delegate?.menuCollapsed!(self)
+      }
+      DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+          if self.platform?.superview != nil { self.platform?.removeFromSuperview() }
       }
     }
   }
