@@ -287,7 +287,7 @@ open class CircleMenu: UIButton {
       buttons = createButtons(platform: platform)
       self.platform = platform
       DispatchQueue.main.asyncAfter(deadline: .now()) {
-        self.delegate?.menuOpened!(self)
+        self.delegate?.menuOpened?(self)
       }
     }
     let isShow = !buttonsIsShown()
@@ -358,7 +358,7 @@ open class CircleMenu: UIButton {
     if isShow == false { // hide buttons and remove
       self.buttons = nil
       DispatchQueue.main.asyncAfter(deadline: .now()) {
-          self.delegate?.menuCollapsed!(self)
+          self.delegate?.menuCollapsed?(self)
       }
       DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
           if self.platform?.superview != nil { self.platform?.removeFromSuperview() }
@@ -485,11 +485,11 @@ open class CircleMenu: UIButton {
 
 internal extension Float {
   var radians: Float {
-    return self * (Float(180) / Float(M_PI))
+    return self * (Float(180) / Float.pi)
   }
 
   var degrees: Float {
-    return self  * Float(M_PI) / 180.0
+    return self  * Float.pi / 180.0
   }
 }
 
