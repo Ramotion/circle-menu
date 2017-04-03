@@ -26,6 +26,7 @@
 		84F248BE1C58E65F008F12C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F248BD1C58E65F008F12C1 /* Assets.xcassets */; };
 		84F248C11C58E65F008F12C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84F248BF1C58E65F008F12C1 /* LaunchScreen.storyboard */; };
 		84F248CC1C58E65F008F12C1 /* CircleMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F248CB1C58E65F008F12C1 /* CircleMenuTests.swift */; };
+		F5B354021E930DF100F65BBA /* CircleMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8403F5791CFF2C2E007D0BD1 /* CircleMenu.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5B354021E930DF100F65BBA /* CircleMenu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +275,7 @@
 					};
 					84F248C61C58E65F008F12C1 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0830;
 						TestTargetID = 84F248B21C58E65F008F12C1;
 					};
 				};
@@ -585,7 +588,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramotion.CircleMenuTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CircleMenu.app/CircleMenu";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CircleMenuDemo.app/CircleMenuDemo";
 			};
 			name = Debug;
 		};
@@ -597,7 +601,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ramotion.CircleMenuTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CircleMenu.app/CircleMenu";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CircleMenuDemo.app/CircleMenuDemo";
 			};
 			name = Release;
 		};
