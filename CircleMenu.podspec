@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'CircleMenu'
-  s.version      = '2.0.1'
+  s.version      = '2.0.3'
   s.summary      = 'Amazing animation with buttons'
   s.homepage     = 'https://github.com/Ramotion/circle-menu'
   s.license      = 'MIT'
