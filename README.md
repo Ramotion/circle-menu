@@ -54,7 +54,7 @@ github "Ramotion/circle-menu"
 3) Use delegate method to configure buttons
 
 ```swift
-func circleMenu(circleMenu: CircleMenu, willDisplay button: CircleMenuButton, atIndex: Int)
+func circleMenu(circleMenu: CircleMenu, willDisplay button: UIButton, atIndex: Int)
 ```
 
 4) Use properties to confiure CircleMenu
@@ -84,13 +84,13 @@ view.addSubview(button)
 
 ```swift
 // configure buttons
-optional func circleMenu(circleMenu: CircleMenu, willDisplay button: CircleMenuButton, atIndex: Int)
+optional func circleMenu(circleMenu: CircleMenu, willDisplay button: UIButton, atIndex: Int)
 
 // call before animation
-optional func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: CircleMenuButton, atIndex: Int)
+optional func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: UIButton, atIndex: Int)
 
 // call after animation
-optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: CircleMenuButton, atIndex: Int)
+optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: UIButton, atIndex: Int)
 
 // call upon cancel of the menu
 optional func menuCollapsed(circleMenu: CircleMenu)
