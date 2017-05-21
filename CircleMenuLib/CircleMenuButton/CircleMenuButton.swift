@@ -158,7 +158,7 @@ internal extension CircleMenuButton {
   
   internal func hideAnimation(distance: Float, duration: Double, delay: Double = 0) {
     guard let heightConstraint = (self.container?.constraints.filter {$0.identifier == "height"})?.first else {
-      fatalError()
+      return
     }
     
     heightConstraint.constant = CGFloat(distance)
