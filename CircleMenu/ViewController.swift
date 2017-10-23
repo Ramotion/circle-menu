@@ -11,10 +11,10 @@ import UIKit
 extension UIColor {
   static func color(_ red: Int, green: Int, blue: Int, alpha: Float) -> UIColor {
     return UIColor(
-      colorLiteralRed: Float(1.0) / Float(255.0) * Float(red),
-      green: Float(1.0) / Float(255.0) * Float(green),
-      blue: Float(1.0) / Float(255.0) * Float(blue),
-      alpha: alpha)
+      red: 1.0 / 255.0 * CGFloat(red),
+      green: 1.0 / 255.0 * CGFloat(green),
+      blue: 1.0 / 255.0 * CGFloat(blue),
+      alpha: CGFloat(alpha))
   }
 }
 
@@ -62,7 +62,7 @@ class ViewController: UIViewController, CircleMenuDelegate {
     // set highlited image
     let highlightedImage  = UIImage(named: items[atIndex].icon)?.withRenderingMode(.alwaysTemplate)
     button.setImage(highlightedImage, for: .highlighted)
-    button.tintColor = UIColor.init(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.3)
+    button.tintColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.3)
   }
   
   func circleMenu(_ circleMenu: CircleMenu, buttonWillSelected button: UIButton, atIndex: Int) {

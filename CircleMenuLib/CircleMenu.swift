@@ -274,7 +274,7 @@ open class CircleMenu: UIButton {
   
   // MARK: actions
   
-  func onTap() {
+  @objc func onTap() {
     if buttonsIsShown() == false {
       let platform = createPlatform()
       buttons = createButtons(platform: platform)
@@ -288,7 +288,7 @@ open class CircleMenu: UIButton {
     tapRotatedAnimation(0.3, isSelected: isShow)
   }
   
-  func buttonHandler(_ sender: CircleMenuButton) {
+  @objc func buttonHandler(_ sender: CircleMenuButton) {
     guard let platform = self.platform else { return }
 
     delegate?.circleMenu?(self, buttonWillSelected: sender, atIndex: sender.tag)
@@ -304,10 +304,10 @@ open class CircleMenu: UIButton {
     }
     
     if let buttons = buttons {
-      circle.fillAnimation(duration, startAngle: -90 + Float(360 / buttons.count) * Float(sender.tag)) { [weak self] _ in
+      circle.fillAnimation(duration, startAngle: -90 + Float(360 / buttons.count) * Float(sender.tag)) { [weak self] in
         self?.buttons?.forEach { $0.alpha = 0 }
       }
-      circle.hideAnimation(0.5, delay: duration) { [weak self] _ in
+      circle.hideAnimation(0.5, delay: duration) { [weak self] in
         if self?.platform?.superview != nil { self?.platform?.removeFromSuperview() }
       }
       
