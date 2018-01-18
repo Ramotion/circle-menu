@@ -187,6 +187,11 @@ open class CircleMenu: UIButton {
         return true
     }
 
+  open override func removeFromSuperview() {
+    if self.platform?.superview != nil { self.platform?.removeFromSuperview() }
+    super.removeFromSuperview()
+  }
+  
     // MARK: create
 
     fileprivate func createButtons(platform: UIView) -> [UIButton] {
