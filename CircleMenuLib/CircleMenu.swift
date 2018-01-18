@@ -343,12 +343,11 @@ open class CircleMenu: UIButton {
         button.hideAnimation(
           distance: Float(self.bounds.size.height / 2.0),
           duration: duration, delay: hideDelay)
-        self.delegate?.menuCollapsed?(self)
       }
     }
     if isShow == false { // hide buttons and remove
       self.buttons = nil
-
+      self.delegate?.menuCollapsed?(self)
       DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration) {
         if self.platform?.superview != nil { self.platform?.removeFromSuperview() }
       }
