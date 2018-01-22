@@ -88,6 +88,9 @@ open class CircleMenu: UIButton {
     @IBInspectable open var distance: Float = 100
     /// Delay between show buttons
     @IBInspectable open var showDelay: Double = 0
+    
+    // Pop buttons radius, if nil use center button size
+    open var subButtonsRadius: CGFloat?
 
     /// The object that acts as the delegate of the circle menu.
     @IBOutlet open var delegate: AnyObject? // CircleMenuDelegate?
@@ -202,7 +205,13 @@ open class CircleMenu: UIButton {
 
             let angle: Float = Float(index) * step
             let distance = Float(bounds.size.height / 2.0)
-            let button = Init(CircleMenuButton(size: bounds.size, platform: platform, distance: distance, angle: angle)) {
+            let buttonSize: CGSize
+            if let subButtonsRadius = self.subButtonsRadius {
+                buttonSize = CGSize(width: subButtonsRadius * 2, height: subButtonsRadius * 2)
+            } else {
+                buttonSize = bounds.size
+            }
+            let button = Init(CircleMenuButton(size: buttonSize, platform: platform, distance: distance, angle: angle)) {
                 $0.tag = index
                 $0.addTarget(self, action: #selector(CircleMenu.buttonHandler(_:)), for: UIControlEvents.touchUpInside)
                 $0.alpha = 0
@@ -299,9 +308,16 @@ open class CircleMenu: UIButton {
         guard let platform = self.platform else { return }
 
         delegate?.circleMenu?(self, buttonWillSelected: sender, atIndex: sender.tag)
+        
+        let strokeWidth: CGFloat
+        if let radius = self.subButtonsRadius {
+           strokeWidth = radius * 2
+        } else {
+            strokeWidth = bounds.size.height
+        }
 
         let circle = CircleMenuLoader(radius: CGFloat(distance),
-                                      strokeWidth: bounds.size.height,
+                                      strokeWidth: strokeWidth,
                                       platform: platform,
                                       color: sender.backgroundColor)
 
