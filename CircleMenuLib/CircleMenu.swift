@@ -91,6 +91,13 @@ open class CircleMenu: UIButton {
     
     // Pop buttons radius, if nil use center button size
     open var subButtonsRadius: CGFloat?
+    
+    // Show buttons event
+    open var showButtonsEvent: UIControlEvents = UIControlEvents.touchUpInside {
+        didSet {
+            addActions(newEvent: showButtonsEvent, oldEvent: oldValue)
+        }
+    }
 
     /// The object that acts as the delegate of the circle menu.
     @IBOutlet open var delegate: AnyObject? // CircleMenuDelegate?
@@ -143,7 +150,7 @@ open class CircleMenu: UIButton {
     }
 
     fileprivate func commonInit() {
-        addActions()
+        addActions(newEvent: showButtonsEvent)
 
         customNormalIconView = addCustomImageView(state: UIControlState())
 
@@ -170,7 +177,7 @@ open class CircleMenu: UIButton {
 
         buttonsAnimationIsShow(isShow: false, duration: duration, hideDelay: hideDelay)
 
-        tapBounceAnimation()
+        tapBounceAnimation(duration: 0.5)
         tapRotatedAnimation(0.3, isSelected: false)
     }
 
@@ -284,13 +291,19 @@ open class CircleMenu: UIButton {
 
     // MARK: configure
 
-    fileprivate func addActions() {
-        addTarget(self, action: #selector(CircleMenu.onTap), for: UIControlEvents.touchUpInside)
+    fileprivate func addActions(newEvent: UIControlEvents, oldEvent: UIControlEvents? = nil) {
+        if let oldEvent = oldEvent { removeTarget(self, action: #selector(CircleMenu.onTap), for: oldEvent) }
+        addTarget(self, action: #selector(CircleMenu.onTap), for: newEvent)
     }
 
     // MARK: actions
+    
+    private var isBounceAnimating: Bool = false
 
     @objc func onTap() {
+        guard isBounceAnimating == false else { return }
+        isBounceAnimating = true
+
         if buttonsIsShown() == false {
             let platform = createPlatform()
             buttons = createButtons(platform: platform)
@@ -300,7 +313,7 @@ open class CircleMenu: UIButton {
         let duration = isShow ? 0.5 : 0.2
         buttonsAnimationIsShow(isShow: isShow, duration: duration)
 
-        tapBounceAnimation()
+        tapBounceAnimation(duration: 0.5) { [weak self] _ in self?.isBounceAnimating = false }
         tapRotatedAnimation(0.3, isSelected: isShow)
     }
 
@@ -375,14 +388,14 @@ open class CircleMenu: UIButton {
         }
     }
 
-    fileprivate func tapBounceAnimation() {
+    fileprivate func tapBounceAnimation(duration: TimeInterval, completion: ((Bool)->())? = nil) {
         transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 5,
+        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 5,
                        options: UIViewAnimationOptions.curveLinear,
                        animations: { () -> Void in
                            self.transform = CGAffineTransform(scaleX: 1, y: 1)
                        },
-                       completion: nil)
+                       completion: completion)
     }
 
     fileprivate func tapRotatedAnimation(_ duration: Float, isSelected: Bool) {
