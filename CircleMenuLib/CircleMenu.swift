@@ -88,7 +88,11 @@ open class CircleMenu: UIButton {
     @IBInspectable open var distance: Float = 100
     /// Delay between show buttons
     @IBInspectable open var showDelay: Double = 0
-    
+    /// Start angle of the circle
+    @IBInspectable open var startAngle: Float = 0
+    /// End angle of the circle
+    @IBInspectable open var endAngle: Float = 360
+
     // Pop buttons radius, if nil use center button size
     open var subButtonsRadius: CGFloat?
     
@@ -207,10 +211,10 @@ open class CircleMenu: UIButton {
     fileprivate func createButtons(platform: UIView) -> [UIButton] {
         var buttons = [UIButton]()
 
-        let step: Float = 360.0 / Float(buttonsCount)
+        let step = getArcStep()
         for index in 0 ..< buttonsCount {
 
-            let angle: Float = Float(index) * step
+            let angle: Float = startAngle + Float(index) * step
             let distance = Float(bounds.size.height / 2.0)
             let buttonSize: CGSize
             if let subButtonsRadius = self.subButtonsRadius {
@@ -296,6 +300,24 @@ open class CircleMenu: UIButton {
         addTarget(self, action: #selector(CircleMenu.onTap), for: newEvent)
     }
 
+    /**
+     Retrieves the incremental lengths between buttons. If the arc length is 360 degrees or more, the increments
+     will evenly space out in a full circle. If the arc length is less than 360 degrees, the last button will be
+     placed on the endAngle.
+     */
+    fileprivate func getArcStep() -> Float {
+        var arcLength = endAngle - startAngle
+        var stepCount = buttonsCount
+
+        if arcLength < 360 {
+            stepCount -= 1
+        } else if arcLength > 360 {
+            arcLength = 360
+        }
+
+        return arcLength / Float(stepCount)
+    }
+
     // MARK: actions
     
     private var isBounceAnimating: Bool = false
@@ -340,7 +362,8 @@ open class CircleMenu: UIButton {
         }
 
         if let buttons = buttons {
-            circle.fillAnimation(duration, startAngle: -90 + Float(360 / buttons.count) * Float(sender.tag)) { [weak self] in
+            let step = getArcStep()
+            circle.fillAnimation(duration, startAngle: -90 + startAngle + step * Float(sender.tag)) { [weak self] in
                 self?.buttons?.forEach { $0.alpha = 0 }
             }
             circle.hideAnimation(0.5, delay: duration) { [weak self] in
@@ -366,13 +389,12 @@ open class CircleMenu: UIButton {
             return
         }
 
-        let step: Float = 360.0 / Float(buttonsCount)
+        let step = getArcStep()
         for index in 0 ..< buttonsCount {
             guard case let button as CircleMenuButton = buttons[index] else { continue }
-            let angle: Float = Float(index) * step
             if isShow == true {
                 delegate?.circleMenu?(self, willDisplay: button, atIndex: index)
-
+                let angle: Float = startAngle + Float(index) * step
                 button.rotatedZ(angle: angle, animated: false, delay: Double(index) * showDelay)
                 button.showAnimation(distance: distance, duration: duration, delay: Double(index) * showDelay)
             } else {
