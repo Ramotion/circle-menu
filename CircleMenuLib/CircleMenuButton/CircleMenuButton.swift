@@ -60,7 +60,7 @@ internal class CircleMenuButton: UIButton {
     // MARK: configure
 
     fileprivate func createContainer(_ size: CGSize, platform: UIView) -> UIView {
-        let container = Init(UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))) {
+        let container = customize(UIView(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))) {
             $0.backgroundColor = UIColor.clear
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
@@ -200,7 +200,7 @@ internal extension CircleMenuButton {
     // MARK: layer animation
 
     internal func rotationAnimation(_ angle: Float, duration: Double) {
-        let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
+        let rotation = customize(CABasicAnimation(keyPath: "transform.rotation")) {
             $0.duration = TimeInterval(duration)
             $0.toValue = (angle.degrees)
             $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)

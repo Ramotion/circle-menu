@@ -66,7 +66,7 @@ internal class CircleMenuLoader: UIView {
             endAngle: CGFloat.pi * 2,
             clockwise: true)
 
-        let circle = Init(CAShapeLayer()) {
+        let circle = customize(CAShapeLayer()) {
             $0.path = circlePath.cgPath
             $0.fillColor = UIColor.clear.cgColor
             $0.strokeColor = color?.cgColor
@@ -105,7 +105,7 @@ internal class CircleMenuLoader: UIView {
     }
 
     internal func createRoundView(_ rect: CGRect, color: UIColor?) {
-        let roundView = Init(UIView(frame: rect)) {
+        let roundView = customize(UIView(frame: rect)) {
             $0.backgroundColor = UIColor.black
             $0.layer.cornerRadius = rect.size.width / 2.0
             $0.backgroundColor = color
@@ -125,7 +125,7 @@ internal class CircleMenuLoader: UIView {
 
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
-        let animation = Init(CABasicAnimation(keyPath: "strokeEnd")) {
+        let animation = customize(CABasicAnimation(keyPath: "strokeEnd")) {
             $0.duration = CFTimeInterval(duration)
             $0.fromValue = 0
             $0.toValue = 1
@@ -137,7 +137,7 @@ internal class CircleMenuLoader: UIView {
 
     internal func hideAnimation(_ duration: CGFloat, delay: Double, completion: @escaping () -> Void) {
 
-        let scale = Init(CABasicAnimation(keyPath: "transform.scale")) {
+        let scale = customize(CABasicAnimation(keyPath: "transform.scale")) {
             $0.toValue = 1.2
             $0.duration = CFTimeInterval(duration)
             $0.fillMode = kCAFillModeForwards
