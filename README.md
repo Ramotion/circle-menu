@@ -1,5 +1,6 @@
 ![header](./header.png)
-![preview](./preview.gif)
+<img src="https://github.com/Ramotion/circle-menu/blob/master/circle-menu.gif" width="600" height="450" />
+<br><br/>
 
 # CircleMenu
 [![Twitter](https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat)](http://twitter.com/Ramotion)
