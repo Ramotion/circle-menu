@@ -103,6 +103,9 @@ optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: UIBut
 optional func menuCollapsed(circleMenu: CircleMenu)
 ```
 
+
+This library is a part of a <a href="https://github.com/Ramotion/swift-ui-animation-components-and-libraries"><b>selection of our best UI open-source projects.</b></a>
+
 ## Licence
 
 Circle menu is released under the MIT license.
