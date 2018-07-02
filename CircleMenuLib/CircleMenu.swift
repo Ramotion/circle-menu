@@ -370,13 +370,10 @@ open class CircleMenu: UIButton {
         
         hideCenterButton(duration: 0.3)
         showCenterButton(duration: 0.525, delay: duration)
-        
-        if customNormalIconView != nil && customSelectedIconView != nil {
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: {
-                self.delegate?.circleMenu?(self, buttonDidSelected: sender, atIndex: sender.tag)
-            })
-        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: {
+            self.delegate?.circleMenu?(self, buttonDidSelected: sender, atIndex: sender.tag)
+        })
     }
 
     // MARK: animations
