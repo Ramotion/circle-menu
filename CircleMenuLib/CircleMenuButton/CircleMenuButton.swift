@@ -116,7 +116,7 @@ internal class CircleMenuButton: UIButton {
       UIView.animate(
         withDuration: duration,
         delay: delay,
-        options: UIViewAnimationOptions(),
+        options: UIView.AnimationOptions(),
         animations: { () -> Void in
           container.layer.transform = rotateTransform
         },
@@ -147,7 +147,7 @@ internal extension CircleMenuButton {
       delay: delay,
       usingSpringWithDamping: 0.7,
       initialSpringVelocity: 0,
-      options: UIViewAnimationOptions.curveLinear,
+      options: UIView.AnimationOptions.curveLinear,
       animations: { () -> Void in
         self.container?.superview?.layoutIfNeeded()
         self.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
@@ -165,7 +165,7 @@ internal extension CircleMenuButton {
     UIView.animate(
       withDuration: duration,
       delay: delay,
-      options: UIViewAnimationOptions.curveEaseIn,
+      options: UIView.AnimationOptions.curveEaseIn,
       animations: { () -> Void in
         self.container?.superview?.layoutIfNeeded()
         self.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
@@ -189,7 +189,7 @@ internal extension CircleMenuButton {
     UIView.animate(
       withDuration: duration,
       delay: delay,
-      options: UIViewAnimationOptions.curveEaseIn,
+      options: UIView.AnimationOptions.curveEaseIn,
       animations: { () -> Void in
         self.container?.superview?.layoutIfNeeded()
       },
@@ -202,7 +202,7 @@ internal extension CircleMenuButton {
     let rotation = Init(CABasicAnimation(keyPath: "transform.rotation")) {
       $0.duration       = TimeInterval(duration)
       $0.toValue        = (angle.degrees)
-      $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+      $0.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
     }
     container?.layer.add(rotation, forKey: "rotation")
   }
