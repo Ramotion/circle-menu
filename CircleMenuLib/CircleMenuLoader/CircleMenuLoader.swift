@@ -81,7 +81,7 @@ internal class CircleMenuLoader: UIView {
 
         translatesAutoresizingMaskIntoConstraints = false
         // added constraints
-        let sizeConstraints = [NSLayoutAttribute.width, .height].map {
+        let sizeConstraints = [NSLayoutConstraint.Attribute.width, .height].map {
             NSLayoutConstraint(item: self,
                                attribute: $0,
                                relatedBy: .equal,
@@ -92,7 +92,7 @@ internal class CircleMenuLoader: UIView {
         }
         addConstraints(sizeConstraints)
 
-        let centerConstaraints = [NSLayoutAttribute.centerY, .centerX].map {
+        let centerConstaraints = [NSLayoutConstraint.Attribute.centerY, .centerX].map {
             NSLayoutConstraint(item: platform,
                                attribute: $0,
                                relatedBy: .equal,
@@ -129,7 +129,7 @@ internal class CircleMenuLoader: UIView {
             $0.duration = CFTimeInterval(duration)
             $0.fromValue = 0
             $0.toValue = 1
-            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            $0.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         }
         circle?.add(animation, forKey: nil)
         CATransaction.commit()
@@ -140,9 +140,9 @@ internal class CircleMenuLoader: UIView {
         let scale = customize(CABasicAnimation(keyPath: "transform.scale")) {
             $0.toValue = 1.2
             $0.duration = CFTimeInterval(duration)
-            $0.fillMode = kCAFillModeForwards
+            $0.fillMode = CAMediaTimingFillMode.forwards
             $0.isRemovedOnCompletion = false
-            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+            $0.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
             $0.beginTime = CACurrentMediaTime() + delay
         }
         layer.add(scale, forKey: nil)
@@ -150,7 +150,7 @@ internal class CircleMenuLoader: UIView {
         UIView.animate(
             withDuration: CFTimeInterval(duration),
             delay: delay,
-            options: UIViewAnimationOptions.curveEaseIn,
+            options: UIView.AnimationOptions.curveEaseIn,
             animations: { () -> Void in
                 self.alpha = 0
             },
