@@ -66,11 +66,18 @@ func customize<Type>(_ value: Type, block: (_ object: Type) -> Void) -> Type {
     @objc optional func circleMenu(_ circleMenu: CircleMenu, buttonDidSelected button: UIButton, atIndex: Int)
 
     /**
-     Tells the delegate that the menu was collapsed - the cancel action.
+     Tells the delegate that the menu was collapsed - the cancel action. Fires immediately on button press
 
      - parameter circleMenu: A circle menu object informing the delegate about the new index selection.
      */
     @objc optional func menuCollapsed(_ circleMenu: CircleMenu)
+
+    /**
+     Tells the delegate that the menu was opened. Fires immediately on button press
+
+     - parameter circleMenu: A circle menu object informing the delegate about the new index selection.
+     */
+    @objc optional func menuOpened(_ circleMenu: CircleMenu)
 }
 
 // MARK: CircleMenu
@@ -95,7 +102,7 @@ open class CircleMenu: UIButton {
 
     // Pop buttons radius, if nil use center button size
     open var subButtonsRadius: CGFloat?
-    
+
     // Show buttons event
     open var showButtonsEvent: UIControl.Event = UIControl.Event.touchUpInside {
         didSet {
@@ -160,7 +167,7 @@ open class CircleMenu: UIButton {
 
         customSelectedIconView = addCustomImageView(state: .selected)
         customSelectedIconView?.alpha = 0
-        
+
         setImage(UIImage(), for: .normal)
         setImage(UIImage(), for: .selected)
     }
@@ -198,13 +205,14 @@ open class CircleMenu: UIButton {
             }
         }
         return true
+
     }
 
-  open override func removeFromSuperview() {
-    if self.platform?.superview != nil { self.platform?.removeFromSuperview() }
-    super.removeFromSuperview()
-  }
-  
+    open override func removeFromSuperview() {
+        if self.platform?.superview != nil { self.platform?.removeFromSuperview() }
+        super.removeFromSuperview()
+    }
+
     // MARK: create
 
     fileprivate func createButtons(platform: UIView) -> [UIButton] {
@@ -318,7 +326,7 @@ open class CircleMenu: UIButton {
     }
 
     // MARK: actions
-    
+
     private var isBounceAnimating: Bool = false
 
     @objc func onTap() {
@@ -329,6 +337,9 @@ open class CircleMenu: UIButton {
             let platform = createPlatform()
             buttons = createButtons(platform: platform)
             self.platform = platform
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                self.delegate?.menuOpened?(self)
+            }
         }
         let isShow = !buttonsIsShown()
         let duration = isShow ? 0.5 : 0.2
@@ -345,7 +356,7 @@ open class CircleMenu: UIButton {
         
         let strokeWidth: CGFloat
         if let radius = self.subButtonsRadius {
-           strokeWidth = radius * 2
+            strokeWidth = radius * 2
         } else {
             strokeWidth = bounds.size.height
         }
@@ -367,14 +378,14 @@ open class CircleMenu: UIButton {
         circle.hideAnimation(0.5, delay: duration) { [weak self] in
             if self?.platform?.superview != nil { self?.platform?.removeFromSuperview() }
         }
-        
+
         hideCenterButton(duration: 0.3)
         showCenterButton(duration: 0.525, delay: duration)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: {
             self.delegate?.circleMenu?(self, buttonDidSelected: sender, atIndex: sender.tag)
         })
-    }
+}
 
     // MARK: animations
 
@@ -409,8 +420,8 @@ open class CircleMenu: UIButton {
         UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 5,
                        options: UIView.AnimationOptions.curveLinear,
                        animations: { () -> Void in
-                           self.transform = CGAffineTransform(scaleX: 1, y: 1)
-                       },
+                        self.transform = CGAffineTransform(scaleX: 1, y: 1)
+        },
                        completion: completion)
     }
 
@@ -473,7 +484,7 @@ open class CircleMenu: UIButton {
         UIView.animate(withDuration: TimeInterval(duration), delay: TimeInterval(delay),
                        options: UIView.AnimationOptions.curveEaseOut,
                        animations: { () -> Void in
-                           self.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
+                        self.transform = CGAffineTransform(scaleX: 0.001, y: 0.001)
         }, completion: nil)
     }
 
@@ -481,9 +492,9 @@ open class CircleMenu: UIButton {
         UIView.animate(withDuration: TimeInterval(duration), delay: TimeInterval(delay), usingSpringWithDamping: 0.78,
                        initialSpringVelocity: 0, options: UIView.AnimationOptions.curveLinear,
                        animations: { () -> Void in
-                           self.transform = CGAffineTransform(scaleX: 1, y: 1)
-                           self.alpha = 1
-                       },
+                        self.transform = CGAffineTransform(scaleX: 1, y: 1)
+                        self.alpha = 1
+        },
                        completion: nil)
 
         let rotation = customize(CASpringAnimation(keyPath: "transform.rotation")) {
