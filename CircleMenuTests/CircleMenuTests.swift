@@ -6,24 +6,22 @@
 //  Copyright © 2016 Alex K. All rights reserved.
 //
 
-import XCTest
-
 @testable import CircleMenu
+import XCTest
 
 class CircleMenuTests: XCTestCase {
 
     let buttonsCount = 4
 
     let circleMenu = CircleMenu(
-                    frame: CGRect(x: 200, y: 200, width: 50, height: 50),
-                    normalIcon:"icon_menu",
-                    selectedIcon:"icon_close",
-                    buttonsCount: 4,
-                    duration: 4,
-                    distance: 120)
+        frame: CGRect(x: 200, y: 200, width: 50, height: 50),
+        normalIcon: "icon_menu",
+        selectedIcon: "icon_close",
+        buttonsCount: 4,
+        duration: 4,
+        distance: 120)
 
     let view = UIView()
-
 
     override func setUp() {
         super.setUp()
@@ -33,7 +31,6 @@ class CircleMenuTests: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
-
     }
 
     func testCircleMenuShowButtons() {
@@ -47,7 +44,6 @@ class CircleMenuTests: XCTestCase {
         XCTAssertEqual(circleMenu.buttons?.count, buttonsCount, "button is created")
     }
 
-
     func testCircleMenuHideButtons() {
         // given
         circleMenu.onTap()
@@ -59,13 +55,12 @@ class CircleMenuTests: XCTestCase {
         XCTAssertNil(circleMenu.buttons, "button is removed")
     }
 
-
     func testCircleMenuHideButtonsAfterAnimation() {
         // given
         circleMenu.onTap()
 
         // when
-        circleMenu.buttonHandler((circleMenu.buttons?.first)!)
+        circleMenu.buttonHandler((circleMenu.buttons?.first)! as! CircleMenuButton)
 
         // then
         XCTAssertNil(circleMenu.buttons, "button is removed")
