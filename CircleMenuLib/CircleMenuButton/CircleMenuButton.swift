@@ -132,7 +132,7 @@ internal class CircleMenuButton: UIButton {
 
 internal extension CircleMenuButton {
 
-    internal func showAnimation(distance: Float, duration: Double, delay: Double = 0) {
+    func showAnimation(distance: Float, duration: Double, delay: Double = 0) {
         guard let heightConstraint = (self.container?.constraints.filter { $0.identifier == "height" })?.first else {
             fatalError()
         }
@@ -157,7 +157,7 @@ internal extension CircleMenuButton {
         })
     }
 
-    internal func hideAnimation(distance: Float, duration: Double, delay: Double = 0) {
+    func hideAnimation(distance: Float, duration: Double, delay: Double = 0) {
         guard let heightConstraint = (self.container?.constraints.filter { $0.identifier == "height" })?.first else {
             return
         }
@@ -179,7 +179,7 @@ internal extension CircleMenuButton {
         })
     }
 
-    internal func changeDistance(_ distance: CGFloat, animated _: Bool, duration: Double = 0, delay: Double = 0) {
+    func changeDistance(_ distance: CGFloat, animated _: Bool, duration: Double = 0, delay: Double = 0) {
 
         guard let heightConstraint = (self.container?.constraints.filter { $0.identifier == "height" })?.first else {
             fatalError()
@@ -199,7 +199,7 @@ internal extension CircleMenuButton {
 
     // MARK: layer animation
 
-    internal func rotationAnimation(_ angle: Float, duration: Double) {
+    func rotationAnimation(_ angle: Float, duration: Double) {
         let rotation = customize(CABasicAnimation(keyPath: "transform.rotation")) {
             $0.duration = TimeInterval(duration)
             $0.toValue = (angle.degrees)
