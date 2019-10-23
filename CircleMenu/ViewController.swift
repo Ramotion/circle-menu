@@ -20,14 +20,95 @@ extension UIColor {
 
 class ViewController: UIViewController, CircleMenuDelegate {
 
-    //    let colors = [UIColor.redColor(), UIColor.grayColor(), UIColor.greenColor(), UIColor.purpleColor()]
-    let items: [(icon: String, color: UIColor)] = [
-        ("icon_home", UIColor(red: 0.19, green: 0.57, blue: 1, alpha: 1)),
-        ("icon_search", UIColor(red: 0.22, green: 0.74, blue: 0, alpha: 1)),
-        ("notifications-btn", UIColor(red: 0.96, green: 0.23, blue: 0.21, alpha: 1)),
-        ("settings-btn", UIColor(red: 0.51, green: 0.15, blue: 1, alpha: 1)),
-        ("nearby-btn", UIColor(red: 1, green: 0.39, blue: 0, alpha: 1))
-    ]
+    var colorForHome: UIColor {
+        if #available(iOS 13, *) {
+            switch traitCollection.userInterfaceStyle {
+            case .dark:
+                return .systemTeal
+            case .light, .unspecified:
+                return .systemTeal
+            @unknown default:
+                return .systemTeal
+            }
+        }
+        return UIColor(red: 0.19, green: 0.57, blue: 1, alpha: 1)
+    }
+
+    var colorForSearch: UIColor {
+        if #available(iOS 13, *) {
+            switch traitCollection.userInterfaceStyle {
+            case .dark:
+                return .systemGreen
+            case .light, .unspecified:
+                return .systemGreen
+            @unknown default:
+                return .systemGreen
+            }
+        }
+        return UIColor(red: 0.22, green: 0.74, blue: 0, alpha: 1)
+    }
+
+    var colorForNotifications: UIColor {
+        if #available(iOS 13, *) {
+            switch traitCollection.userInterfaceStyle {
+            case .dark:
+                return .systemRed
+            case .light, .unspecified:
+                return .systemRed
+            @unknown default:
+                return .systemRed
+            }
+        }
+        return UIColor(red: 0.96, green: 0.23, blue: 0.21, alpha: 1)
+    }
+
+    var colorForSettings: UIColor {
+        if #available(iOS 13, *) {
+            switch traitCollection.userInterfaceStyle {
+            case .dark:
+                return .systemPurple
+            case .light, .unspecified:
+                return .systemPurple
+            @unknown default:
+                return .systemPurple
+            }
+        }
+        return UIColor(red: 0.51, green: 0.15, blue: 1, alpha: 1)
+    }
+
+    var colorForNearby: UIColor {
+        if #available(iOS 13, *) {
+            switch traitCollection.userInterfaceStyle {
+            case .dark:
+                return .systemOrange
+            case .light, .unspecified:
+                return .systemOrange
+            @unknown default:
+                return .systemOrange
+            }
+        }
+        return UIColor(red: 1, green: 0.39, blue: 0, alpha: 1)
+    }
+
+    var colorForBackground: UIColor {
+        if #available(iOS 13, *) {
+                switch traitCollection.userInterfaceStyle {
+                case .dark:
+                    return UIColor(named: "modeColors")!
+                case .light, .unspecified:
+                    return UIColor(named: "modeColors")!
+                @unknown default:
+                    return UIColor(named: "modeColors")!
+                }
+            } else {
+                return UIColor(red: 0.059, green: 0.078, blue: 0.153, alpha: 1)
+            }
+        }
+
+    var items: [(icon: String, color: UIColor)] = []
+
+    // -------------------------------------------------------
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,6 +124,17 @@ class ViewController: UIViewController, CircleMenuDelegate {
         //        button.delegate = self
         //        button.layer.cornerRadius = button.frame.size.width / 2.0
         //        view.addSubview(button)
+
+        items = [
+            ("icon_home", colorForHome),
+            ("icon_search", colorForSearch),
+            ("notifications-btn", colorForNotifications),
+            ("settings-btn", colorForSettings),
+            ("nearby-btn", colorForNearby)
+        ]
+
+        self.view.backgroundColor = colorForBackground
+
     }
 
     // MARK: <CircleMenuDelegate>

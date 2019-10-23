@@ -60,7 +60,9 @@ class CircleMenuTests: XCTestCase {
         circleMenu.onTap()
 
         // when
-        circleMenu.buttonHandler((circleMenu.buttons?.first)! as! CircleMenuButton)
+        if let button = (circleMenu.buttons?.first)! as? CircleMenuButton {
+            circleMenu.buttonHandler(button)
+        }
 
         // then
         XCTAssertNil(circleMenu.buttons, "button is removed")
