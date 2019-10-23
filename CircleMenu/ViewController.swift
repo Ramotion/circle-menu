@@ -20,13 +20,18 @@ extension UIColor {
 
 class ViewController: UIViewController, CircleMenuDelegate {
 
+    @IBOutlet weak var circleMenu: CircleMenu!
+    
+    // Set the colors for the light and dark modes of iOS 13.
+    // Also, falls back to normal UIColors for pre-iOS 13 devices
+
     var colorForHome: UIColor {
         if #available(iOS 13, *) {
             switch traitCollection.userInterfaceStyle {
             case .dark:
                 return .systemTeal
             case .light, .unspecified:
-                return .systemTeal
+                return .systemBlue
             @unknown default:
                 return .systemTeal
             }
@@ -90,6 +95,9 @@ class ViewController: UIViewController, CircleMenuDelegate {
         return UIColor(red: 1, green: 0.39, blue: 0, alpha: 1)
     }
 
+    // Set the colors for the light and dark modes of iOS 13 from
+    // the named colors (iOS 11+) defined in the Assets.xcassets bundle.
+
     var colorForBackground: UIColor {
         if #available(iOS 13, *) {
                 switch traitCollection.userInterfaceStyle {
@@ -134,6 +142,26 @@ class ViewController: UIViewController, CircleMenuDelegate {
         ]
 
         self.view.backgroundColor = colorForBackground
+
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        // Do any special light/dark mod changes when this fires ...
+
+        if #available(iOS 13, *) {
+                switch traitCollection.userInterfaceStyle {
+                case .dark:
+                    circleMenu.buttons?.first?.backgroundColor = .systemTeal
+                case .light, .unspecified:
+                    circleMenu.buttons?.first?.backgroundColor = .systemBlue
+                @unknown default:
+                    circleMenu.buttons?.first?.backgroundColor = .systemTeal
+                }
+            } else {
+                circleMenu.buttons?.first?.backgroundColor = UIColor(red:1, green:0.787, blue:0.011, alpha: 1)
+            }
 
     }
 
