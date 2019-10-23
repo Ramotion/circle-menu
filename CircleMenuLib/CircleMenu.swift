@@ -199,10 +199,8 @@ open class CircleMenu: UIButton {
             return false
         }
 
-        for button in buttons {
-            if button.alpha == 0 {
-                return false
-            }
+        for button in buttons where button.alpha == 0 {
+            return false
         }
         return true
 
@@ -353,7 +351,7 @@ open class CircleMenu: UIButton {
         guard let platform = self.platform else { return }
 
         delegate?.circleMenu?(self, buttonWillSelected: sender, atIndex: sender.tag)
-        
+
         let strokeWidth: CGFloat
         if let radius = self.subButtonsRadius {
             strokeWidth = radius * 2
@@ -415,7 +413,7 @@ open class CircleMenu: UIButton {
         }
     }
 
-    fileprivate func tapBounceAnimation(duration: TimeInterval, completion: ((Bool)->())? = nil) {
+    fileprivate func tapBounceAnimation(duration: TimeInterval, completion: ((Bool) -> Void)? = nil) {
         transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
         UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 5,
                        options: UIView.AnimationOptions.curveLinear,

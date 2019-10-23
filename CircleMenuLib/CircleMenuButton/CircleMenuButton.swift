@@ -173,7 +173,7 @@ internal extension CircleMenuButton {
             }, completion: { (_) -> Void in
                 self.alpha = 0
 
-                if let _ = self.container {
+                if self.container != nil {
                     self.container?.removeFromSuperview() // remove container
                 }
         })
