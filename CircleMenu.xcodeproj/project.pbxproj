@@ -17,7 +17,6 @@
 		841EC5911C58E898008872D5 /* CircleMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC58F1C58E898008872D5 /* CircleMenuButton.swift */; };
 		841EC5941C58F3E2008872D5 /* CircleMenuLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC5931C58F3E2008872D5 /* CircleMenuLoader.swift */; };
 		8497460C1C6A1C5D001E7184 /* CircleMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC58D1C58E898008872D5 /* CircleMenu.swift */; };
-		8497460D1C6A1C6D001E7184 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84F248BD1C58E65F008F12C1 /* Assets.xcassets */; };
 		8497460E1C6A1C9D001E7184 /* CircleMenuLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC5931C58F3E2008872D5 /* CircleMenuLoader.swift */; };
 		8497460F1C6A1CA0001E7184 /* CircleMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841EC58F1C58E898008872D5 /* CircleMenuButton.swift */; };
 		84F248B71C58E65F008F12C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F248B61C58E65F008F12C1 /* AppDelegate.swift */; };
@@ -72,7 +71,6 @@
 		84F248BB1C58E65F008F12C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84F248BD1C58E65F008F12C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84F248C01C58E65F008F12C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		84F248C21C58E65F008F12C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84F248C71C58E65F008F12C1 /* CircleMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CircleMenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84F248CB1C58E65F008F12C1 /* CircleMenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleMenuTests.swift; sourceTree = "<group>"; };
 		84F248CD1C58E65F008F12C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -168,7 +166,6 @@
 				84F248BA1C58E65F008F12C1 /* Main.storyboard */,
 				84F248BD1C58E65F008F12C1 /* Assets.xcassets */,
 				84F248BF1C58E65F008F12C1 /* LaunchScreen.storyboard */,
-				84F248C21C58E65F008F12C1 /* Info.plist */,
 			);
 			path = CircleMenu;
 			sourceTree = "<group>";
@@ -319,7 +316,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8497460D1C6A1C6D001E7184 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +559,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = CircleMenu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -582,6 +579,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = CircleMenu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
