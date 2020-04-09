@@ -65,7 +65,7 @@ github "Ramotion/circle-menu"
 func circleMenu(circleMenu: CircleMenu, willDisplay button: UIButton, atIndex: Int)
 ```
 
-4) Use properties to confiure CircleMenu
+4) Use properties to configure CircleMenu
 
 ```swift
 @IBInspectable var buttonsCount: Int = 3
