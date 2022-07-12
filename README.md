@@ -53,7 +53,7 @@ github "Ramotion/circle-menu"
 
 ## Usage
 
-##### with storyboard
+### with storyboard
 
 1) Create a new UIButton inheriting from `CircleMenu`
 
@@ -73,7 +73,7 @@ func circleMenu(circleMenu: CircleMenu, willDisplay button: UIButton, atIndex: I
 @IBInspectable var distance: Float = 100 // distance between center button and buttons
 ```
 
-##### programmatically
+### programmatically
 
 ```swift
 let button = CircleMenu(
@@ -88,7 +88,7 @@ button.layer.cornerRadius = button.frame.size.width / 2.0
 view.addSubview(button)
 ```
 
-##### delegate methods
+### delegate methods
 
 ```swift
 // configure buttons
